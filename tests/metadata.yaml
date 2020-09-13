@@ -1,0 +1,11 @@
+---
+acronyms:
+  afaik:
+    short: AFAIK
+    long: as far as I know
+  lol:
+    short: lol
+    long: laugh out loud
+    short-plural: es  # Contrived for example purposes
+    long-plural: es   # Contrived for example purposes
+...

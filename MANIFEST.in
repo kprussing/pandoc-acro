@@ -1,0 +1,3 @@
+# Include the tests and supporting files
+graft tests
+

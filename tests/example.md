@@ -1,0 +1,17 @@
+-   [+afaik]{.short}
+-   +afaik
+-   +afaik
+-   [+afaik]{.plural}
+-   [+afaik]{.short .plural}
+-   [+afaik]{.long}
+-   [+afaik]{.long .plural}
+-   [+afaik]{.full}
+-   [+afaik]{.full .plural}
+-   [+afaik]{.caps}
+-   [+afaik]{.caps .plural}
+-   [+afaik]{.caps .short}
+-   [+afaik]{.caps .short .plural}
+-   [+afaik]{.caps .long}
+-   [+afaik]{.caps .long .plural}
+-   [+afaik]{.caps .full}
+-   [+afaik]{.caps .full .plural}
