@@ -6,7 +6,7 @@ import subprocess
 _filter = os.path.join(os.path.dirname(__file__),
                        os.pardir,
                        "pandocacro",
-                       "__main__.py")
+                       "__init__.py")
 
 _inputs = [os.path.join(os.path.dirname(__file__), s)
            for s in ("metadata.yaml", "example.md")]

@@ -34,7 +34,7 @@ _expected = "\n".join([
 ) + "\n"
 
 
-class TestMarkdown(unittest.TestCase):
+class TestLatex(unittest.TestCase):
     def test(self):
         result = run_filter(command + ["-t", "latex"])
         self.assertEqual(result, _expected)

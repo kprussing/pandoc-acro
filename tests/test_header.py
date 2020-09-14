@@ -21,7 +21,7 @@ short-plural = es
 _template = os.path.join(os.path.dirname(__file__), "test.latex")
 
 
-class TestMarkdown(unittest.TestCase):
+class TestHeader(unittest.TestCase):
     def test(self):
         result = run_filter(command + ["--template=" + _template,
                                        "-t", "latex"])
