@@ -1,8 +1,8 @@
-__doc__="""Check the bare expanded text"""
-
-import unittest
+__doc__ = """Check the bare expanded text"""
 
 from . import command, run_filter
+
+import unittest
 
 _expected = "\n".join("-   " + s for s in (
     "AFAIK",
@@ -25,10 +25,12 @@ _expected = "\n".join("-   " + s for s in (
     )
 ) + "\n"
 
+
 class TestMarkdown(unittest.TestCase):
     def test(self):
         result = run_filter(command + ["-t", "markdown"])
         self.assertEqual(result, _expected)
+
 
 if __name__ == "__main__":
     unittest.main()

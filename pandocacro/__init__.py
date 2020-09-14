@@ -17,6 +17,7 @@ import panflute
 _acronyms = "acronyms"
 """The metadata key to the acronyms map"""
 
+
 def get_key(elem: panflute.Element, doc: panflute.Doc) -> Union[None, str]:
     """Extract the key from an element
 
@@ -24,7 +25,7 @@ def get_key(elem: panflute.Element, doc: panflute.Doc) -> Union[None, str]:
     field preceded by ``+``.  If it is, return the key.  Otherwise,
     return ``None``.
     """
-    # Check for 
+    # Check for the main acronym database
     if _acronyms not in doc.metadata:
         return
 
@@ -60,12 +61,12 @@ def prepare(doc: panflute.Doc) -> None:
     if not isinstance(header, list):
         header = [header]
 
-    LaTeX = lambda l: panflute.RawInline(l, format="latex")
-    header.append( LaTeX(r"\usepackage{acro}") )
+    LaTeX = lambda l: panflute.RawInline(l, format="latex") # noqa E731 I just want a short name
+    header.append(LaTeX(r"\usepackage{acro}"))
     for key, values in doc.get_metadata("acronyms").items():
         header.append(LaTeX(fr"\DeclareAcronym{{{key}}}{{"))
         header.append(LaTeX(",\n".join(f"{k} = {v}" for k, v
-                                           in values.items())))
+                                       in values.items())))
         header.append(LaTeX("}"))
 
     doc.metadata["header-includes"] = header
@@ -122,8 +123,8 @@ def algorithm(elem: panflute.Element,
         return panflute.RawInline(macro, format="latex")
     else:
         kwargs = {
-            k:panflute.stringify(acronyms[key][k])
-                for k in acronyms[key].content
+            k: panflute.stringify(acronyms[key][k])
+            for k in acronyms[key].content
         }
 
         long_ = "{long}" + (
@@ -131,7 +132,7 @@ def algorithm(elem: panflute.Element,
             if "plural" in elem.classes else ""
         )
         short_ = "{short}" + (
-            ("{short-plural}"  if "long-plural" in kwargs else "s")
+            ("{short-plural}" if "long-plural" in kwargs else "s")
             if "plural" in elem.classes else ""
         )
         full_ = long_ + " (" + short_ + ")"
@@ -157,10 +158,10 @@ def algorithm(elem: panflute.Element,
                             + "".join(tail))
 
 
-def main(doc: Union[panflute.Doc, None]=None) \
+def main(doc: Union[panflute.Doc, None] = None) \
         -> Union[panflute.Doc, None]:
     return panflute.run_filters([algorithm], prepare=prepare, doc=doc)
 
+
 if __name__ == "__main__":
     main()
-

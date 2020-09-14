@@ -19,4 +19,3 @@ def run_filter(command: list) -> str:
     """Run Pandoc with the filter on the example inputs"""
     return subprocess.run(command, check=True, capture_output=True,
                           universal_newlines=True).stdout
-

@@ -4,7 +4,7 @@ _`the main reference`: https://github.com/pypa/sampleproject
 """
 
 # Always prefer setuptools over distutils
-from setuptools import setup, find_packages
+from setuptools import setup
 import pathlib
 
 here = pathlib.Path(__file__).parent.resolve()
@@ -113,7 +113,7 @@ setup(
     # Note that this is a list of additional keywords, separated
     # by commas, to be used to assist searching for the distribution in a
     # larger catalog.
-    keywords="pandoc, filter, acronyms", # Optional
+    keywords="pandoc, filter, acronyms",  # Optional
 
     # You can just specify package directories manually here if your project is
     # simple. Or you can use find_packages().

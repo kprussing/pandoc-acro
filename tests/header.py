@@ -1,9 +1,9 @@
-__doc__="""Check the bare expanded text"""
+__doc__ = """Check the bare expanded text"""
+
+from . import command, run_filter
 
 import os
 import unittest
-
-from . import command, run_filter
 
 _expected = r"""\usepackage{acro}
 \DeclareAcronym{afaik}{
@@ -20,10 +20,13 @@ short-plural = es
 
 _template = os.path.join(os.path.dirname(__file__), "test.latex")
 
+
 class TestMarkdown(unittest.TestCase):
     def test(self):
-        result = run_filter(command + ["--template=" + _template, "-t", "latex"])
+        result = run_filter(command + ["--template=" + _template,
+                                       "-t", "latex"])
         self.assertEqual(result, _expected)
+
 
 if __name__ == "__main__":
     unittest.main()
