@@ -27,6 +27,15 @@ class TestHeader(unittest.TestCase):
                                        "-t", "latex"])
         self.assertEqual(result, _expected)
 
+    def test_extra_after(self):
+        extra = r"\usepackage{test}"
+        extras = os.path.join(os.path.dirname(__file__),
+                              "header-includes.yaml")
+        result = run_filter(command + [extras,
+                                       "--template=" + _template,
+                                       "-t", "latex"])
+        self.assertEqual(result, extra + "\n" + _expected)
+
 
 if __name__ == "__main__":
     unittest.main()

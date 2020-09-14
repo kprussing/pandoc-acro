@@ -57,11 +57,12 @@ def prepare(doc: panflute.Doc) -> None:
         return
 
     # Prepare the LaTeX details.
-    header = doc.get_metadata("header-includes", [])
-    if not isinstance(header, list):
-        header = [header]
+    header = doc.metadata["header-includes"] \
+        if "header-includes" in doc.metadata else []
 
-    LaTeX = lambda l: panflute.RawInline(l, format="latex") # noqa E731 I just want a short name
+    LaTeX = lambda l: panflute.MetaInlines( # noqa E731 I just want a short name
+        panflute.RawInline(l, format="latex")
+    )
     header.append(LaTeX(r"\usepackage{acro}"))
     for key, values in doc.get_metadata("acronyms").items():
         header.append(LaTeX(fr"\DeclareAcronym{{{key}}}{{"))
