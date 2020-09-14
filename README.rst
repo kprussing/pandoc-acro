@@ -24,10 +24,15 @@ script and pass it to Pandoc as a filter, i.e.
 
 .. code-block:: bash
 
-    pandoc -F <path/to/download>/pandoc-acro.py input.md
+    pandoc -F <path/to/download>/pandocacro/__init__.py input.md
 
 Alternatively, the script can be installed using the standard Python
-``setuptools`` with ``python setup.py install``.
+``setuptools`` with ``python setup.py install`` and then use the
+executable version
+
+.. code-block:: bash
+
+    pandoc -F pandoc-acro input.md
 
 Usage
 -----
@@ -48,7 +53,6 @@ Beyond the minimum, each acronym can define:
 An example metadata block would be:
 
 .. code-block:: yaml
-
     ---
     acronyms:
       afaik:
@@ -70,21 +74,41 @@ The simplest usage in text is to prepend a key with ‘``+``’ such as
 subsequent use.  The aim is to replicate the behavior of the ``acro``
 package from LaTeX.  The default behavior can be overridden by placing
 the key in a span and specifying the ``short``, ``long``, or ``full``
-class.  To get the plural form, set the ``plural`` class in the span.
-To be clear, the mapping is:
+class.  To get the plural form, set the ``plural`` class in the span,
+and to set the initial capitalization use ``caps``.  To be clear, the
+mapping is:
 
-+-------------------------------+-------------------+-------------------------------+
-| Markdown                      | LaTeX             | Expanded text                 |
-+===============================+===================+===============================+
-| ``+afaik``                    | ``\ac{afaik}``    | as far as I know (AFAIK)      |
-| ``+afaik``                    | ``\ac{afaik}``    | AFAIK                         |
-| ``[+afaik]{.short}``          | ``\acs{afaik}``   | AFAIK                         |
-| ``[+afaik]{.short .plural}``  | ``\acsp{afaik}``  | AFAIKs                        |
-| ``[+afaik]{.long}``           | ``\acl{afaik}``   | as far as I know              |
-| ``[+afaik]{.long .plural}``   | ``\aclp{afaik}``  | as far as I knows             |
-| ``[+afaik]{.full}``           | ``\acf{afaik}``   | as far as I know (AFAIK)      |
-| ``[+afaik]{.full .plural}``   | ``\acfp{afaik}``  | as far as I knows (AFAIKs)    |
-+-------------------------------+-------------------+-------------------------------+
++------------------------------------+-------------------+-------------------------------+
+| Markdown                           | LaTeX             | Expanded text                 |
++====================================+===================+===============================+
+| ``+afaik``                         | ``\ac{afaik}``    | as far as I know (AFAIK)      |
++------------------------------------+-------------------+-------------------------------+
+| ``+afaik``                         | ``\ac{afaik}``    | AFAIK                         |
++------------------------------------+-------------------+-------------------------------+
+| ``[+afaik]{.short}``               | ``\acs{afaik}``   | AFAIK                         |
++------------------------------------+-------------------+-------------------------------+
+| ``[+afaik]{.short .plural}``       | ``\acsp{afaik}``  | AFAIKs                        |
++------------------------------------+-------------------+-------------------------------+
+| ``[+afaik]{.long}``                | ``\acl{afaik}``   | as far as I know              |
++------------------------------------+-------------------+-------------------------------+
+| ``[+afaik]{.long .plural}``        | ``\aclp{afaik}``  | as far as I knows             |
++------------------------------------+-------------------+-------------------------------+
+| ``[+afaik]{.full}``                | ``\acf{afaik}``   | as far as I know (AFAIK)      |
++------------------------------------+-------------------+-------------------------------+
+| ``[+afaik]{.full .plural}``        | ``\acfp{afaik}``  | as far as I knows (AFAIKs)    |
++------------------------------------+-------------------+-------------------------------+
+| ``[+afaik]{.short .caps}``         | ``\Acs{afaik}``   | AFAIK                         |
++------------------------------------+-------------------+-------------------------------+
+| ``[+afaik]{.short .plural .caps}`` | ``\Acsp{afaik}``  | AFAIKs                        |
++------------------------------------+-------------------+-------------------------------+
+| ``[+afaik]{.long .caps}``          | ``\Acl{afaik}``   | As far as I know              |
++------------------------------------+-------------------+-------------------------------+
+| ``[+afaik]{.long .plural .caps}``  | ``\Aclp{afaik}``  | As far as I knows             |
++------------------------------------+-------------------+-------------------------------+
+| ``[+afaik]{.full .caps}``          | ``\Acf{afaik}``   | As far as I know (AFAIK)      |
++------------------------------------+-------------------+-------------------------------+
+| ``[+afaik]{.full .plural .caps}``  | ``\Acfp{afaik}``  | As far as I knows (AFAIKs)    |
++------------------------------------+-------------------+-------------------------------+
 
 Output Format Notes
 -------------------
