@@ -12,7 +12,8 @@ def lint(session):
              venv_backend="conda")
 def test(session):
     """Run the regression tests"""
+    session.install("pytest")
     session.install("panflute")
     session.install('.')
     session.conda_install("pandoc")
-    session.run('python', '-m', 'unittest', 'discover', '-v')
+    session.run("pytest", "tests")
