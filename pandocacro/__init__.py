@@ -10,7 +10,9 @@ simply translated to the ``acro`` macro.  If a key is not defined in the
 metadata, no transformation is done.
 """
 
-from typing import Union
+import re
+
+from typing import Optional, Tuple
 
 import panflute
 
@@ -18,31 +20,51 @@ _acronyms = "acronyms"
 """The metadata key to the acronyms map"""
 
 
-def get_key(elem: panflute.Element, doc: panflute.Doc) -> Union[None, str]:
+def get_key(elem: panflute.Element,
+            doc: panflute.Doc
+            ) -> Tuple[Optional[str], Optional[str]]:
     """Extract the key from an element
 
-    Check if the given element is a key in the metadata ``acronyms``
-    field preceded by ``+``.  If it is, return the key.  Otherwise,
-    return ``None``.
+    Check if the given element contains a key in the metadata ``acronyms``
+    field preceded by ``+``.  If it is, return the key and all trailing
+    punctuation and posessives.  Otherwise, return None.
+
+    elem: :class:`panflute.Element`
+        The element under inspection
+    doc: :class:`panflte.Doc`
+        The main document
+
+    Returns
+    -------
+
+    str:
+        The acronym key.
+    str:
+        The trailing punctuation.
+
     """
     # Check for the main acronym database
     if _acronyms not in doc.metadata:
-        return
+        return None, None
 
     if isinstance(elem, panflute.Str):
-        pass
+        content = panflute.stringify(elem)
     elif isinstance(elem, panflute.Span):
         if len(elem.content) > 1:
-            return
+            return None, None
+
+        content = panflute.stringify(elem.content[0])
     else:
-        return
+        return None, None
 
-    # Check for the leading marker
-    content = panflute.stringify(elem)
-    if content[0] != "+":
-        return
+    if re.search(r"\s", content):
+        # Keys cannot have white space, but panflute should have already
+        # split this up.
+        return None, None
 
-    return content[1:] if content[1:] in doc.metadata[_acronyms] else None
+    match = re.match(r"[+](?P<key>\w+)(?P<post>.*)", content)
+    return (None, None) if not match \
+        else (match.group("key"), match.group("post"))
 
 
 def prepare(doc: panflute.Doc) -> None:
@@ -75,7 +97,7 @@ def prepare(doc: panflute.Doc) -> None:
     # For other outputs, we'll need to tally use of the acronyms
     def count(elem, doc):
         """Helper to count use of acronyms"""
-        key = get_key(elem, doc)
+        key, _ = get_key(elem, doc)
         if key:
             doc.metadata[_acronyms][key]["count"] \
                 = int(doc.get_metadata(_acronyms)[key].get("count", 0)) + 1
@@ -86,13 +108,13 @@ def prepare(doc: panflute.Doc) -> None:
 
 
 def algorithm(elem: panflute.Element,
-              doc: panflute.Doc) -> Union[panflute.Element, None]:
+              doc: panflute.Doc) -> Optional[panflute.Element]:
     """The core algorithm to substitute the acronym
 
     This method does the heavy lifting of actually inspecting the
     element and doing the relevant replacement.
     """
-    key = get_key(elem, doc)
+    key, post = get_key(elem, doc)
     if not key:
         return
 
@@ -121,7 +143,7 @@ def algorithm(elem: panflute.Element,
                 + (form[0] if form else "") \
                 + ("p" if "plural" in elem.classes else "") \
                 + f"{{{key}}}"
-        return panflute.RawInline(macro, format="latex")
+        return panflute.RawInline(macro + post, format="latex")
     else:
         kwargs = {
             k: panflute.stringify(acronyms[key][k])
@@ -156,11 +178,10 @@ def algorithm(elem: panflute.Element,
 
         head, *tail = text.format(**kwargs)
         return panflute.Str((head.upper() if "caps" in elem.classes else head)
-                            + "".join(tail))
+                            + "".join(tail) + post)
 
 
-def main(doc: Union[panflute.Doc, None] = None) \
-        -> Union[panflute.Doc, None]:
+def main(doc: Optional[panflute.Doc] = None) -> Optional[panflute.Doc]:
     return panflute.run_filters([algorithm], prepare=prepare, doc=doc)
 
 

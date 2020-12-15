@@ -19,17 +19,13 @@ def test_get_key() -> None:
     key = "mwe"
     markups = (
             f"+{key}",
-            f"[+{key}]",
             f"[+{key}]{{}}",
             f"[+{key}]{{.short}}"
         )
     contexts = (
             "{markup}",
-            "'{markup}'",
-            '"{markup}"',
             "{markup}.",
-            "<{markup}",
-            "{markup}>",
+            "{markup}'s",
         )
     for markup, context in itertools.product(markups, contexts):
         mark = context.format(markup=markup)
@@ -42,9 +38,10 @@ acronyms:
 {mark}
     """, standalone=True)
         elem = doc.content[0].content[0]
-        result = pandocacro.get_key(elem, doc)
+        result, post = pandocacro.get_key(elem, doc)
         if result != key:
-            pytest.fail(f"Error extracting {key} from '{mark}'. "
+            delim = '"' if "'" in mark else "'"
+            pytest.fail(f"Error extracting {key} from {delim}{mark}{delim}. "
                         f"Found {elem} -> {result}")
 
 
