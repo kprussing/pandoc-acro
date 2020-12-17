@@ -13,7 +13,7 @@ def lint(session):
 def test(session):
     """Run the regression tests"""
     session.install("pytest")
-    session.install("panflute")
+    session.install("panflute>=2.0")
     session.install('.')
-    session.conda_install("pandoc")
+    session.conda_install("pandoc>=2.11")
     session.run("pytest", "tests")
