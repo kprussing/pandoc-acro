@@ -49,6 +49,9 @@ def get_key(elem: panflute.Element,
 
     if isinstance(elem, panflute.Str):
         content = panflute.stringify(elem)
+        if isinstance(elem.parent, panflute.Quoted):
+            content = re.sub("['\"]", "", content)
+
     elif isinstance(elem, panflute.Span):
         if len(elem.content) > 1:
             return None, None
