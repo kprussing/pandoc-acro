@@ -66,7 +66,10 @@ def get_key(elem: panflute.Element,
         return None, None
 
     match = re.match(r"[+](?P<key>\w+)(?P<post>.*)", content)
-    return (None, None) if not match \
+    if not match:
+        return None, None
+
+    return (None, None) if match.group("key") not in doc.metadata["acronyms"] \
         else (match.group("key"), match.group("post"))
 
 
