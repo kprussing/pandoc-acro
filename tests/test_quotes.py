@@ -23,7 +23,17 @@ checks = {
     f"'+{key}'": [
         (
             "markdown",
-            f"'{acronyms[key]['long']} ({acronyms[key]['short']})'",
+            f"'{acronyms[key]['long']}'",
+        ),
+        (
+            "latex",
+            f"`\\ac{{{key}}}'",
+        ),
+    ],
+    f"‘+{key}’": [
+        (
+            "markdown",
+            f"'{acronyms[key]['long']}'",
         ),
         (
             "latex",
@@ -33,7 +43,17 @@ checks = {
     f'"+{key}"': [
         (
             "markdown",
-            f'"{acronyms[key]["long"]} ({acronyms[key]["short"]})"',
+            f'"{acronyms[key]["long"]}"',
+        ),
+        (
+            "latex",
+            f"``\\ac{{{key}}}''",
+        ),
+    ],
+    f'“+{key}”': [
+        (
+            "markdown",
+            f'"{acronyms[key]["long"]}"',
         ),
         (
             "latex",
