@@ -20,6 +20,7 @@ acronyms = {
     }
 }
 checks = {
+    # Simplest form in all quote styles
     f"'+{key}'": [
         (
             "markdown",
@@ -60,6 +61,7 @@ checks = {
             f"``\\ac{{{key}}}''",
         ),
     ],
+    # Explicit spans
     f"'[+{key}]{{}}'": [
         (
             "markdown",
@@ -78,6 +80,37 @@ checks = {
         (
             "latex",
             f"``\\acl{{{key}}}''",
+        ),
+    ],
+    # Acronyms not the sole item in a quotation
+    f'"+{key} with text"': [
+        (
+            "markdown",
+            f'"{acronyms[key]["long"]} with text"',
+        ),
+        (
+            "latex",
+            f"``\\ac{{{key}}} with text''",
+        ),
+    ],
+    f'"with +{key} text"': [
+        (
+            "markdown",
+            f'"with {acronyms[key]["long"]} text"',
+        ),
+        (
+            "latex",
+            f"``with \\ac{{{key}}} text''",
+        ),
+    ],
+    f'"with text +{key}"': [
+        (
+            "markdown",
+            f'"with text {acronyms[key]["long"]}"',
+        ),
+        (
+            "latex",
+            f"``with text \\ac{{{key}}}''",
         ),
     ],
 }
