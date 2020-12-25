@@ -6,7 +6,7 @@ import re
 import pytest
 
 import panflute
-import pandocacro
+import pandocacro.keys
 
 key = "mwe"
 acronyms = {
@@ -47,7 +47,7 @@ def test_get_key() -> None:
         mark = markup + punc
         doc = panflute.convert_text(text.format(mark=mark), standalone=True)
         elem = doc.content[0].content[0]
-        result, post = pandocacro.get_key(elem, doc)
+        result, post = pandocacro.keys.get(elem, doc)
         if result != key:
             delim = '"' if "'" in mark else "'"
             pytest.fail(f"Error extracting {key} from {delim}{mark}{delim}. "
