@@ -25,7 +25,7 @@ class Key:
     value: str
         The acronym key.
     count: bool
-        The entry should be counted (True if '*' and False otherwise)
+        The entry should be counted (False if '*' and True otherwise)
     post: str
         The trailing punctuation.
 
@@ -38,7 +38,7 @@ class Key:
 
     def __init__(self, value: str, count: str = "*", post: str = ""):
         self.value: str = value
-        self.count: bool = count == "*"
+        self.count: bool = count != "*"
         self.post: str = post
 
 
