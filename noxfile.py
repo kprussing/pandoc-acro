@@ -2,10 +2,17 @@ import nox
 
 
 @nox.session
-def lint(session):
-    """Run the linter"""
+def flake8(session):
+    """Run the flake8"""
     session.install("flake8")
     session.run("flake8", "pandocacro", "tests", "noxfile.py")
+
+
+@nox.session
+def mypy(session):
+    """Run mypy"""
+    session.install("mypy")
+    session.run("mypy", "pandocacro", "tests", "noxfile.py")
 
 
 @nox.session(python=[f"3.{x}" for x in range(6, 10)],

@@ -48,6 +48,7 @@ def test_get_key() -> None:
         doc = panflute.convert_text(text.format(mark=mark), standalone=True)
         elem = doc.content[0].content[0]
         result = pandocacro.keys.get(elem, doc)
+        assert result is not None
         if result.value != key:
             delim = '"' if "'" in mark else "'"
             pytest.fail(f"Error extracting {key} from {delim}{mark}{delim}. "

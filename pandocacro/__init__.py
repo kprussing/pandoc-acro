@@ -70,14 +70,14 @@ def algorithm(elem: panflute.Element,
     """
     key = keys.get(elem, doc)
     if not key:
-        return
+        return None
 
     if isinstance(elem, panflute.Str):
         if isinstance(elem.parent, panflute.Span):
             # Apparently, panflute does the contents of the Span before
             # the Span.  Therefore we should punt to let the Span be
             # evaluated and not the string.
-            return
+            return None
 
         return algorithm(panflute.Span(elem), doc)
 
@@ -89,7 +89,7 @@ def algorithm(elem: panflute.Element,
     )
     if sum((c in elem.classes) for c in (f for f, _ in forms)) > 1:
         panflute.debug(f"Too many classes for element {elem.classes}")
-        return
+        return None
 
     if doc.format in ("latex", "beamer"):
         form = [s for c, s in forms if c in elem.classes]
@@ -130,7 +130,7 @@ def algorithm(elem: panflute.Element,
             else:
                 text = long_
 
-        head, *tail = text.format(**kwargs)
+        head, *tail = (s for s in text.format(**kwargs))
         return panflute.Str((head.upper() if "caps" in elem.classes else head)
                             + "".join(tail) + key.post)
 
