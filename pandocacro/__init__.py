@@ -50,11 +50,12 @@ def prepare(doc: panflute.Doc) -> None:
     # For other outputs, we'll need to tally use of the acronyms
     def count(elem, doc):
         """Helper to count use of acronyms"""
-        key, _ = keys.get(elem, doc)
+        key = keys.get(elem, doc)
         if key:
-            doc.metadata[_acronyms][key]["count"] \
-                = int(doc.get_metadata(_acronyms)[key].get("count", 0)) + 1
-            doc.metadata[_acronyms][key]["used"] = False
+            doc.metadata[_acronyms][key.value]["count"] \
+                = int(doc.get_metadata(_acronyms)[key.value].get("count", 0)) \
+                + 1
+            doc.metadata[_acronyms][key.value]["used"] = False
 
     doc.walk(count)
     return
@@ -67,7 +68,7 @@ def algorithm(elem: panflute.Element,
     This method does the heavy lifting of actually inspecting the
     element and doing the relevant replacement.
     """
-    key, post = keys.get(elem, doc)
+    key = keys.get(elem, doc)
     if not key:
         return
 
@@ -95,12 +96,12 @@ def algorithm(elem: panflute.Element,
         macro = "\\" + ("A" if "caps" in elem.classes else "a") + "c" \
                 + (form[0] if form else "") \
                 + ("p" if "plural" in elem.classes else "") \
-                + f"{{{key}}}"
-        return panflute.RawInline(macro + post, format="latex")
+                + f"{{{key.value}}}"
+        return panflute.RawInline(macro + key.post, format="latex")
     else:
         kwargs = {
-            k: panflute.stringify(acronyms[key][k])
-            for k in acronyms[key].content
+            k: panflute.stringify(acronyms[key.value][k])
+            for k in acronyms[key.value].content
         }
 
         long_ = "{long}" + (
@@ -119,19 +120,19 @@ def algorithm(elem: panflute.Element,
         elif "short" in elem.classes:
             text = short_
         else:
-            if int(acronyms[key]["count"].text) > 1:
-                if acronyms[key]["used"].boolean:
+            if int(acronyms[key.value]["count"].text) > 1:
+                if acronyms[key.value]["used"].boolean:
                     text = short_
                 else:
                     text = full_
-                    doc.metadata[_acronyms][key]["used"] = True
+                    doc.metadata[_acronyms][key.value]["used"] = True
 
             else:
                 text = long_
 
         head, *tail = text.format(**kwargs)
         return panflute.Str((head.upper() if "caps" in elem.classes else head)
-                            + "".join(tail) + post)
+                            + "".join(tail) + key.post)
 
 
 def main(doc: Optional[panflute.Doc] = None) -> Optional[panflute.Doc]:

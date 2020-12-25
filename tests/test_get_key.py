@@ -47,15 +47,15 @@ def test_get_key() -> None:
         mark = markup + punc
         doc = panflute.convert_text(text.format(mark=mark), standalone=True)
         elem = doc.content[0].content[0]
-        result, post = pandocacro.keys.get(elem, doc)
-        if result != key:
+        result = pandocacro.keys.get(elem, doc)
+        if result.value != key:
             delim = '"' if "'" in mark else "'"
             pytest.fail(f"Error extracting {key} from {delim}{mark}{delim}. "
-                        f"Found {elem} -> {result}")
+                        f"Found {elem} -> {result.value}")
 
         if "[" not in markup:
             # We have a bare string
-            pass
+            post = result.post
         elif punc != "":
             # We have a span so the punctuation should be the next
             # element.
