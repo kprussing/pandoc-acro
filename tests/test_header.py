@@ -1,9 +1,8 @@
 __doc__ = """Check the bare expanded text"""
 
-from . import command, run_filter
-
 import os
-import unittest
+
+import panflute
 
 _expected = r"""\usepackage{acro}
 \DeclareAcronym{afaik}{
@@ -15,27 +14,30 @@ long = laugh out loud,
 long-plural = es,
 short = lol,
 short-plural = es
-}
-"""
+}"""
 
 _template = os.path.join(os.path.dirname(__file__), "test.latex")
 
 
-class TestHeader(unittest.TestCase):
-    def test(self):
-        result = run_filter(command + ["--template=" + _template,
-                                       "-t", "latex"])
-        self.assertEqual(result, _expected)
-
-    def test_extra_after(self):
-        extra = r"\usepackage{test}"
-        extras = os.path.join(os.path.dirname(__file__),
-                              "header-includes.yaml")
-        result = run_filter(command + [extras,
-                                       "--template=" + _template,
-                                       "-t", "latex"])
-        self.assertEqual(result, extra + "\n" + _expected)
+def test_header() -> None:
+    """Check the base LaTeX header includes"""
+    dirname = os.path.dirname(os.path.abspath(__file__))
+    text = "\n".join(open(os.path.join(dirname, p), "r").read()
+                     for p in ("metadata.yaml", "example.md"))
+    result = panflute.convert_text(text, output_format="latex",
+                                   extra_args=["-F", "pandoc-acro",
+                                               "--template", _template])
+    assert _expected == result
 
 
-if __name__ == "__main__":
-    unittest.main()
+def test_header_after() -> None:
+    """Check the header includes additional includes"""
+    dirname = os.path.dirname(os.path.abspath(__file__))
+    text = "\n".join(open(os.path.join(dirname, p), "r").read()
+                     for p in ("metadata.yaml",
+                               "header-includes.yaml",
+                               "example.md"))
+    result = panflute.convert_text(text, output_format="latex",
+                                   extra_args=["-F", "pandoc-acro",
+                                               "--template", _template])
+    assert "\\usepackage{test}\n" + _expected == result

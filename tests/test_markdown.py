@@ -1,8 +1,8 @@
 __doc__ = """Check the bare expanded text"""
 
-from . import command, run_filter
+import os
 
-import unittest
+import panflute
 
 _expected = "\n".join("-   " + s for s in (
     "AFAIK",
@@ -23,14 +23,14 @@ _expected = "\n".join("-   " + s for s in (
     "As far as I know (AFAIK)",
     "As far as I knows (AFAIKs)",
     )
-) + "\n"
+)
 
 
-class TestMarkdown(unittest.TestCase):
-    def test(self):
-        result = run_filter(command + ["-t", "markdown"])
-        self.assertEqual(result, _expected)
-
-
-if __name__ == "__main__":
-    unittest.main()
+def test_markdown() -> None:
+    """Check the Markdown output"""
+    dirname = os.path.dirname(os.path.abspath(__file__))
+    text = "\n".join(open(os.path.join(dirname, p), "r").read()
+                     for p in ("metadata.yaml", "example.md"))
+    result = panflute.convert_text(text, output_format="markdown",
+                                   extra_args=["-F", "pandoc-acro"])
+    assert _expected == result

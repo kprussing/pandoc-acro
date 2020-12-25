@@ -1,8 +1,8 @@
 __doc__ = """Check the bare expanded text"""
 
-from . import command, run_filter
+import os
 
-import unittest
+import panflute
 
 _macros = [f"\\item\n  \\{s}{{afaik}}" for s in (
         "acs",
@@ -31,14 +31,14 @@ _expected = "\n".join([
     *_macros,
     r"\end{itemize}",
     ]
-) + "\n"
+)
 
 
-class TestLatex(unittest.TestCase):
-    def test(self):
-        result = run_filter(command + ["-t", "latex"])
-        self.assertEqual(result, _expected)
-
-
-if __name__ == "__main__":
-    unittest.main()
+def test_latex() -> None:
+    """Check the LaTeX output"""
+    dirname = os.path.dirname(os.path.abspath(__file__))
+    text = "\n".join(open(os.path.join(dirname, p), "r").read()
+                     for p in ("metadata.yaml", "example.md"))
+    result = panflute.convert_text(text, output_format="latex",
+                                   extra_args=["-F", "pandoc-acro"])
+    assert _expected == result

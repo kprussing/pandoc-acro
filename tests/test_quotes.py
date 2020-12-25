@@ -1,16 +1,8 @@
 __doc__ = """Check acronyms in quote blocks work as expected"""
 
-import os
-
 import pytest
 
 import panflute
-
-FILTER = os.path.join(os.path.dirname(__file__),
-                      os.pardir,
-                      "pandocacro",
-                      "__init__.py"
-                     )
 
 key = "mwe"
 acronyms = {
@@ -143,7 +135,7 @@ acronyms:
 ...
 
 {check}
-""", output_format=format, extra_args=["-F", FILTER])
+""", output_format=format, extra_args=["-F", "pandoc-acro"])
             if result != expected:
                 if debug:
                     print(f"Error converting {check} for {format}")
