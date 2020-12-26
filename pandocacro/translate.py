@@ -73,7 +73,7 @@ def plain(key: Key, acronyms: panflute.MetaMap) -> panflute.Str:
         ("{short-plural}" if "short-plural" in kwargs else "s")
         if key.plural else ""
     )
-    full_ = long_ + " (" + short_ + ")"
+    full_ = long_ + " ({short})"
     if key.type == "full":
         text = full_
     elif key.type == "short":
@@ -86,10 +86,12 @@ def plain(key: Key, acronyms: panflute.MetaMap) -> panflute.Str:
                 text = short_
             else:
                 text = full_
-                acronyms[key.value]["used"] = True
 
         else:
             text = long_
+
+    if key.count:
+        acronyms[key.value]["used"] = True
 
     head, *tail = (s for s in text.format(**kwargs))
     return panflute.Str((head.upper() if key.capitalize else head)

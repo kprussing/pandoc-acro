@@ -5,7 +5,6 @@ import os
 import panflute
 
 _macros = [f"\\item\n  \\{s}{{afaik}}" for s in (
-        "acs",
         "ac",
         "ac",
         "acp",

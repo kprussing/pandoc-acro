@@ -1,4 +1,3 @@
--   [+afaik]{.short}
 -   +afaik
 -   +afaik
 -   [+afaik]{.plural}

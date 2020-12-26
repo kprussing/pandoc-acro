@@ -99,11 +99,11 @@ def test_plain() -> None:
             expected = acronyms["short"] + ("s" if key.plural else "")
         elif key.type == "full":
             expected = acronyms["long"] + ("s" if key.plural else "") \
-                + "(" + acronyms["short"] + ")"
+                + " (" + acronyms["short"] + ")"
         else:
             if first:
                 expected = acronyms["long"] + ("s" if key.plural else "") \
-                    + "(" + acronyms["short"] + ")"
+                    + " (" + acronyms["short"] + ")"
             else:
                 expected = acronyms["short"] + ("s" if key.plural else "")
 
