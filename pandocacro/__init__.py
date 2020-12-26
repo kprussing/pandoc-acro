@@ -45,16 +45,7 @@ def prepare(doc: panflute.Doc) -> None:
     doc.metadata["header-includes"] = header
 
     # For other outputs, we'll need to tally use of the acronyms
-    def count(elem, doc):
-        """Helper to count use of acronyms"""
-        key = keys.get(elem, doc)
-        if key:
-            doc.metadata[_acronyms][key.value]["count"] \
-                = int(doc.get_metadata(_acronyms)[key.value].get("count", 0)) \
-                + 1
-            doc.metadata[_acronyms][key.value]["used"] = False
-
-    doc.walk(count)
+    doc.walk(keys.count)
     return
 
 

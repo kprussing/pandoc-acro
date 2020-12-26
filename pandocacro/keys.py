@@ -152,6 +152,30 @@ class Key:
             + "}" + self.post
 
 
+def count(elem: panflute.Element, doc: panflute.Doc) -> None:
+    """Count the use of acronyms in the document
+
+    This method investigates the element and increments the 'count'
+    value of the acronym in the :class:`panflute.MetaMap` of the
+    document.  If the acronym does not have a 'count' field, it is
+    added.  It is intended to be used to prepare the document before
+    actually doing the actual substitution.  It also sets the 'used'
+    field to False.
+
+    elem: :class:`panflute.Element`
+        The element under inspection
+    doc: :class:`panflte.Doc`
+        The main document
+
+    """
+    key = get(elem, doc)
+    if key:
+        count = doc.get_metadata("acronyms")[key.value].get("count", 0)
+        doc.metadata["acronyms"][key.value]["count"] = int(count) \
+            + (1 if key.count else 0)
+        doc.metadata["acronyms"][key.value]["used"] = False
+
+
 def get(elem: panflute.Element, doc: panflute.Doc) -> Optional[Key]:
     """Extract the key from an element
 
