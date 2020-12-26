@@ -33,3 +33,63 @@ def latex(key: Key) -> panflute.RawInline:
         + f"{{{key.value}}}" \
         + key.post
     return panflute.RawInline(macro, format="latex")
+
+
+def plain(key: Key, acronyms: panflute.MetaMap) -> panflute.Str:
+    """Generate the plain text acronym expansion from a key
+
+    This method inspects the given :class:`Key` and deduces the
+    appropriate expansion based on the details in the given
+    :class:`Acronyms` mapping.  It explicitly checks the user requested
+    formatting ('long', 'short', 'full', etc.) to do the formatting, but
+    it falls back on inspecting the number of usages based on the
+    'count' and 'used' fields for the acronym.  Further, it increments
+    the 'used' field in the :class:`Acronyms` unless the key was marked
+    “do not count.”
+
+    Parameters
+    ----------
+
+    key: :class:`Key`
+        The :class:`Key` to interpret.
+
+    Returns
+    -------
+
+    :class:`panflute.Str`
+        The plain text formatted acronym expansion.
+
+    """
+    kwargs = {
+        k: panflute.stringify(acronyms[key.value][k])
+        for k in acronyms[key.value].content
+    }
+    long_ = "{long}" + (
+        ("{long-plural}" if "long-plural" in kwargs else "s")
+        if key.plural else ""
+    )
+    short_ = "{short}" + (
+        ("{short-plural}" if "short-plural" in kwargs else "s")
+        if key.plural else ""
+    )
+    full_ = long_ + " (" + short_ + ")"
+    if key.type == "full":
+        text = full_
+    elif key.type == "short":
+        text = short_
+    elif key.type == "long":
+        text = long_
+    else:
+        if int(acronyms[key.value]["count"].text) > 1:
+            if acronyms[key.value]["used"].boolean:
+                text = short_
+            else:
+                text = full_
+                acronyms[key.value]["used"] = True
+
+        else:
+            text = long_
+
+    head, *tail = (s for s in text.format(**kwargs))
+    return panflute.Str((head.upper() if key.capitalize else head)
+                        + "".join(tail) + key.post)

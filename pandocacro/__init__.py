@@ -83,40 +83,7 @@ def algorithm(elem: panflute.Element,
     if doc.format in ("latex", "beamer"):
         return translate.latex(key)
     else:
-        kwargs = {
-            k: panflute.stringify(acronyms[key.value][k])
-            for k in acronyms[key.value].content
-        }
-
-        long_ = "{long}" + (
-            ("{long-plural}" if "long-plural" in kwargs else "s")
-            if "plural" in elem.classes else ""
-        )
-        short_ = "{short}" + (
-            ("{short-plural}" if "long-plural" in kwargs else "s")
-            if "plural" in elem.classes else ""
-        )
-        full_ = long_ + " (" + short_ + ")"
-        if "full" in elem.classes:
-            text = full_
-        elif "long" in elem.classes:
-            text = long_
-        elif "short" in elem.classes:
-            text = short_
-        else:
-            if int(acronyms[key.value]["count"].text) > 1:
-                if acronyms[key.value]["used"].boolean:
-                    text = short_
-                else:
-                    text = full_
-                    doc.metadata["acronyms"][key.value]["used"] = True
-
-            else:
-                text = long_
-
-        head, *tail = (s for s in text.format(**kwargs))
-        return panflute.Str((head.upper() if "caps" in elem.classes else head)
-                            + "".join(tail) + key.post)
+        return translate.plain(key, doc.metadata["acronyms"])
 
 
 def main(doc: Optional[panflute.Doc] = None) -> Optional[panflute.Doc]:
