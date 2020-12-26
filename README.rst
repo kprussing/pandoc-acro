@@ -19,16 +19,9 @@ see the `Usage`_ section below.
 Installation
 ------------
 
-The simplest way to install and use this filter is to download the main
-script and pass it to Pandoc as a filter, i.e.
-
-.. code-block:: bash
-
-    pandoc -F <path/to/download>/pandocacro/__init__.py input.md
-
-Alternatively, the script can be installed using the standard Python
-``setuptools`` with ``python setup.py install`` and then use the
-executable version
+To install, download the source and run ``python setup.py install`` from
+the top of the source tree.  Then pass ``pandoc-acro`` as a filter to
+Pandoc_ e.g.
 
 .. code-block:: bash
 
