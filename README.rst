@@ -46,6 +46,7 @@ Beyond the minimum, each acronym can define:
 An example metadata block would be:
 
 .. code-block:: yaml
+
     ---
     acronyms:
       afaik:
