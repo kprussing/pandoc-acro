@@ -57,10 +57,6 @@ def algorithm(elem: panflute.Element,
     This method does the heavy lifting of actually inspecting the
     element and doing the relevant replacement.
     """
-    key = keys.get(elem, doc)
-    if not key:
-        return None
-
     if isinstance(elem, panflute.Str):
         if isinstance(elem.parent, panflute.Span):
             # Apparently, panflute does the contents of the Span before
@@ -70,14 +66,8 @@ def algorithm(elem: panflute.Element,
 
         return algorithm(panflute.Span(elem), doc)
 
-    acronyms = doc.metadata["acronyms"]
-    forms = (
-        ("full", "f"),
-        ("short", "s"),
-        ("long", "l")
-    )
-    if sum((c in elem.classes) for c in (f for f, _ in forms)) > 1:
-        panflute.debug(f"Too many classes for element {elem.classes}")
+    key = keys.get(elem, doc)
+    if not key:
         return None
 
     if doc.format in ("latex", "beamer"):
