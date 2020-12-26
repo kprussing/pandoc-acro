@@ -61,19 +61,17 @@ def plain(key: Key, acronyms: panflute.MetaMap) -> panflute.Str:
         The plain text formatted acronym expansion.
 
     """
-    kwargs = {
+    content = {
         k: panflute.stringify(acronyms[key.value][k])
         for k in acronyms[key.value].content
     }
-    long_ = "{long}" + (
-        ("{long-plural}" if "long-plural" in kwargs else "s")
-        if key.plural else ""
+    long_ = content["long"] + (
+        content.get("long-plural", "s") if key.plural else ""
     )
-    short_ = "{short}" + (
-        ("{short-plural}" if "short-plural" in kwargs else "s")
-        if key.plural else ""
+    short_ = content["short"] + (
+        content.get("short-plural", "s") if key.plural else ""
     )
-    full_ = long_ + " ({short})"
+    full_ = long_ + " (" + content["short"] + ")"
     if key.type == "full":
         text = full_
     elif key.type == "short":
@@ -93,6 +91,6 @@ def plain(key: Key, acronyms: panflute.MetaMap) -> panflute.Str:
     if key.count:
         acronyms[key.value]["used"] = True
 
-    head, *tail = (s for s in text.format(**kwargs))
+    head, *tail = (s for s in text)
     return panflute.Str((head.upper() if key.capitalize else head)
                         + "".join(tail) + key.post)
