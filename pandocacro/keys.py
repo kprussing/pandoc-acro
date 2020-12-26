@@ -162,6 +162,9 @@ def count(elem: panflute.Element, doc: panflute.Doc) -> None:
     actually doing the actual substitution.  It also sets the 'used'
     field to False.
 
+    Parameters
+    ----------
+
     elem: :class:`panflute.Element`
         The element under inspection
     doc: :class:`panflte.Doc`
@@ -182,6 +185,9 @@ def get(elem: panflute.Element, doc: panflute.Doc) -> Optional[Key]:
     Check if the given element contains a key in the metadata ``acronyms``
     field preceded by ``+``.  If it is, return the key and all its
     details.  Otherwise, return None.
+
+    Parameters
+    ----------
 
     elem: :class:`panflute.Element`
         The element under inspection
