@@ -15,6 +15,7 @@ from typing import Optional
 import panflute
 
 from . import keys
+from . import translate
 
 
 def prepare(doc: panflute.Doc) -> None:
@@ -80,12 +81,7 @@ def algorithm(elem: panflute.Element,
         return None
 
     if doc.format in ("latex", "beamer"):
-        form = [s for c, s in forms if c in elem.classes]
-        macro = "\\" + ("A" if "caps" in elem.classes else "a") + "c" \
-                + (form[0] if form else "") \
-                + ("p" if "plural" in elem.classes else "") \
-                + f"{{{key.value}}}"
-        return panflute.RawInline(macro + key.post, format="latex")
+        return translate.latex(key)
     else:
         kwargs = {
             k: panflute.stringify(acronyms[key.value][k])
