@@ -16,9 +16,6 @@ import panflute
 
 from . import keys
 
-_acronyms = "acronyms"
-"""The metadata key to the acronyms map"""
-
 
 def prepare(doc: panflute.Doc) -> None:
     """Prepare the document
@@ -28,7 +25,7 @@ def prepare(doc: panflute.Doc) -> None:
     acronyms in the document.  These details are to be used by the
     writer or the main filter.
     """
-    if _acronyms not in doc.metadata:
+    if "acronyms" not in doc.metadata:
         return
 
     # Prepare the LaTeX details.
@@ -81,7 +78,7 @@ def algorithm(elem: panflute.Element,
 
         return algorithm(panflute.Span(elem), doc)
 
-    acronyms = doc.metadata[_acronyms]
+    acronyms = doc.metadata["acronyms"]
     forms = (
         ("full", "f"),
         ("short", "s"),
@@ -125,7 +122,7 @@ def algorithm(elem: panflute.Element,
                     text = short_
                 else:
                     text = full_
-                    doc.metadata[_acronyms][key.value]["used"] = True
+                    doc.metadata["acronyms"][key.value]["used"] = True
 
             else:
                 text = long_
