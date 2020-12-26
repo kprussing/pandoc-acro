@@ -5,7 +5,6 @@ import os
 import panflute
 
 _expected = "\n".join("-   " + s for s in (
-    "AFAIK",
     "as far as I know (AFAIK)",
     "AFAIK",
     "AFAIKs",
@@ -13,7 +12,7 @@ _expected = "\n".join("-   " + s for s in (
     "as far as I know",
     "as far as I knows",
     "as far as I know (AFAIK)",
-    "as far as I knows (AFAIKs)",
+    "as far as I knows (AFAIK)",
     "AFAIK",
     "AFAIKs",
     "AFAIK",
@@ -21,7 +20,7 @@ _expected = "\n".join("-   " + s for s in (
     "As far as I know",
     "As far as I knows",
     "As far as I know (AFAIK)",
-    "As far as I knows (AFAIKs)",
+    "As far as I knows (AFAIK)",
     )
 )
 
