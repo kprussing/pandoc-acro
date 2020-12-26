@@ -30,6 +30,7 @@ def latex(key: Key) -> panflute.RawInline:
            "long": "l"
            }.get(key.type, "") \
         + ("p" if key.plural else "") \
+        + ("*" if not key.count else "") \
         + f"{{{key.value}}}" \
         + key.post
     return panflute.RawInline(macro, format="latex")
