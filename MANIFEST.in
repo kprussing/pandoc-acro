@@ -1,4 +1,4 @@
 # Include the tests and supporting files
 graft tests
 
-include tox.ini
+include noxfile.py
