@@ -103,6 +103,20 @@ mapping is:
 | ``[+afaik]{.full .plural .caps}``  | ``\Acfp{afaik}``  | As far as I knows (AFAIKs)    |
 +------------------------------------+-------------------+-------------------------------+
 
+Additionally, one can specify the acronym with ``*`` after the ``+``.
+This sets the “starred” version of the LaTeX macro.  In the LaTeX
+output, this places a ``*`` after the macro but before the opening
+``{``.  Per the ``acro`` documentation, this indicates “don't count as
+usage.”  Therefore, in the plain text output the rules are:
+
+1.  Every usage respects the “full,” “short,” or “long” designation.
+2.  Usages before the first one that “counts” are expanded to the full
+    form by default.
+3.  The first usage that “counts” is respected as the first usage and
+    expanded as full by default.
+4.  All usages after the first usage are expanded to the short form by
+    default.
+
 Output Format Notes
 -------------------
 
