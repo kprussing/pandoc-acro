@@ -19,10 +19,10 @@ acronyms:
 """
 
 
-def generate(N: int) -> Tuple[str, List[Key]]:
+def generate() -> Tuple[str, List[Key]]:
     """Generate the text and the expected list of keys"""
     keys = []
-    for _ in range(10):
+    for _ in range(random.randrange(100)):
         key = Key()
         key.value = value
         key.count = random.choice((True, False))
@@ -36,7 +36,7 @@ def generate(N: int) -> Tuple[str, List[Key]]:
 
 def test_latex() -> None:
     """Check the starred LaTeX version works as expected"""
-    text, keys = generate(10)
+    text, keys = generate()
     result = panflute.convert_text(text, output_format="latex",
                                    extra_args=["-F", "pandoc-acro"])
     lines = (line for line in result.splitlines())
@@ -83,7 +83,7 @@ def test_forced_first_use() -> None:
 
 def test_plain() -> None:
     """Check the results of the starred plain text output"""
-    text, keys = generate(10)
+    text, keys = generate()
     doc = panflute.convert_text(text, standalone=True)
     acronyms = {k: panflute.stringify(doc.metadata["acronyms"]["mwe"][k])
                 for k in doc.metadata["acronyms"]["mwe"].content}
