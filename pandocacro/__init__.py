@@ -16,6 +16,7 @@ import panflute
 
 from . import keys
 from .translate import translate
+from .list import printacronyms
 
 
 def prepare(doc: panflute.Doc) -> None:
@@ -51,7 +52,8 @@ def prepare(doc: panflute.Doc) -> None:
 
 
 def main(doc: Optional[panflute.Doc] = None) -> Optional[panflute.Doc]:
-    return panflute.run_filters([translate], prepare=prepare, doc=doc)
+    return panflute.run_filters([translate, printacronyms],
+                                prepare=prepare, doc=doc)
 
 
 if __name__ == "__main__":

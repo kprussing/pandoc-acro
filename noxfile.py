@@ -21,6 +21,7 @@ def test(session):
     """Run the regression tests"""
     session.install("pytest")
     session.install("panflute>=2.0")
+    session.install("pyyaml")
     session.install('.')
     session.conda_install("pandoc>=2.11")
     session.run("pytest", "tests")
