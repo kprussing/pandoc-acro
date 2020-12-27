@@ -1,6 +1,8 @@
 __doc__ = """Test the printing of the list of acronyms"""
 
 import random
+import re
+import string
 
 from typing import List, Tuple
 
@@ -8,6 +10,7 @@ import panflute
 import yaml
 
 from pandocacro.keys import Key
+from pandocacro import printacronyms
 
 
 TEXT = """---
@@ -73,3 +76,48 @@ def test_latex() -> None:
             break
 
     assert next(lines) == r"\printacronyms"
+
+
+def test_latex_options() -> None:
+    r"""Check the expected options get printed correctly"""
+    letters = string.ascii_uppercase + string.ascii_lowercase + " "
+    for _ in range(random.randrange(10)):
+        block = random.choice(("::: {{#acronyms {options}}}\n:::",
+                               "# {name} {{#acronyms {options}}}"))
+        name = re.sub(" +", " ", "".join(random.choices(letters, k=20)))
+        options = []
+        sort = random.choice((None, "true", "false", "bad"))
+        if sort is not None:
+            options.append(f"sort={sort}")
+
+        doc = panflute.convert_text(
+            block.format(name=name, options=" ".join(options)),
+            standalone=True
+        )
+        doc.format = "latex"
+        result = printacronyms(doc.content[-1], doc)
+
+        assert result is not None
+
+        match = re.match(r"\\printacronyms(?:\[(.*)])?",
+                         panflute.stringify(result))
+        assert match
+        if match.group(1) is None:
+            assert isinstance(doc.content[-1], panflute.Div) \
+                and sort in (None, "bad")
+            continue
+
+        args = [[s for s in a.split("=")] for a in match.group(1).split(",")]
+        try:
+            val = next(v for k, v in args if k == "name")
+        except StopIteration:
+            assert isinstance(doc.content[-1], panflute.Div)
+        else:
+            assert val == name
+
+        try:
+            val = next(v for k, v in args if k == "sort")
+        except StopIteration:
+            assert sort in (None, "bad")
+        else:
+            assert sort == val
