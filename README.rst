@@ -144,11 +144,6 @@ In the LaTeX output, the div or header is replaced with
 ``\printacronyms`` with the following options:
 
 -   ``name``: The text of the header (header version only).
--   ``heading``: The value of the ``heading`` attribute (``section``,
-    ``section*``, ``chapter``, or ``chapter*``) or the highest valid
-    sectioning command (no star version) based on the ``documentclass``
-    and the heading level in the header version (e.g. in a ``book``,
-    level 1 would be ``chapter`` and level 2 would be ``section``).
 -   ``sort``: The value of the ``sort`` attribute (``true`` or
     ``false``) indicating if the acronyms should be sorted.
 
@@ -158,7 +153,6 @@ header style, the list is placed under a heading of the appropriate
 level using the header’s text.  For the div style, the list is created
 under a new level 1 header with the text “Acronyms.”  The list is sorted
 (default) or not based on the ``sort`` attribute of the div or header.
-The ``heading`` attribute is not used in the plain text output.
 
 Output Format Notes
 -------------------
