@@ -1,21 +1,67 @@
 __doc__ = """Functions to translate keys to proper output"""
 
+from typing import Optional
+
 import panflute
 
-from .keys import Key
+from . import keys
 
 
-def latex(key: Key) -> panflute.RawInline:
+def translate(elem: panflute.Element,
+              doc: panflute.Doc) -> Optional[panflute.Element]:
+    """Translate a marked acronym to the expanded version
+
+    This method is the filter interface to actually inspect an element
+    and translate it to the appropriate replacement.  This includes
+    generating the appropriate LaTeX macro or fully expanding the text
+    based on the :class:`panflute.Doc` :attr:`format`.
+
+    Parameters
+    ----------
+
+    elem: :class:`panflute.Element`
+        The element to inspect and replace.
+    doc: :class:`panflute.Doc`
+        The document under consideration.
+
+    Returns
+    -------
+
+    :class:`panflute.Element`, optional:
+        The replacement element with the acronym replacement.
+
+
+    """
+    if isinstance(elem, panflute.Str):
+        if isinstance(elem.parent, panflute.Span):
+            # Apparently, panflute does the contents of the Span before
+            # the Span.  Therefore we should punt to let the Span be
+            # evaluated and not the string.
+            return None
+
+        return translate(panflute.Span(elem), doc)
+
+    key = keys.get(elem, doc)
+    if not key:
+        return None
+
+    if doc.format in ("latex", "beamer"):
+        return latex(key)
+    else:
+        return plain(key, doc.metadata["acronyms"])
+
+
+def latex(key: keys.Key) -> panflute.RawInline:
     """Generate the LaTeX output from a key
 
-    This method inspects the given :class:`Key` and determine the
+    This method inspects the given :class:`keys.Key` and determine the
     properly formatted version of the LaTeX acronym.
 
     Parameters
     ----------
 
-    key: :class:`Key`
-        The :class:`Key` to interpret.
+    key: :class:`keys.Key`
+        The :class:`keys.Key` to interpret.
 
     Returns
     -------
@@ -36,10 +82,10 @@ def latex(key: Key) -> panflute.RawInline:
     return panflute.RawInline(macro, format="latex")
 
 
-def plain(key: Key, acronyms: panflute.MetaMap) -> panflute.Str:
+def plain(key: keys.Key, acronyms: panflute.MetaMap) -> panflute.Str:
     """Generate the plain text acronym expansion from a key
 
-    This method inspects the given :class:`Key` and deduces the
+    This method inspects the given :class:`keys.Key` and deduces the
     appropriate expansion based on the details in the given
     :class:`Acronyms` mapping.  It explicitly checks the user requested
     formatting ('long', 'short', 'full', etc.) to do the formatting, but
@@ -51,8 +97,8 @@ def plain(key: Key, acronyms: panflute.MetaMap) -> panflute.Str:
     Parameters
     ----------
 
-    key: :class:`Key`
-        The :class:`Key` to interpret.
+    key: :class:`keys.Key`
+        The :class:`keys.Key` to interpret.
 
     Returns
     -------

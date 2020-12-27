@@ -15,7 +15,7 @@ from typing import Optional
 import panflute
 
 from . import keys
-from . import translate
+from .translate import translate
 
 
 def prepare(doc: panflute.Doc) -> None:
@@ -50,34 +50,8 @@ def prepare(doc: panflute.Doc) -> None:
     return
 
 
-def algorithm(elem: panflute.Element,
-              doc: panflute.Doc) -> Optional[panflute.Element]:
-    """The core algorithm to substitute the acronym
-
-    This method does the heavy lifting of actually inspecting the
-    element and doing the relevant replacement.
-    """
-    if isinstance(elem, panflute.Str):
-        if isinstance(elem.parent, panflute.Span):
-            # Apparently, panflute does the contents of the Span before
-            # the Span.  Therefore we should punt to let the Span be
-            # evaluated and not the string.
-            return None
-
-        return algorithm(panflute.Span(elem), doc)
-
-    key = keys.get(elem, doc)
-    if not key:
-        return None
-
-    if doc.format in ("latex", "beamer"):
-        return translate.latex(key)
-    else:
-        return translate.plain(key, doc.metadata["acronyms"])
-
-
 def main(doc: Optional[panflute.Doc] = None) -> Optional[panflute.Doc]:
-    return panflute.run_filters([algorithm], prepare=prepare, doc=doc)
+    return panflute.run_filters([translate], prepare=prepare, doc=doc)
 
 
 if __name__ == "__main__":
