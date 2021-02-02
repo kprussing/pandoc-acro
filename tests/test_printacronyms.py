@@ -113,7 +113,7 @@ def test_latex_options() -> None:
         except StopIteration:
             assert isinstance(doc.content[-1], panflute.Div)
         else:
-            assert val == name
+            assert val == name.strip()
 
         try:
             val = next(v for k, v in args if k == "sort")
