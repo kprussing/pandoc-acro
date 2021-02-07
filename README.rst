@@ -146,6 +146,8 @@ In the LaTeX output, the div or header is replaced with
 -   ``name``: The text of the header (header version only).
 -   ``sort``: The value of the ``sort`` attribute (``true`` or
     ``false``) indicating if the acronyms should be sorted.
+-   ``level``: The desired section level for the title (plain text
+    output for div version only).
 
 In the plain text output, the div or header is replaced with a bulleted
 list of acronyms in the ``description`` style of ``acro``.  For the

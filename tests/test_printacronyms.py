@@ -121,3 +121,64 @@ def test_latex_options() -> None:
             assert sort in (None, "bad")
         else:
             assert sort == val
+
+
+def test_plain() -> None:
+    r"""Check the acronym list is generated in plain text"""
+    base, _ = generate()
+    div = """
+::: {{#{ident}}}
+:::
+"""
+    text = "\n".join([base, div.format(ident="acronyms")])
+    result = panflute.convert_text(text, output_format="markdown",
+                                   extra_args=["-F", "pandoc-acro"])
+    acronyms = yaml.safe_load(TEXT)["acronyms"]
+    for acro in acronyms:
+        acronyms[acro]["used"] = False
+        acronyms[acro]["found"] = False
+        for k in ("long", "short"):
+            if k + "-plural" not in acro:
+                acronyms[acro][k + "-plural"] = "s"
+
+    lines = iter(result.splitlines())
+    while True:
+        line = next(lines)
+        if re.match(r":::\s*{#acronym-list}", line):
+            break
+
+        # If the short version appears, it better make it to the list
+        for acro in acronyms:
+            head, *tail = (s for s in acronyms[acro]["short"])
+            pat = r"\b[" + head + head.upper() + "]" + "".join(tail) \
+                + "(" + acronyms[acro]["short-plural"] + r")?\b"
+            if re.search(pat, line):
+                acronyms[acro]["used"] = True
+                break
+
+    # Pop the title, marker and empty line
+    if not re.match(r"^#\s+.*", next(lines)):
+        assert re.match("=+", next(lines))
+
+    assert next(lines).strip() == ""
+    for line in lines:
+        if re.match("^:+$", line):
+            break
+
+        match = re.match(r"-\s+[*]+(\w+)[*]+:\s*(.*)", line)
+        assert match
+        for acro, values in acronyms.items():
+            if match.group(1) == values["short"] and \
+                    match.group(2) == values["long"]:
+                acronyms[acro]["found"] = True
+                break
+
+    # Now check that if the acronym was used it was reported
+    usage = [a["used"] == a["found"] for a in acronyms.values()]
+    if not all(usage):
+        for key, value in acronyms.items():
+            print(key, ": used, found = ", value["used"], value["found"])
+
+        print("Text: '''=\n" + result + "\n'''")
+
+    assert all(usage)
