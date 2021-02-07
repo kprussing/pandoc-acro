@@ -11,11 +11,10 @@ def printacronyms(elem: panflute.Element,
                   doc: panflute.Doc) -> Optional[panflute.Block]:
     """Print the list of acronyms.
 
-    Replace the 'acronyms' :class:`panflute.Div` with the list of acronyms
-
     This is the high level filter to generate a list of acronyms.  It
-    checks for a :class:`panflute.Div` that has the :attr:`identifier`
-    'acronyms' and replaces it with the appropriate list of acronyms.
+    checks for a :class:`panflute.Div` or :class:`panflute.Header` that
+    has the :attr:`identifier` 'acronyms' and replaces it with the
+    appropriate list of acronyms.
 
     Parameters
     ----------
@@ -64,7 +63,7 @@ def latex(elem: Union[panflute.Div, panflute.Header],
     Returns
     -------
 
-    :class:`panflute.RawBlock`, optional:
+    :class:`panflute.RawBlock`:
         The replacement for the block.
 
     """
