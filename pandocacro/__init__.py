@@ -16,6 +16,7 @@ import panflute
 
 from . import keys
 from .translate import translate
+from .list import printacronyms
 
 
 def prepare(doc: panflute.Doc) -> None:
@@ -42,6 +43,9 @@ def prepare(doc: panflute.Doc) -> None:
         header.append(LaTeX(",\n".join(f"{k} = {v}" for k, v
                                        in values.items())))
         header.append(LaTeX("}"))
+        doc.metadata["acronyms"][key]["used"] = False
+        doc.metadata["acronyms"][key]["count"] = 0
+        doc.metadata["acronyms"][key]["list"] = False
 
     doc.metadata["header-includes"] = header
 
@@ -51,7 +55,8 @@ def prepare(doc: panflute.Doc) -> None:
 
 
 def main(doc: Optional[panflute.Doc] = None) -> Optional[panflute.Doc]:
-    return panflute.run_filters([translate], prepare=prepare, doc=doc)
+    return panflute.run_filters([translate, printacronyms],
+                                prepare=prepare, doc=doc)
 
 
 if __name__ == "__main__":
