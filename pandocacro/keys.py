@@ -176,7 +176,6 @@ def count(elem: panflute.Element, doc: panflute.Doc) -> None:
         count = doc.get_metadata("acronyms")[key.value].get("count", 0)
         doc.metadata["acronyms"][key.value]["count"] = int(count) \
             + (1 if key.count else 0)
-        doc.metadata["acronyms"][key.value]["used"] = False
 
 
 def get(elem: panflute.Element, doc: panflute.Doc) -> Optional[Key]:
