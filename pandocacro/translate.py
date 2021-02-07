@@ -134,9 +134,6 @@ def plain(key: keys.Key, acronyms: panflute.MetaMap) -> panflute.Str:
         else:
             text = long_
 
-    if content["short"] in text:
-        acronyms[key.value]["list"] = True
-
     if key.count:
         acronyms[key.value]["used"] = True
 
