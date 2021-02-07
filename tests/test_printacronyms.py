@@ -31,7 +31,7 @@ def generate() -> Tuple[str, List[Key]]:
     """Generate the base text and expected list of keys"""
     keys = []
     values = [v for v in yaml.safe_load(TEXT)["acronyms"].keys()]
-    for _ in range(random.randrange(10)):
+    for _ in range(random.randrange(1, 11)):
         key = Key()
         key.value = random.choice(values)
         key.count = random.choice((True, False))
