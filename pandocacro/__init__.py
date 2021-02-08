@@ -10,6 +10,8 @@ simply translated to the ``acro`` macro.  If a key is not defined in the
 metadata, no transformation is done.
 """
 
+__version__ = "0.9.5"
+
 from typing import Optional
 
 import panflute
