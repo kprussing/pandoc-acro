@@ -1,3 +1,5 @@
+import os
+
 import nox
 
 
@@ -34,3 +36,21 @@ def test(session):
         tests = ["tests"]
 
     session.run("pytest", *tests)
+
+
+@nox.session
+def docs(session):
+    """Build the documentation"""
+    session.install("sphinx")
+    session.install("panflute>=2.0")
+    session.install(".")
+    docs = os.path.dirname(session.bin)
+    html = os.path.join(docs, "html")
+    doctrees = os.path.join(docs, "doctrees")
+    session.run("sphinx-build",
+                "-b", "html",
+                "-W",  # Warnings as errors
+                "-d", doctrees,
+                "docs",
+                html
+                )
