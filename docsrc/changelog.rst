@@ -14,7 +14,7 @@ Added
 -   Random selection of keys for testing purposes
 -   Support for creating a list of acronyms
 -   Option to pass through arguments to pytest_ from nox_
--   HTML documentation generation via Sphinx_
+-   HTML documentation generation via Sphinx_ and deploy to github pages
 
 Changed
 ^^^^^^^
