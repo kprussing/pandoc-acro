@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Changelog &#8212; Pandoc Acronym Filter 0.9.5 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="canonical" href="https://kprussing.github.io/pandoc-acro/html/changelog.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Rationale Behind the Filter" href="rationale.html" />
+    <link rel="prev" title="Contributing" href="contributing.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="changelog">
+<h1>Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h1>
+<p>All notable changes to this project will be documented in this file.
+The format is based on <a class="reference external" href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>.</p>
+<div class="section" id="unreleased">
+<h2><a class="reference external" href="https://github.com/kprussing/pandoc-acro/compare/v0.9.5...HEAD">Unreleased</a><a class="headerlink" href="#unreleased" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="added">
+<h3>Added<a class="headerlink" href="#added" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Full support for the starred usage in the output</p></li>
+<li><p>Random selection of keys for testing purposes</p></li>
+<li><p>Support for creating a list of acronyms</p></li>
+<li><p>Option to pass through arguments to <a class="reference external" href="https://docs.pytest.org/en/stable/">pytest</a> from <a class="reference external" href="xhttps://nox.thea.codes/en/stable/">nox</a></p></li>
+<li><p>HTML documentation generation via <a class="reference external" href="https://www.sphinx-doc.org/en/master/index.html">Sphinx</a></p></li>
+</ul>
+</div>
+<div class="section" id="changed">
+<h3>Changed<a class="headerlink" href="#changed" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Moved the main translation function to the submodule</p></li>
+<li><p>Moved the version string to the main source following <a class="reference external" href="https://packaging.python.org/guides/single-sourcing-package-version/">single source
+pattern</a></p></li>
+</ul>
+</div>
+<div class="section" id="fixed">
+<h3>Fixed<a class="headerlink" href="#fixed" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Typos in the README</p></li>
+<li><p>Added missing files to the distribution</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id1">
+<h2><a class="reference external" href="https://github.com/kprussing/pandoc-acro/compare/v0.9.4...v0.9.5">0.9.5</a> 2020-12-25<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h3>Added<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>A unique type for processing acronym keys</p></li>
+<li><p>Have the key class manage the parsing during the initialization</p></li>
+<li><p>Added <a class="reference external" href="https://mypy.readthedocs.io/en/stable/">mypy</a> as a linting step</p></li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h3>Changed<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Refactored the tests to directly use the filter</p></li>
+<li><p>Moved key extraction to a submodule for better testing</p></li>
+<li><p>Moved the output generation to a submodule</p></li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h3>Fixed<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Correct the counting of starred keys</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id5">
+<h2><a class="reference external" href="https://github.com/kprussing/pandoc-acro/compare/v0.9.3...v0.9.4">0.9.4</a> 2020-12-18<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id6">
+<h3>Fixed<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Properly strip quotes when processing <code class="xref py py-class docutils literal notranslate"><span class="pre">panflute.Quoted</span></code>
+blocks</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id7">
+<h2><a class="reference external" href="https://github.com/kprussing/pandoc-acro/compare/v0.9.1...v0.9.3">0.9.3</a> 2020-12-18<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id8">
+<h3>Changed<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Migrated from <a class="reference external" href="https://tox.readthedocs.io/en/latest/">tox</a> to <a class="reference external" href="xhttps://nox.thea.codes/en/stable/">nox</a></p></li>
+<li><p>Migrated to <a class="reference external" href="https://docs.pytest.org/en/stable/">pytest</a> for testing</p></li>
+</ul>
+</div>
+<div class="section" id="id9">
+<h3>Fixed<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Corrected logic to make sure a key was registered before use</p></li>
+<li><p>Parsing of acronyms at bounded by punctuation</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id10">
+<h2><a class="reference external" href="https://github.com/kprussing/pandoc-acro/releases/tag/v0.9.1">0.9.1</a> 2020-09-14<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id11">
+<h3>Added<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://tox.readthedocs.io/en/latest/">tox</a> support linting with <a class="reference external" href="https://flake8.pycqa.org/en/latest/">flake8</a> and testing with <a class="reference external" href="https://docs.python.org/3/library/unittest.html">unittest</a></p></li>
+</ul>
+</div>
+<div class="section" id="id12">
+<h3>Fixed<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>LaTeX header inclusion logic to not overwrite user additions</p></li>
+</ul>
+</div>
+<div class="section" id="removed">
+<h3>Removed<a class="headerlink" href="#removed" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Support for Python 3.5</p></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Pandoc Acronym Filter</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="api.html">Pandocacro API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rationale.html">Rationale Behind the Filter</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="contributing.html" title="previous chapter">Contributing</a></li>
+      <li>Next: <a href="rationale.html" title="next chapter">Rationale Behind the Filter</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Keith F. Prussing.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/changelog.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

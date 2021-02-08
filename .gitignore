@@ -3,3 +3,4 @@ dist
 *.egg-info
 .nox
 docs/doctrees
+docs/html/.buildinfo
