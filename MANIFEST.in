@@ -1,4 +1,5 @@
 # Include the tests and supporting files
 graft tests
+prune tests/__pycache__
 
 include noxfile.py
