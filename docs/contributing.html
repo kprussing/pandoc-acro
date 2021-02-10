@@ -79,6 +79,15 @@ debugger on error use</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="deploying-the-html-documentation">
+<h2>Deploying the HTML Documentation<a class="headerlink" href="#deploying-the-html-documentation" title="Permalink to this headline">¶</a></h2>
+<p>The HTML version of the documentation can be updated by running
+<em class="manpage">make(1)</em> with the target <code class="docutils literal notranslate"><span class="pre">github</span></code> from the dosrc directory.
+Then add and commit the changes.  To prevent pushing the stable branch
+without rebuilding the documentation, copy the script
+<code class="file docutils literal notranslate"><span class="pre">pre-push-build-sphinx.py</span></code> to <code class="file docutils literal notranslate"><span class="pre">.git/hooks/pre-push</span></code> and make
+it executable.</p>
+</div>
 </div>
 
 
