@@ -1,12 +1,14 @@
 #!/usr/bin/env python
-__doc__ = """Force build the HTML documentation if pushing to the stable
-branch.  This script checks if the stable branch is being pushed.  If it
-is, it checks it out, runs Sphinx to build the HTML documentation, adds
-and commits the changes if necessary, and reverts to the original
-branch.  It refuses to do any of this if there are uncommitted or staged
-changes as this would potentially interfere with the user's state.  To
-enable this hook, copy this file to ``.git/hooks/pre-push`` and make it
-executable with ``chmod +x .git/hooks/pre-push``.
+__doc__ = """Prevent the user from pushing to stable without updating
+the HTML documentation.  This makes sure the stable branch always pushes
+the most up to date documentation to the website.  This script checks if
+the stable branch is being pushed.  If it is, it checks it out, runs
+Sphinx to build the HTML documentation, checks if any changes need to be
+committed, and reverts to the original branch.  It refuses to do any of
+this if there are uncommitted or staged changes as this would
+potentially interfere with the user's state.  To enable this hook, copy
+this file to ``.git/hooks/pre-push`` and make it executable with ``chmod
++x .git/hooks/pre-push``.
 """
 
 import argparse
@@ -92,12 +94,11 @@ if success:
                              capture_output=True,
                              universal_newlines=True).stdout
     if any(re.match(r"^\s*M", x) for x in changes.splitlines()):
-        subprocess.run(["git", "add", root / "docs"])
-        subprocess.run(["git", "commit", "-m", "Automatic push HTML Update"])
+        print("Push error: Building the HTML documentation yields "
+              "changes to commit", file=sys.stderr)
+        success = False
 
-else:
-    subprocess.run(["git", "checkout", root / "docs"])
-
+subprocess.run(["git", "checkout", root / "docs"])
 if not re.search("stable$", branch):
     subprocess.run(["git", "checkout", branch], check=True)
 

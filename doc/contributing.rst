@@ -56,10 +56,10 @@ Deploying the HTML Documentation
 
 The HTML version of the documentation can be updated by running
 :manpage:`make(1)` with the target ``github`` from the dosrc directory.
-Then add and commit the changes.  Alternatively, the procedure can be
-automated when pushing to stable with the pre-push hook
-:file:`pre-push-build-sphinx.py`.  To enable it, copy the script to the
-local :file:`.git/hooks/pre-push` and make it executable.
+Then add and commit the changes.  To prevent pushing the stable branch
+without rebuilding the documentation, copy the script
+:file:`pre-push-build-sphinx.py` to :file:`.git/hooks/pre-push` and make
+it executable.
 
 .. _BSD 2-Clause License: https://opensource.org/licenses/BSD-2-Clause
 .. _conda: https://nox.thea.codes/en/stable/config.html#configuring-a-session-s-virtualenv
