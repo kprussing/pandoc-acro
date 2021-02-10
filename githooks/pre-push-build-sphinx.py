@@ -71,7 +71,7 @@ if not re.search("stable$", branch):
 
 with tempfile.TemporaryDirectory() as tmp:
     build = subprocess.run(
-        ["sphinx-build", "-M", "html", root / "docsrc", tmp]
+        ["sphinx-build", "-M", "html", root / "doc", tmp]
     )
     success = build.returncode == 0
     if success:
