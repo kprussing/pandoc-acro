@@ -15,6 +15,8 @@ Added
 -   Support for creating a list of acronyms
 -   Option to pass through arguments to pytest_ from nox_
 -   HTML documentation generation via Sphinx_ and deploy to github pages
+-   Hook to automatically build the HTML documentation when pushing to
+    stable
 
 Changed
 ^^^^^^^
