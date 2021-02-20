@@ -10,25 +10,37 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-import os
+import configparser
+import importlib
+import pathlib
 import sys
 
-try:
-    import pandocacro
-except ImportError:
-    sys.path.insert(0, os.path.abspath(os.path.pardir))
-    import pandocacro
+# Load the details from the setup.cfg
+root = pathlib.Path(__file__).parent.parent
+parser = configparser.ConfigParser(empty_lines_in_values=True)
+parser.read(root / "setup.cfg")
 
+# Make sure the module has been found
 
 # -- Project information -----------------------------------------------------
 
-project = 'Pandoc Acronym Filter'
-copyright = '2021, Keith F. Prussing'
-author = 'Keith F. Prussing'
+project = parser.get("build_sphinx", "project")
+author = parser.get("metadata", "author")
+copyright = "2021, " + author
 
 # The full version, including alpha/beta/rc tags
-release = pandocacro.__version__
+release = parser.get("metadata", "version")
+version = ".".join(release.split(".")[:2])
 
+# Ensure the package can be loaded for auto documentation
+for module in parser.get("options", "packages", fallback="").splitlines():
+    try:
+        importlib.import_module(module)
+    except ImportError:
+        if str(root.resolve()) not in sys.path:
+            sys.path.insert(0, str(root.resolve()))
+
+        importlib.import_module(module)
 
 # -- General configuration ---------------------------------------------------
 
