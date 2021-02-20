@@ -1,5 +1,6 @@
 import configparser
 import pathlib
+import shutil
 
 import nox
 
@@ -83,3 +84,16 @@ def docs(session):
                 str(srcdir.resolve()),
                 str(html.resolve())
                 )
+
+
+@nox.session
+def github(session):
+    """Build the github documentation"""
+    docs(session)
+    #
+    # Move the docs to the proper location
+    root = pathlib.Path(__file__).parent
+    shutil.rmtree(root / "docs")
+    html = pathlib.Path(session.bin).parent / "html"
+    (html / ".buildinfo").unlink()
+    html.rename(root / "docs")
