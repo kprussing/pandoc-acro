@@ -3,6 +3,15 @@ import pathlib
 
 import nox
 
+# Set the default sessions to run
+pythons = [f"3.{x}" for x in range(6, 10)]
+nox.options.sessions = [
+    "flake8",
+    "mypy",
+    *["test-" + x for x in pythons],
+    "docs"
+]
+
 
 @nox.session
 def flake8(session):
@@ -18,6 +27,13 @@ def mypy(session):
     session.run("mypy", "pandocacro", "tests", "noxfile.py")
 
 
+@nox.session
+def lint(session):
+    """Run the linters"""
+    flake8(session)
+    mypy(session)
+
+
 def setup_environment(session):
     """Install the base dependencies"""
     # Get the dependencies from the setup.cfg
@@ -28,7 +44,7 @@ def setup_environment(session):
     session.install('.')
 
 
-@nox.session(python=[f"3.{x}" for x in range(6, 10)],
+@nox.session(python=pythons,
              venv_backend="conda")
 def test(session):
     """Run the regression tests
