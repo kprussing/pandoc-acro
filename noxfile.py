@@ -1,5 +1,4 @@
 import configparser
-import os
 import pathlib
 
 import nox
@@ -52,15 +51,19 @@ def test(session):
 def docs(session):
     """Build the documentation"""
     session.install("sphinx")
-    session.install("panflute>=2.0")
-    session.install(".")
-    docs = os.path.dirname(session.bin)
-    html = os.path.join(docs, "html")
-    doctrees = os.path.join(docs, "doctrees")
+    setup_environment(session)
+    docs = pathlib.Path(session.bin).parent
+    html = docs / "html"
+    doctrees = docs / "doctrees"
+    srcdir = pathlib.Path(__file__).parent / "doc"
+    static = srcdir / "_static"
+    if not static.is_dir():
+        static.mkdir()
+
     session.run("sphinx-build",
                 "-b", "html",
                 "-W",  # Warnings as errors
-                "-d", doctrees,
-                "docs",
-                html
+                "-d", str(doctrees.resolve()),
+                str(srcdir.resolve()),
+                str(html.resolve())
                 )
