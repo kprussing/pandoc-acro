@@ -47,7 +47,7 @@ simply translated to the <code class="docutils literal notranslate"><span class=
 metadata, no transformation is done.</p>
 <dl class="py function">
 <dt id="pandocacro.prepare">
-<code class="sig-prename descclassname">pandocacro.</code><code class="sig-name descname">prepare</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">doc</span><span class="p">:</span> <span class="n">panflute.elements.Doc</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#pandocacro.prepare" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">pandocacro.</span></code><code class="sig-name descname"><span class="pre">prepare</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">doc</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">panflute.elements.Doc</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#pandocacro.prepare" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prepare the document</p>
 <p>If <code class="docutils literal notranslate"><span class="pre">acronyms</span></code> map is in the metadata, generate the LaTeX
 definitions of the acronyms and count the number of uses of the
@@ -62,7 +62,7 @@ writer or the main filter.</p>
 element.</p>
 <dl class="py class">
 <dt id="pandocacro.keys.Key">
-<em class="property">class </em><code class="sig-prename descclassname">pandocacro.keys.</code><code class="sig-name descname">Key</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">elem</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>panflute.base.Element<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandocacro.keys.Key" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pandocacro.keys.</span></code><code class="sig-name descname"><span class="pre">Key</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elem</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">panflute.base.Element</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandocacro.keys.Key" title="Permalink to this definition">¶</a></dt>
 <dd><p>The key value and associated details</p>
 <p>A key is an alphanumeric string preceded by a <code class="docutils literal notranslate"><span class="pre">+</span></code> either outside
 of or within a <code class="xref py py-class docutils literal notranslate"><span class="pre">panflute.Span</span></code>.  A key may also have a <code class="docutils literal notranslate"><span class="pre">*</span></code>
@@ -72,7 +72,7 @@ within a <code class="xref py py-class docutils literal notranslate"><span class
 such as a period, comma, or possessive markings.</p>
 <dl class="py attribute">
 <dt id="pandocacro.keys.Key.value">
-<code class="sig-name descname">value</code><a class="headerlink" href="#pandocacro.keys.Key.value" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">value</span></code><a class="headerlink" href="#pandocacro.keys.Key.value" title="Permalink to this definition">¶</a></dt>
 <dd><p>The acronym key.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -83,7 +83,7 @@ such as a period, comma, or possessive markings.</p>
 
 <dl class="py attribute">
 <dt id="pandocacro.keys.Key.count">
-<code class="sig-name descname">count</code><a class="headerlink" href="#pandocacro.keys.Key.count" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">count</span></code><a class="headerlink" href="#pandocacro.keys.Key.count" title="Permalink to this definition">¶</a></dt>
 <dd><p>The entry should be counted (False if ‘*’ and True otherwise).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -94,7 +94,7 @@ such as a period, comma, or possessive markings.</p>
 
 <dl class="py attribute">
 <dt id="pandocacro.keys.Key.type">
-<code class="sig-name descname">type</code><a class="headerlink" href="#pandocacro.keys.Key.type" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">type</span></code><a class="headerlink" href="#pandocacro.keys.Key.type" title="Permalink to this definition">¶</a></dt>
 <dd><p>The version of the acronym to typeset.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -105,7 +105,7 @@ such as a period, comma, or possessive markings.</p>
 
 <dl class="py attribute">
 <dt id="pandocacro.keys.Key.capitalize">
-<code class="sig-name descname">capitalize</code><a class="headerlink" href="#pandocacro.keys.Key.capitalize" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">capitalize</span></code><a class="headerlink" href="#pandocacro.keys.Key.capitalize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Capitalize the first work of the acronym.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -116,7 +116,7 @@ such as a period, comma, or possessive markings.</p>
 
 <dl class="py attribute">
 <dt id="pandocacro.keys.Key.plural">
-<code class="sig-name descname">plural</code><a class="headerlink" href="#pandocacro.keys.Key.plural" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">plural</span></code><a class="headerlink" href="#pandocacro.keys.Key.plural" title="Permalink to this definition">¶</a></dt>
 <dd><p>Use the plural form of the acronym.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -127,7 +127,7 @@ such as a period, comma, or possessive markings.</p>
 
 <dl class="py attribute">
 <dt id="pandocacro.keys.Key.post">
-<code class="sig-name descname">post</code><a class="headerlink" href="#pandocacro.keys.Key.post" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">post</span></code><a class="headerlink" href="#pandocacro.keys.Key.post" title="Permalink to this definition">¶</a></dt>
 <dd><p>The trailing punctuation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -143,19 +143,19 @@ such as a period, comma, or possessive markings.</p>
 </dl>
 <dl class="py attribute">
 <dt id="pandocacro.keys.Key.PATTERN">
-<code class="sig-name descname">PATTERN</code><em class="property">: ClassVar<span class="p">[</span>Pattern<span class="p">[</span>str<span class="p">]</span><span class="p">]</span></em><em class="property"> = re.compile('[+](?P&lt;count&gt;[*]?)(?P&lt;value&gt;\\w+)(?P&lt;post&gt;.*)')</em><a class="headerlink" href="#pandocacro.keys.Key.PATTERN" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">PATTERN</span></code><em class="property"><span class="pre">:</span> <span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">Pattern</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">re.compile('[+](?P&lt;count&gt;[*]?)(?P&lt;value&gt;\\w+)(?P&lt;post&gt;.*)')</span></em><a class="headerlink" href="#pandocacro.keys.Key.PATTERN" title="Permalink to this definition">¶</a></dt>
 <dd><p>The pattern for extracting a key</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="pandocacro.keys.Key.TYPES">
-<code class="sig-name descname">TYPES</code><em class="property">: ClassVar<span class="p">[</span>Set<span class="p">]</span></em><em class="property"> = {'full', 'long', 'short'}</em><a class="headerlink" href="#pandocacro.keys.Key.TYPES" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">TYPES</span></code><em class="property"><span class="pre">:</span> <span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">Set</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">{'full',</span> <span class="pre">'long',</span> <span class="pre">'short'}</span></em><a class="headerlink" href="#pandocacro.keys.Key.TYPES" title="Permalink to this definition">¶</a></dt>
 <dd><p>The valid class options for the type of acronym expansion</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="pandocacro.keys.Key.match">
-<em class="property">static </em><code class="sig-name descname">match</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">elem</span><span class="p">:</span> <span class="n">panflute.base.Element</span></em><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span>Match<span class="p">[</span>str<span class="p">]</span><span class="p">]</span><a class="headerlink" href="#pandocacro.keys.Key.match" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">match</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elem</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">panflute.base.Element</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Match</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#pandocacro.keys.Key.match" title="Permalink to this definition">¶</a></dt>
 <dd><p>Pattern match for a key in the element</p>
 <p>We can convert a given element to a string and match it against
 the known format for an acronym key.  This method manages
@@ -178,7 +178,7 @@ version of the element.</p>
 
 <dl class="py method">
 <dt id="pandocacro.keys.Key.parse">
-<code class="sig-name descname">parse</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">elem</span><span class="p">:</span> <span class="n">panflute.base.Element</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#pandocacro.keys.Key.parse" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">parse</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elem</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">panflute.base.Element</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#pandocacro.keys.Key.parse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse the key from a document element</p>
 <p>This method does the low-level details of extracting the
 relevant information from a document <code class="xref py py-class docutils literal notranslate"><span class="pre">panflute.Element</span></code>.
@@ -199,7 +199,7 @@ attribute.</p>
 
 <dl class="py function">
 <dt id="pandocacro.keys.count">
-<code class="sig-prename descclassname">pandocacro.keys.</code><code class="sig-name descname">count</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">elem</span><span class="p">:</span> <span class="n">panflute.base.Element</span></em>, <em class="sig-param"><span class="n">doc</span><span class="p">:</span> <span class="n">panflute.elements.Doc</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#pandocacro.keys.count" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">pandocacro.keys.</span></code><code class="sig-name descname"><span class="pre">count</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elem</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">panflute.base.Element</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doc</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">panflute.elements.Doc</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#pandocacro.keys.count" title="Permalink to this definition">¶</a></dt>
 <dd><p>Count the use of acronyms in the document</p>
 <p>This method investigates the element and increments the ‘count’
 value of the acronym in the <code class="xref py py-class docutils literal notranslate"><span class="pre">panflute.MetaMap</span></code> of the
@@ -219,7 +219,7 @@ field to False.</p>
 
 <dl class="py function">
 <dt id="pandocacro.keys.get">
-<code class="sig-prename descclassname">pandocacro.keys.</code><code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">elem</span><span class="p">:</span> <span class="n">panflute.base.Element</span></em>, <em class="sig-param"><span class="n">doc</span><span class="p">:</span> <span class="n">panflute.elements.Doc</span></em><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span><a class="reference internal" href="#pandocacro.keys.Key" title="pandocacro.keys.Key">pandocacro.keys.Key</a><span class="p">]</span><a class="headerlink" href="#pandocacro.keys.get" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">pandocacro.keys.</span></code><code class="sig-name descname"><span class="pre">get</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elem</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">panflute.base.Element</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doc</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">panflute.elements.Doc</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pandocacro.keys.Key" title="pandocacro.keys.Key"><span class="pre">pandocacro.keys.Key</span></a><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#pandocacro.keys.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extract the key from an element</p>
 <p>Check if the given element contains a key in the metadata <code class="docutils literal notranslate"><span class="pre">acronyms</span></code>
 field preceded by <code class="docutils literal notranslate"><span class="pre">+</span></code>.  If it is, return the key and all its
@@ -247,7 +247,7 @@ metadata.  Otherwise, None.</p>
 <p>Functions to translate keys to proper output</p>
 <dl class="py function">
 <dt id="pandocacro.translate.latex">
-<code class="sig-prename descclassname">pandocacro.translate.</code><code class="sig-name descname">latex</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#pandocacro.keys.Key" title="pandocacro.keys.Key">pandocacro.keys.Key</a></span></em><span class="sig-paren">)</span> &#x2192; panflute.elements.RawInline<a class="headerlink" href="#pandocacro.translate.latex" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">pandocacro.translate.</span></code><code class="sig-name descname"><span class="pre">latex</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#pandocacro.keys.Key" title="pandocacro.keys.Key"><span class="pre">pandocacro.keys.Key</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">panflute.elements.RawInline</span><a class="headerlink" href="#pandocacro.translate.latex" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate the LaTeX output from a key</p>
 <p>This method inspects the given <code class="xref py py-class docutils literal notranslate"><span class="pre">keys.Key</span></code> and determine the
 properly formatted version of the LaTeX acronym.</p>
@@ -266,7 +266,7 @@ properly formatted version of the LaTeX acronym.</p>
 
 <dl class="py function">
 <dt id="pandocacro.translate.plain">
-<code class="sig-prename descclassname">pandocacro.translate.</code><code class="sig-name descname">plain</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#pandocacro.keys.Key" title="pandocacro.keys.Key">pandocacro.keys.Key</a></span></em>, <em class="sig-param"><span class="n">acronyms</span><span class="p">:</span> <span class="n">panflute.elements.MetaMap</span></em><span class="sig-paren">)</span> &#x2192; panflute.elements.Str<a class="headerlink" href="#pandocacro.translate.plain" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">pandocacro.translate.</span></code><code class="sig-name descname"><span class="pre">plain</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#pandocacro.keys.Key" title="pandocacro.keys.Key"><span class="pre">pandocacro.keys.Key</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">acronyms</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">panflute.elements.MetaMap</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">panflute.elements.Str</span><a class="headerlink" href="#pandocacro.translate.plain" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate the plain text acronym expansion from a key</p>
 <p>This method inspects the given <code class="xref py py-class docutils literal notranslate"><span class="pre">keys.Key</span></code> and deduces the
 appropriate expansion based on the details in the given
@@ -291,7 +291,7 @@ the ‘used’ field in the <code class="xref py py-class docutils literal notra
 
 <dl class="py function">
 <dt id="pandocacro.translate.translate">
-<code class="sig-prename descclassname">pandocacro.translate.</code><code class="sig-name descname">translate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">elem</span><span class="p">:</span> <span class="n">panflute.base.Element</span></em>, <em class="sig-param"><span class="n">doc</span><span class="p">:</span> <span class="n">panflute.elements.Doc</span></em><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span>panflute.base.Element<span class="p">]</span><a class="headerlink" href="#pandocacro.translate.translate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">pandocacro.translate.</span></code><code class="sig-name descname"><span class="pre">translate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elem</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">panflute.base.Element</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doc</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">panflute.elements.Doc</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">panflute.base.Element</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#pandocacro.translate.translate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Translate a marked acronym to the expanded version</p>
 <p>This method is the filter interface to actually inspect an element
 and translate it to the appropriate replacement.  This includes
@@ -319,7 +319,7 @@ based on the <code class="xref py py-class docutils literal notranslate"><span c
 <p>Functions to generate the list of acronyms</p>
 <dl class="py function">
 <dt id="pandocacro.list.latex">
-<code class="sig-prename descclassname">pandocacro.list.</code><code class="sig-name descname">latex</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">elem</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>panflute.elements.Div<span class="p">, </span>panflute.elements.Header<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">doc</span><span class="p">:</span> <span class="n">panflute.elements.Doc</span></em><span class="sig-paren">)</span> &#x2192; panflute.elements.RawBlock<a class="headerlink" href="#pandocacro.list.latex" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">pandocacro.list.</span></code><code class="sig-name descname"><span class="pre">latex</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elem</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">panflute.elements.Div</span><span class="p"><span class="pre">,</span> </span><span class="pre">panflute.elements.Header</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doc</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">panflute.elements.Doc</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">panflute.elements.RawBlock</span><a class="headerlink" href="#pandocacro.list.latex" title="Permalink to this definition">¶</a></dt>
 <dd><p>Assemble the LaTeX version of the acronym list</p>
 <p>The base LaTeX output is the <code class="docutils literal notranslate"><span class="pre">\printacronyms</span></code> macro, but we need
 to extract the possible name, and sort variables based on the
@@ -345,7 +345,7 @@ list and a warning is logged.</p>
 
 <dl class="py function">
 <dt id="pandocacro.list.plain">
-<code class="sig-prename descclassname">pandocacro.list.</code><code class="sig-name descname">plain</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">elem</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>panflute.elements.Div<span class="p">, </span>panflute.elements.Header<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">doc</span><span class="p">:</span> <span class="n">panflute.elements.Doc</span></em><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span>panflute.elements.Div<span class="p">]</span><a class="headerlink" href="#pandocacro.list.plain" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">pandocacro.list.</span></code><code class="sig-name descname"><span class="pre">plain</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elem</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">panflute.elements.Div</span><span class="p"><span class="pre">,</span> </span><span class="pre">panflute.elements.Header</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doc</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">panflute.elements.Doc</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">panflute.elements.Div</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#pandocacro.list.plain" title="Permalink to this definition">¶</a></dt>
 <dd><p>Assemble the plain text version of the acronym list</p>
 <p>The base plain text output is a bulleted list of acronyms in the
 following format:</p>
@@ -379,7 +379,7 @@ logged.</p>
 
 <dl class="py function">
 <dt id="pandocacro.list.printacronyms">
-<code class="sig-prename descclassname">pandocacro.list.</code><code class="sig-name descname">printacronyms</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">elem</span><span class="p">:</span> <span class="n">panflute.base.Element</span></em>, <em class="sig-param"><span class="n">doc</span><span class="p">:</span> <span class="n">panflute.elements.Doc</span></em><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span>panflute.base.Block<span class="p">]</span><a class="headerlink" href="#pandocacro.list.printacronyms" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">pandocacro.list.</span></code><code class="sig-name descname"><span class="pre">printacronyms</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elem</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">panflute.base.Element</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doc</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">panflute.elements.Doc</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">panflute.base.Block</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#pandocacro.list.printacronyms" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print the list of acronyms.</p>
 <p>This is the high level filter to generate a list of acronyms.  It
 checks for a <code class="xref py py-class docutils literal notranslate"><span class="pre">panflute.Div</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">panflute.Header</span></code> that
@@ -464,7 +464,7 @@ appropriate list of acronyms.</p>
       &copy;2021, Keith F. Prussing.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.1</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

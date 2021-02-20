@@ -81,12 +81,11 @@ debugger on error use</p>
 </div>
 <div class="section" id="deploying-the-html-documentation">
 <h2>Deploying the HTML Documentation<a class="headerlink" href="#deploying-the-html-documentation" title="Permalink to this headline">¶</a></h2>
-<p>The HTML version of the documentation can be updated by running
-<em class="manpage">make(1)</em> with the target <code class="docutils literal notranslate"><span class="pre">github</span></code> from the dosrc directory.
-Then add and commit the changes.  To prevent pushing the stable branch
-without rebuilding the documentation, copy the script
-<code class="file docutils literal notranslate"><span class="pre">pre-push-build-sphinx.py</span></code> to <code class="file docutils literal notranslate"><span class="pre">.git/hooks/pre-push</span></code> and make
-it executable.</p>
+<p>The HTML version of the documentation can be updated by running <code class="docutils literal notranslate"><span class="pre">nox</span></code>
+with the <code class="docutils literal notranslate"><span class="pre">github</span></code> session.  Then add and commit the changes.  To
+prevent pushing the stable branch without rebuilding the documentation,
+copy the script <code class="file docutils literal notranslate"><span class="pre">pre-push-build-sphinx.py</span></code> to
+<code class="file docutils literal notranslate"><span class="pre">.git/hooks/pre-push</span></code> and make it executable.</p>
 </div>
 </div>
 
@@ -150,7 +149,7 @@ it executable.</p>
       &copy;2021, Keith F. Prussing.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.1</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

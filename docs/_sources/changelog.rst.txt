@@ -29,6 +29,7 @@ Fixed
 
 -   Typos in the README
 -   Added missing files to the distribution
+-   Errors in the documentation build
 
 0.9.5_ 2020-12-25
 -----------------
