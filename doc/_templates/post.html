@@ -1,0 +1,23 @@
+{#
+    post.html
+    ~~~~~~~~~
+
+    Adaptation of basic/page.html to add a by-line and date to the end.
+
+    :copyright: Copyright 2021 by Keith F. Prussing.
+    :license: BSD, see LICENSE.rst for details.
+#}
+{%- extends "!page.html" %}
+{% block body %}
+  {{ super() }}
+  {%- if "author" in meta %}
+  <div class="by-line" id="by-line">
+    <p><span class="by-line">{{ meta.author }}
+      {%- if "date" in meta %}
+        on {{ meta.date }}
+      {%- endif -%}
+      </span>
+    </p>
+  </div>
+  {%- endif %}
+{% endblock %}

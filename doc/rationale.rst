@@ -1,6 +1,6 @@
-.. meta::
-   :author: Keith F. Prussing
-   :date: 2021-02-07
+:author: Keith F. Prussing
+:date: 2021-02-07
+:template: post.html
 
 Rationale Behind the Filter
 ===========================
