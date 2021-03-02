@@ -71,26 +71,12 @@ branch = subprocess.run(["git", "symbolic-ref", "HEAD"],
 if not re.search("stable$", branch):
     subprocess.run(["git", "checkout", "stable"], check=True)
 
-with tempfile.TemporaryDirectory() as tmp:
-    build = subprocess.run(
-        ["sphinx-build", "-M", "html", root / "doc", tmp]
-    )
-    success = build.returncode == 0
-    if success:
-        try:
-            shutil.rmtree(root / "docs")
-        except Exception as err:
-            print(f"Push error: Failed to remove docs with error {err}",
-                  file=sys.stderr)
-            success = False
-        else:
-            html = pathlib.Path(tmp) / "html"
-            (html / ".buildinfo").unlink()
-            html.rename(root / "docs")
+build = subprocess.run(["nox", "-s", "github"], cwd=root)
+success = build.returncode == 0
 
 if success:
     subprocess.run(["git", "checkout", root / "docs" / ".nojekyll"])
-    changes = subprocess.run(["git", "status", "--porcelain"],
+    changes = subprocess.run(["git", "status", "--porcelain", "docs"],
                              capture_output=True,
                              universal_newlines=True).stdout
     if any(re.match(r"^\s*M", x) for x in changes.splitlines()):
