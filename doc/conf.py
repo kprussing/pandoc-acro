@@ -49,6 +49,7 @@ for module in parser.get("options", "packages", fallback="").splitlines():
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
+    'sphinx.ext.githubpages',
     'sphinx.ext.napoleon',
     'sphinx.ext.todo',
     'sphinx.ext.githubpages',

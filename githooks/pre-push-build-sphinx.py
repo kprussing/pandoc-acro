@@ -75,7 +75,6 @@ build = subprocess.run(["nox", "-s", "github"], cwd=root)
 success = build.returncode == 0
 
 if success:
-    subprocess.run(["git", "checkout", root / "docs" / ".nojekyll"])
     changes = subprocess.run(["git", "status", "--porcelain", "docs"],
                              capture_output=True,
                              universal_newlines=True).stdout
