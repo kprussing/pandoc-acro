@@ -59,6 +59,15 @@ An example metadata block would be:
         long-plural: es   # Contrived for example purposes
     ...
 
+The only reserved acronym is ``options`` which is reserved for passing
+additional options to the ``\acsetup`` macro in LaTeX.  The options are
+translated to the form ``key=value`` and are passed as a comma separated
+option to ``\acsetup``.  The filter will try to sanity check the
+options.  If it cannot convert the option to a string or boolean, the
+option is skipped and a warning is issued.  If it is a known option used
+by the filter, it checks for a valid value and issues a warning if it is
+not valid but it still passes the option to ``\acsetup``.
+
 Inline Usage
 ^^^^^^^^^^^^
 
@@ -164,7 +173,8 @@ LaTeX
 
 The acronyms definitions in the metadata are transformed to
 ``\DeclareAcronym`` commands and are added to the ``header-includes``
-metadata field after ``\usepackage{acro}``.  These are entered as raw
-LaTeX Inlines.  The running text markup is translated to the appropriate
-``acro`` macro as described in the above table.
+metadata field after ``\usepackage{acro}`` and the ``\acsetup`` command.
+These are entered as raw LaTeX Inlines.  The running text markup is
+translated to the appropriate ``acro`` macro as described in the above
+table.
 

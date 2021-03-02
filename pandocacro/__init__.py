@@ -14,7 +14,7 @@ from typing import Optional
 
 import panflute
 
-from . import keys
+from . import keys, options
 from .pandocacro import PandocAcro
 from .translate import translate
 from .list import printacronyms
@@ -42,6 +42,9 @@ def prepare(doc: panflute.Doc) -> None:
         panflute.RawInline(l, format="latex")
     )
     header.append(LaTeX(r"\usepackage{acro}"))
+    if doc.acronyms.options:
+        header.append(LaTeX(options.acsetup(doc.acronyms.options)))
+
     for key, values in doc.acronyms.items():
         header.append(LaTeX(fr"\DeclareAcronym{{{key}}}{{"))
         header.append(LaTeX(",\n".join(f"{k} = {v}" for k, v
