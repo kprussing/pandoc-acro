@@ -1,11 +1,22 @@
 import configparser
 import pathlib
+import re
 import shutil
 
 import nox
 
+parser = configparser.ConfigParser(empty_lines_in_values=True)
+parser.read(
+    pathlib.Path(__file__).parent / x for x in ("pyproject.toml",
+                                                "setup.cfg")
+)
+
 # Set the default sessions to run
-pythons = [f"3.{x}" for x in range(6, 10)]
+pythons = [v.split(":")[-1].strip()
+           for v in parser.get("metadata",
+                               "classifiers",
+                               fallback="").splitlines()
+           if re.search(r"Python\s*::\s*\d+[.]\d+\s*$", v)]
 nox.options.sessions = [
     "flake8",
     "mypy",
@@ -38,8 +49,6 @@ def lint(session):
 def setup_environment(session):
     """Install the base dependencies"""
     # Get the dependencies from the setup.cfg
-    parser = configparser.ConfigParser(empty_lines_in_values=True)
-    parser.read(pathlib.Path(__file__).parent / "setup.cfg")
     deps = parser.get("options", "install_requires", fallback="")
     session.install(*[d for d in deps.splitlines() if d])
     session.install('.')
@@ -67,7 +76,18 @@ def test(session):
 @nox.session
 def docs(session):
     """Build the documentation"""
-    session.install("sphinx")
+
+    deps = []
+    for dep in parser.get("build-system",
+                          "requires",
+                          fallback="")[1:-1].split(","):
+        match = re.match(r"(?P<quote>['\"])(.*)(?P=quote)", dep.strip())
+        if match and not re.match("(wheel|setuptools)", match.group(2)):
+            deps.append(match.group(2))
+
+    if deps != []:
+        session.install(*deps)
+
     setup_environment(session)
     docs = pathlib.Path(session.bin).parent
     html = docs / "html"
