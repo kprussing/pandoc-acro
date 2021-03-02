@@ -43,7 +43,7 @@ for line in sys.stdin.readlines():
         pushing_stable = True
 
 if not pushing_stable:
-    sys.exit(1)
+    sys.exit(0)
 
 changes = subprocess.run(["git", "status", "--porcelain"],
                          check=True,
