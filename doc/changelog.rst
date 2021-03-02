@@ -21,8 +21,8 @@ Changed
 ^^^^^^^
 
 -   Moved the main translation function to the submodule
--   Moved the version string to the main source following `single source
-    pattern`_
+-   Completed setting up the build files to distribute cleanly
+-   Updated nox_ to pull dependencies from the package metadata
 
 Fixed
 ^^^^^
