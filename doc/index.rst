@@ -10,6 +10,7 @@ The Pandoc Acronym Filter documentation
    contributing.rst
    changelog.rst
    rationale.rst
+   todo.rst
 
 .. include:: ../README.rst
 
