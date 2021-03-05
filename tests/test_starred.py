@@ -25,7 +25,7 @@ def generate() -> Tuple[str, List[Key]]:
     for _ in range(random.randrange(100)):
         key = Key()
         key.value = value
-        key.count = random.choice((True, False))
+        key.starred = random.choice((True, False))
         key.type = random.choice(("", "full", "short", "long"))
         key.capitalize = random.choice((True, False))
         key.plural = random.choice((True, False))
@@ -47,7 +47,7 @@ def test_latex() -> None:
         expected = "\\" + ("A" if key.capitalize else "a") + "c" \
             + ("" if key.type == "" else key.type[0]) \
             + ("p" if key.plural else "") \
-            + ("" if key.count else "*") \
+            + ("*" if key.starred else "") \
             + "{" + key.value + "}"
         assert expected == next(lines).strip()
 
@@ -67,7 +67,7 @@ def test_forced_first_use() -> None:
         key.type = type
         key.plural = False
         key.capitalize = False
-        key.count = True
+        key.starred = False
         keys.append(key)
 
     text = meta + "-   " + "\n-   ".join(str(k) for k in keys)
@@ -107,7 +107,7 @@ def test_plain() -> None:
             else:
                 expected = acronyms["short"] + ("s" if key.plural else "")
 
-        if key.count:
+        if not key.starred:
             first = False
 
         head, *tail = (s for s in expected)

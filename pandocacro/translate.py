@@ -76,7 +76,7 @@ def latex(key: keys.Key) -> panflute.RawInline:
            "long": "l"
            }.get(key.type, "") \
         + ("p" if key.plural else "") \
-        + ("*" if not key.count else "") \
+        + ("*" if key.starred else "") \
         + f"{{{key.value}}}" \
         + key.post
     return panflute.RawInline(macro, format="latex")
@@ -134,7 +134,7 @@ def plain(key: keys.Key, acronyms: panflute.MetaMap) -> panflute.Str:
         else:
             text = long_
 
-    if key.count:
+    if not key.starred:
         acronyms[key.value]["used"] = True
 
     head, *tail = (s for s in text)

@@ -34,7 +34,7 @@ def generate() -> Tuple[str, List[Key]]:
     for _ in range(random.randrange(1, 11)):
         key = Key()
         key.value = random.choice(values)
-        key.count = random.choice((True, False))
+        key.starred = random.choice((True, False))
         key.type = random.choice(("", "full", "short", "long"))
         key.capitalize = random.choice((True, False))
         key.plural = random.choice((True, False))

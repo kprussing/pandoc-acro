@@ -24,8 +24,8 @@ class Key:
 
     value: str
         The acronym key.
-    count: bool, optional
-        The entry should be counted (False if '*' and True otherwise).
+    starred: bool, optional
+        The entry should be not counted (True if '*' and False otherwise).
     type: str, in {"full", "short", "long"}, optional
         The version of the acronym to typeset.
     capitalize: bool, optional
@@ -57,7 +57,7 @@ class Key:
 
     def __init__(self, elem: Optional[panflute.Element] = None):
         self.value: str = ""
-        self.count: bool = True
+        self.starred: bool = False
         self.type: str = ""
         self.capitalize: bool = False
         self.plural: bool = False
@@ -126,7 +126,7 @@ class Key:
             return None
 
         self.value = match.group("value")
-        self.count = match.groupdict().get("count", "") != "*"
+        self.starred = match.groupdict().get("count", "") == "*"
         types = [] if not hasattr(elem, "classes") \
             else [c for c in elem.classes if c in self.TYPES]
         if len(types) > 1:
@@ -141,7 +141,7 @@ class Key:
         self.post = match.groupdict().get("post", "")
 
     def __str__(self) -> str:
-        return "[+" + ("" if self.count else "*") \
+        return "[+" + ("*" if self.starred else "") \
             + self.value \
             + "]{" \
             + " ".join([
@@ -175,7 +175,7 @@ def count(elem: panflute.Element, doc: panflute.Doc) -> None:
     if key:
         count = doc.get_metadata("acronyms")[key.value]["count"]
         doc.metadata["acronyms"][key.value]["count"] = int(count) \
-            + (1 if key.count else 0)
+            + (0 if key.starred else 1)
 
         # If the full or short version was explicitly requested, or no
         # version was requested, but this is at least the second time
@@ -183,7 +183,7 @@ def count(elem: panflute.Element, doc: panflute.Doc) -> None:
         # to the list of acronyms.
         if key.type in ("short", "full") or (
                 key.type == "" and
-                key.count and
+                not key.starred and
                 int(doc.get_metadata("acronyms")[key.value]["count"]) > 1
                 ):
             doc.metadata["acronyms"][key.value]["list"] = True
