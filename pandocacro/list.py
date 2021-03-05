@@ -142,10 +142,9 @@ def plain(elem: Union[panflute.Div, panflute.Header],
         sort = "true"
 
     if sort == "true":
-        acronyms = sorted(doc.get_metadata("acronyms").values(),
-                          key=lambda x: x["short"])
+        acronyms = sorted(doc.acronyms.values(), key=lambda x: x["short"])
     else:
-        acronyms = doc.get_metadata("acronyms").values()
+        acronyms = doc.acronyms.values()
 
     acrolist = [panflute.ListItem(
         panflute.Plain(

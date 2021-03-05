@@ -5,6 +5,7 @@ from typing import Optional
 import panflute
 
 from . import keys
+from .pandocacro import PandocAcro
 
 
 def translate(elem: panflute.Element,
@@ -48,7 +49,7 @@ def translate(elem: panflute.Element,
     if doc.format in ("latex", "beamer"):
         return latex(key)
     else:
-        return plain(key, doc.metadata["acronyms"])
+        return plain(key, doc.acronyms)
 
 
 def latex(key: keys.Key) -> panflute.RawInline:
@@ -82,7 +83,7 @@ def latex(key: keys.Key) -> panflute.RawInline:
     return panflute.RawInline(macro, format="latex")
 
 
-def plain(key: keys.Key, acronyms: panflute.MetaMap) -> panflute.Str:
+def plain(key: keys.Key, acronyms: PandocAcro) -> panflute.Str:
     """Generate the plain text acronym expansion from a key
 
     This method inspects the given :class:`keys.Key` and deduces the
@@ -107,17 +108,13 @@ def plain(key: keys.Key, acronyms: panflute.MetaMap) -> panflute.Str:
         The plain text formatted acronym expansion.
 
     """
-    content = {
-        k: panflute.stringify(acronyms[key.value][k])
-        for k in acronyms[key.value].content
-    }
-    long_ = content["long"] + (
-        content.get("long-plural", "s") if key.plural else ""
+    long_ = acronyms[key.value]["long"] + (
+        acronyms[key.value].get("long-plural", "s") if key.plural else ""
     )
-    short_ = content["short"] + (
-        content.get("short-plural", "s") if key.plural else ""
+    short_ = acronyms[key.value]["short"] + (
+        acronyms[key.value].get("short-plural", "s") if key.plural else ""
     )
-    full_ = long_ + " (" + content["short"] + ")"
+    full_ = long_ + " (" + acronyms[key.value]["short"] + ")"
     if key.type == "full":
         text = full_
     elif key.type == "short":
@@ -125,8 +122,8 @@ def plain(key: keys.Key, acronyms: panflute.MetaMap) -> panflute.Str:
     elif key.type == "long":
         text = long_
     else:
-        if int(acronyms[key.value]["count"].text) > 1:
-            if acronyms[key.value]["used"].boolean:
+        if acronyms[key.value]["count"] > 1:
+            if acronyms[key.value]["used"]:
                 text = short_
             else:
                 text = full_

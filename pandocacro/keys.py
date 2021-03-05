@@ -173,9 +173,7 @@ def count(elem: panflute.Element, doc: panflute.Doc) -> None:
     """
     key = get(elem, doc)
     if key:
-        count = doc.get_metadata("acronyms")[key.value]["count"]
-        doc.metadata["acronyms"][key.value]["count"] = int(count) \
-            + (1 if key.count else 0)
+        doc.acronyms[key.value]["count"] += 1 if key.count else 0
 
         # If the full or short version was explicitly requested, or no
         # version was requested, but this is at least the second time
@@ -184,9 +182,9 @@ def count(elem: panflute.Element, doc: panflute.Doc) -> None:
         if key.type in ("short", "full") or (
                 key.type == "" and
                 key.count and
-                int(doc.get_metadata("acronyms")[key.value]["count"]) > 1
+                doc.acronyms[key.value]["count"] > 1
                 ):
-            doc.metadata["acronyms"][key.value]["list"] = True
+            doc.acronyms[key.value]["list"] = True
 
 
 def get(elem: panflute.Element, doc: panflute.Doc) -> Optional[Key]:
@@ -221,4 +219,4 @@ def get(elem: panflute.Element, doc: panflute.Doc) -> Optional[Key]:
         return None
 
     key = Key(elem)
-    return key if key.value in doc.metadata["acronyms"] else None
+    return key if key.value in doc.acronyms else None

@@ -15,6 +15,7 @@ from typing import Optional
 import panflute
 
 from . import keys
+from .pandocacro import PandocAcro
 from .translate import translate
 from .list import printacronyms
 
@@ -30,6 +31,9 @@ def prepare(doc: panflute.Doc) -> None:
     if "acronyms" not in doc.metadata:
         return
 
+    # Store the acronym information as an attribute of the document
+    doc.acronyms = PandocAcro(doc.get_metadata("acronyms"))
+
     # Prepare the LaTeX details.
     header = doc.metadata["header-includes"] \
         if "header-includes" in doc.metadata else []
@@ -38,20 +42,30 @@ def prepare(doc: panflute.Doc) -> None:
         panflute.RawInline(l, format="latex")
     )
     header.append(LaTeX(r"\usepackage{acro}"))
-    for key, values in doc.get_metadata("acronyms").items():
+    for key, values in doc.acronyms.items():
         header.append(LaTeX(fr"\DeclareAcronym{{{key}}}{{"))
         header.append(LaTeX(",\n".join(f"{k} = {v}" for k, v
                                        in values.items())))
         header.append(LaTeX("}"))
-        doc.metadata["acronyms"][key]["used"] = False
-        doc.metadata["acronyms"][key]["count"] = 0
-        doc.metadata["acronyms"][key]["list"] = False
+
+        doc.acronyms[key]["used"] = False
+        doc.acronyms[key]["count"] = 0
+        doc.acronyms[key]["list"] = False
 
     doc.metadata["header-includes"] = header
 
     # For other outputs, we'll need to tally use of the acronyms
     doc.walk(keys.count)
     return
+
+
+def finalize(doc: panflute.Doc) -> None:
+    """Clear all temporary attributes from the elements
+
+    The utilities can place attributes on the elements that are
+    prepended by 'pandocacro-'.  Before we return the
+    """
+    del doc.acronyms
 
 
 def main(doc: Optional[panflute.Doc] = None) -> Optional[panflute.Doc]:

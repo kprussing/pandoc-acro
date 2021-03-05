@@ -6,6 +6,7 @@ import re
 import pytest
 
 import panflute
+import pandocacro
 import pandocacro.keys
 
 key = "mwe"
@@ -46,6 +47,7 @@ def test_get_key() -> None:
     for markup, punc in itertools.product(markups, punctuations):
         mark = markup + punc
         doc = panflute.convert_text(text.format(mark=mark), standalone=True)
+        pandocacro.prepare(doc)
         elem = doc.content[0].content[0]
         result = pandocacro.keys.get(elem, doc)
         assert result is not None
