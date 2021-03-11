@@ -51,8 +51,8 @@ def prepare(doc: panflute.Doc) -> None:
                                        in values.items())))
         header.append(LaTeX("}"))
 
-        doc.acronyms[key]["used"] = False
         doc.acronyms[key]["count"] = 0
+        doc.acronyms[key]["total"] = 0
         doc.acronyms[key]["list"] = False
 
     doc.metadata["header-includes"] = header

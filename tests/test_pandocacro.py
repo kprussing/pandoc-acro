@@ -22,7 +22,7 @@ def test_pandocacro() -> None:
     for acro in doc.acronyms:
         for key, type_ in (("count", int),
                            ("list", bool),
-                           ("used", bool),
+                           ("total", int),
                            ):
             assert key in doc.acronyms[acro]
             assert isinstance(doc.acronyms[acro][key], type_)

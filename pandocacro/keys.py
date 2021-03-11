@@ -173,18 +173,7 @@ def count(elem: panflute.Element, doc: panflute.Doc) -> None:
     """
     key = get(elem, doc)
     if key:
-        doc.acronyms[key.value]["count"] += 1 if key.count else 0
-
-        # If the full or short version was explicitly requested, or no
-        # version was requested, but this is at least the second time
-        # we've seen this acronym that counts, then it should be added
-        # to the list of acronyms.
-        if key.type in ("short", "full") or (
-                key.type == "" and
-                key.count and
-                doc.acronyms[key.value]["count"] > 1
-                ):
-            doc.acronyms[key.value]["list"] = True
+        doc.acronyms[key.value]["total"] += 1 if key.count else 0
 
 
 def get(elem: panflute.Element, doc: panflute.Doc) -> Optional[Key]:

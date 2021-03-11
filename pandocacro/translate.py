@@ -1,6 +1,6 @@
 __doc__ = """Functions to translate keys to proper output"""
 
-from typing import Optional
+from typing import Optional, Tuple
 
 import panflute
 
@@ -107,6 +107,12 @@ def plain(key: keys.Key, acronyms: PandocAcro) -> panflute.Str:
     :class:`panflute.Str`
         The plain text formatted acronym expansion.
 
+    Raises
+    ------
+
+    NotImplementedError:
+        When an unknown first or single style is requested.
+
     """
     long_ = acronyms[key.value]["long"] + (
         acronyms[key.value].get("long-plural", "s") if key.plural else ""
@@ -114,25 +120,53 @@ def plain(key: keys.Key, acronyms: PandocAcro) -> panflute.Str:
     short_ = acronyms[key.value]["short"] + (
         acronyms[key.value].get("short-plural", "s") if key.plural else ""
     )
-    full_ = long_ + " (" + acronyms[key.value]["short"] + ")"
+
+    def get_style(option: str, default: str) -> Tuple[str, bool]:
+        style = acronyms.options.get(option, default)
+        if style == "long-short":
+            return long_ + " (" + acronyms[key.value]["short"] + ")", True
+        elif style == "short-long":
+            return short_ + " (" + acronyms[key.value]["long"] + ")", True
+        elif style == "long":
+            return long_, False
+        elif style == "short":
+            return short_, True
+        else:
+            raise NotImplementedError(
+                f"{__name__}.plain unknown style '{style}'"
+            )
+
+    single_ = acronyms.options.get("single", False)
+    try:
+        single = int(single_)
+    except TypeError:
+        single = single_ == "true"
+
     if key.type == "full":
-        text = full_
+        text, to_list = get_style("first-style", "long-short")
     elif key.type == "short":
         text = short_
+        to_list = True
     elif key.type == "long":
         text = long_
+        to_list = False
+    elif (single is True and acronyms[key.value]["total"] < 2) or (
+                isinstance(single, int) and
+                acronyms[key.value]["total"] <= single
+            ):
+        # We are below the threshold for the usage to "count".
+        text, to_list = get_style("single-style", "long")
+    elif acronyms[key.value]["count"] == 0:
+        text, to_list = get_style("first-style", "long-short")
     else:
-        if acronyms[key.value]["count"] > 1:
-            if acronyms[key.value]["used"]:
-                text = short_
-            else:
-                text = full_
-
-        else:
-            text = long_
+        text = short_
+        to_list = True
 
     if key.count:
-        acronyms[key.value]["used"] = True
+        acronyms[key.value]["count"] += 1
+
+    if to_list:
+        acronyms[key.value]["list"] = True
 
     head, *tail = (s for s in text)
     return panflute.Str((head.upper() if key.capitalize else head)
