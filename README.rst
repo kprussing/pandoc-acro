@@ -165,6 +165,26 @@ level using the header’s text.  For the div style, the list is created
 under a new level 1 header with the text “Acronyms.”  The list is sorted
 (default) or not based on the ``sort`` attribute of the div or header.
 
+Full and Single Use Forms
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The ``acro`` package accepts the ``first-style`` option which sets the
+form of the first and full usages of an acronym.  The valid options are:
+``long-short`` (default), ``short-long``, ``long`` , ``short``, and
+``footnote``.  For the LaTeX output, this option is passed to
+``\acsetup``.  For all other outputs, the filter respects the
+selected style except for ``footnote`` which is not supported.
+
+The default behavior is to typeset a single use of an acronym using the
+first usage.  However, this can be changed using the ``single`` option.
+Setting this to true typesets a single usage using the style passed to
+the ``single-style`` option which accepts the same styles as
+``first-style`` but defaults to ``long``.  The single option can also be
+set to an integer which sets the number of non-starred times an acronym
+must be used before it is considered a “single” use.  If the use goes
+above this value, the first typesetting reverts to the usual method.
+Setting ``single=true`` is equivalent to ``single=1``.
+
 Output Format Notes
 -------------------
 
