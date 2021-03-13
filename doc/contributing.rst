@@ -26,10 +26,10 @@ Pull Requests
     works as expected if appropriate
 
 The development uses nox_ to aide with testing multiple Python versions
-and linting the code and documentation.  It uses the conda_ backend to
+and linting the code and documentation.  It uses the conda_ back end to
 manage the virtual environment to make sure Pandoc_ is available.
-Therefore, you must have ``conda`` on your search path along for
-``nox``.  To run the full suite (that must all pass), use
+Therefore, you must have ``conda`` on your search path for
+``nox`` to succeed.  To run the full suite (that must all pass), use
 
 .. code:: bash
 
