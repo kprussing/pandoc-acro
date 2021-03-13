@@ -7,6 +7,12 @@ pandocacro
 .. automodule:: pandocacro
    :members:
 
+pandocacro.pandocacro
+---------------------
+
+.. automodule:: pandocacro.pandocacro
+   :members:
+
 pandocacro.keys
 ---------------
 

@@ -16,7 +16,7 @@ checks = {
     f"'+{key}'": [
         (
             "markdown",
-            f"'{acronyms[key]['long']}'",
+            f"'{acronyms[key]['long']} ({acronyms[key]['short']})'",
         ),
         (
             "latex",
@@ -26,7 +26,7 @@ checks = {
     f"‘+{key}’": [
         (
             "markdown",
-            f"'{acronyms[key]['long']}'",
+            f"'{acronyms[key]['long']} ({acronyms[key]['short']})'",
         ),
         (
             "latex",
@@ -36,7 +36,7 @@ checks = {
     f'"+{key}"': [
         (
             "markdown",
-            f'"{acronyms[key]["long"]}"',
+            f'"{acronyms[key]["long"]} ({acronyms[key]["short"]})"',
         ),
         (
             "latex",
@@ -46,7 +46,7 @@ checks = {
     f'“+{key}”': [
         (
             "markdown",
-            f'"{acronyms[key]["long"]}"',
+            f'"{acronyms[key]["long"]} ({acronyms[key]["short"]})"',
         ),
         (
             "latex",
@@ -78,7 +78,7 @@ checks = {
     f'"+{key} with text"': [
         (
             "markdown",
-            f'"{acronyms[key]["long"]} with text"',
+            f'"{acronyms[key]["long"]} ({acronyms[key]["short"]}) with text"',
         ),
         (
             "latex",
@@ -88,7 +88,7 @@ checks = {
     f'"with +{key} text"': [
         (
             "markdown",
-            f'"with {acronyms[key]["long"]} text"',
+            f'"with {acronyms[key]["long"]} ({acronyms[key]["short"]}) text"',
         ),
         (
             "latex",
@@ -98,7 +98,7 @@ checks = {
     f'"with text +{key}"': [
         (
             "markdown",
-            f'"with text {acronyms[key]["long"]}"',
+            f'"with text {acronyms[key]["long"]} ({acronyms[key]["short"]})"',
         ),
         (
             "latex",

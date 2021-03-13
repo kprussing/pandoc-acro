@@ -16,6 +16,10 @@ Added
 -   Option to pass through arguments to pytest_ from nox_
 -   HTML documentation generation via Sphinx_ and deploy to github pages
 -   Hook to prevent pushing to stable without up to date HTML docs
+-   Option pass through to ``\acsetup`` in LaTeX output
+-   Support for acro ``first-style``, ``single``, and ``single-style``
+    options
+-   :class:`Pandocacro` class to manage acronyms during run
 
 Changed
 ^^^^^^^
