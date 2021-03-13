@@ -1,8 +1,10 @@
 import configparser
+import os
 import pathlib
 import re
 import shutil
 
+import keyring
 import nox
 
 parser = configparser.ConfigParser(empty_lines_in_values=True)
@@ -117,3 +119,18 @@ def github(session):
     html = pathlib.Path(session.bin).parent / "html"
     (html / ".buildinfo").unlink()
     html.rename(root / "docs")
+
+
+@nox.session
+def dist(session):
+    """Push to PyPI"""
+    session.install("build", "twine")
+    session.run("python", "-m", "build")
+    session.run(
+        "python", "-m", "twine", "check", os.path.join("dist", "*")
+    )
+    session.run(
+        "python", "-m", "twine", "upload", "--user", "__token__",
+        "--password", keyring.get_password("pandoc-acro", "kprussing"),
+        os.path.join("dist", "*")
+    )
