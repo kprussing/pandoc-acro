@@ -7,6 +7,11 @@ The format is based on `Keep a Changelog`_.
 Unreleased_
 -----------
 
+Added
+^^^^^
+
+-   nox_ session to push to PyPI_
+
 Changed
 ^^^^^^^
 
@@ -115,6 +120,7 @@ Removed
 .. _0.9.3: https://github.com/kprussing/pandoc-acro/compare/v0.9.1...v0.9.3
 .. _0.9.1: https://github.com/kprussing/pandoc-acro/releases/tag/v0.9.1
 .. _Keep a Changelog: https://keepachangelog.com/en/1.0.0/
+.. _PyPI: https://pypi.org/project/pandoc-acro/
 .. _flake8: https://flake8.pycqa.org/en/latest/
 .. _mypy: https://mypy.readthedocs.io/en/stable/
 .. _pytest: https://docs.pytest.org/en/stable/

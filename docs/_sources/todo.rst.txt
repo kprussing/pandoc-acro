@@ -5,5 +5,3 @@ General To Dos
 
 Administrative
 --------------
-
-.. todo:: Change the main development branch to ``trunk``
