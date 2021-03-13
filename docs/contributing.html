@@ -55,12 +55,13 @@ example demonstrating issue.</p>
 <li><p>Update the Changelog</p></li>
 <li><p>Provide a test demonstrating the error is fixed or the new feature
 works as expected if appropriate</p></li>
+<li><p>Pull requests should be against the <code class="docutils literal notranslate"><span class="pre">trunk</span></code> branch</p></li>
 </ul>
 <p>The development uses <a class="reference external" href="https://nox.thea.codes/en/stable/index.html">nox</a> to aide with testing multiple Python versions
-and linting the code and documentation.  It uses the <a class="reference external" href="https://nox.thea.codes/en/stable/config.html#configuring-a-session-s-virtualenv">conda</a> backend to
+and linting the code and documentation.  It uses the <a class="reference external" href="https://nox.thea.codes/en/stable/config.html#configuring-a-session-s-virtualenv">conda</a> back end to
 manage the virtual environment to make sure <a class="reference external" href="https://pandoc.org">Pandoc</a> is available.
-Therefore, you must have <code class="docutils literal notranslate"><span class="pre">conda</span></code> on your search path along for
-<code class="docutils literal notranslate"><span class="pre">nox</span></code>.  To run the full suite (that must all pass), use</p>
+Therefore, you must have <code class="docutils literal notranslate"><span class="pre">conda</span></code> on your search path for
+<code class="docutils literal notranslate"><span class="pre">nox</span></code> to succeed.  To run the full suite (that must all pass), use</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nox -x
 </pre></div>
 </div>
