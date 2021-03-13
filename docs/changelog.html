@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Changelog &#8212; Pandoc Acronym Filter 0.9.5 documentation</title>
+    <title>Changelog &#8212; Pandoc Acronym Filter 0.10.0 documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -37,7 +37,10 @@
 <p>All notable changes to this project will be documented in this file.
 The format is based on <a class="reference external" href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>.</p>
 <div class="section" id="unreleased">
-<h2><a class="reference external" href="https://github.com/kprussing/pandoc-acro/compare/v0.9.5...HEAD">Unreleased</a><a class="headerlink" href="#unreleased" title="Permalink to this headline">¶</a></h2>
+<h2><a class="reference external" href="https://github.com/kprussing/pandoc-acro/compare/v0.10.0...HEAD">Unreleased</a><a class="headerlink" href="#unreleased" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="id1">
+<h2><a class="reference external" href="https://github.com/kprussing/pandoc-acro/compare/v0.9.5...v0.10.0">0.10.0</a> 2021-03-12<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="added">
 <h3>Added<a class="headerlink" href="#added" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
@@ -47,6 +50,10 @@ The format is based on <a class="reference external" href="https://keepachangelo
 <li><p>Option to pass through arguments to <a class="reference external" href="https://docs.pytest.org/en/stable/">pytest</a> from <a class="reference external" href="xhttps://nox.thea.codes/en/stable/">nox</a></p></li>
 <li><p>HTML documentation generation via <a class="reference external" href="https://www.sphinx-doc.org/en/master/index.html">Sphinx</a> and deploy to github pages</p></li>
 <li><p>Hook to prevent pushing to stable without up to date HTML docs</p></li>
+<li><p>Option pass through to <code class="docutils literal notranslate"><span class="pre">\acsetup</span></code> in LaTeX output</p></li>
+<li><p>Support for acro <code class="docutils literal notranslate"><span class="pre">first-style</span></code>, <code class="docutils literal notranslate"><span class="pre">single</span></code>, and <code class="docutils literal notranslate"><span class="pre">single-style</span></code>
+options</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Pandocacro</span></code> class to manage acronyms during run</p></li>
 </ul>
 </div>
 <div class="section" id="changed">
@@ -66,68 +73,68 @@ The format is based on <a class="reference external" href="https://keepachangelo
 </ul>
 </div>
 </div>
-<div class="section" id="id1">
-<h2><a class="reference external" href="https://github.com/kprussing/pandoc-acro/compare/v0.9.4...v0.9.5">0.9.5</a> 2020-12-25<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id2">
-<h3>Added<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<h2><a class="reference external" href="https://github.com/kprussing/pandoc-acro/compare/v0.9.4...v0.9.5">0.9.5</a> 2020-12-25<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id3">
+<h3>Added<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>A unique type for processing acronym keys</p></li>
 <li><p>Have the key class manage the parsing during the initialization</p></li>
 <li><p>Added <a class="reference external" href="https://mypy.readthedocs.io/en/stable/">mypy</a> as a linting step</p></li>
 </ul>
 </div>
-<div class="section" id="id3">
-<h3>Changed<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id4">
+<h3>Changed<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Refactored the tests to directly use the filter</p></li>
 <li><p>Moved key extraction to a submodule for better testing</p></li>
 <li><p>Moved the output generation to a submodule</p></li>
 </ul>
 </div>
-<div class="section" id="id4">
-<h3>Fixed<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id5">
+<h3>Fixed<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Correct the counting of starred keys</p></li>
 </ul>
 </div>
 </div>
-<div class="section" id="id5">
-<h2><a class="reference external" href="https://github.com/kprussing/pandoc-acro/compare/v0.9.3...v0.9.4">0.9.4</a> 2020-12-18<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id6">
-<h3>Fixed<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<h2><a class="reference external" href="https://github.com/kprussing/pandoc-acro/compare/v0.9.3...v0.9.4">0.9.4</a> 2020-12-18<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id7">
+<h3>Fixed<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Properly strip quotes when processing <code class="xref py py-class docutils literal notranslate"><span class="pre">panflute.Quoted</span></code>
 blocks</p></li>
 </ul>
 </div>
 </div>
-<div class="section" id="id7">
-<h2><a class="reference external" href="https://github.com/kprussing/pandoc-acro/compare/v0.9.1...v0.9.3">0.9.3</a> 2020-12-18<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id8">
-<h3>Changed<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<h2><a class="reference external" href="https://github.com/kprussing/pandoc-acro/compare/v0.9.1...v0.9.3">0.9.3</a> 2020-12-18<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id9">
+<h3>Changed<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Migrated from <a class="reference external" href="https://tox.readthedocs.io/en/latest/">tox</a> to <a class="reference external" href="xhttps://nox.thea.codes/en/stable/">nox</a></p></li>
 <li><p>Migrated to <a class="reference external" href="https://docs.pytest.org/en/stable/">pytest</a> for testing</p></li>
 </ul>
 </div>
-<div class="section" id="id9">
-<h3>Fixed<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id10">
+<h3>Fixed<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Corrected logic to make sure a key was registered before use</p></li>
 <li><p>Parsing of acronyms at bounded by punctuation</p></li>
 </ul>
 </div>
 </div>
-<div class="section" id="id10">
-<h2><a class="reference external" href="https://github.com/kprussing/pandoc-acro/releases/tag/v0.9.1">0.9.1</a> 2020-09-14<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id11">
-<h3>Added<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<h2><a class="reference external" href="https://github.com/kprussing/pandoc-acro/releases/tag/v0.9.1">0.9.1</a> 2020-09-14<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id12">
+<h3>Added<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p><a class="reference external" href="https://tox.readthedocs.io/en/latest/">tox</a> support linting with <a class="reference external" href="https://flake8.pycqa.org/en/latest/">flake8</a> and testing with <a class="reference external" href="https://docs.python.org/3/library/unittest.html">unittest</a></p></li>
 </ul>
 </div>
-<div class="section" id="id12">
-<h3>Fixed<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id13">
+<h3>Fixed<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>LaTeX header inclusion logic to not overwrite user additions</p></li>
 </ul>
@@ -202,7 +209,7 @@ blocks</p></li>
       &copy;2021, Keith F. Prussing.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.2</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

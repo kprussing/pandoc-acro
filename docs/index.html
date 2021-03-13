@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Pandoc Acronym Filter documentation &#8212; Pandoc Acronym Filter 0.9.5 documentation</title>
+    <title>The Pandoc Acronym Filter documentation &#8212; Pandoc Acronym Filter 0.10.0 documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -91,6 +91,14 @@ Defaults to ‘s’.</p></li>
 <span class="nn">...</span>
 </pre></div>
 </div>
+<p>The only reserved acronym is <code class="docutils literal notranslate"><span class="pre">options</span></code> which is reserved for passing
+additional options to the <code class="docutils literal notranslate"><span class="pre">\acsetup</span></code> macro in LaTeX.  The options are
+translated to the form <code class="docutils literal notranslate"><span class="pre">key=value</span></code> and are passed as a comma separated
+option to <code class="docutils literal notranslate"><span class="pre">\acsetup</span></code>.  The filter will try to sanity check the
+options.  If it cannot convert the option to a string or boolean, the
+option is skipped and a warning is issued.  If it is a known option used
+by the filter, it checks for a valid value and issues a warning if it is
+not valid but it still passes the option to <code class="docutils literal notranslate"><span class="pre">\acsetup</span></code>.</p>
 </div>
 <div class="section" id="inline-usage">
 <h4>Inline Usage<a class="headerlink" href="#inline-usage" title="Permalink to this headline">¶</a></h4>
@@ -221,6 +229,24 @@ level using the header’s text.  For the div style, the list is created
 under a new level 1 header with the text “Acronyms.”  The list is sorted
 (default) or not based on the <code class="docutils literal notranslate"><span class="pre">sort</span></code> attribute of the div or header.</p>
 </div>
+<div class="section" id="full-and-single-use-forms">
+<h4>Full and Single Use Forms<a class="headerlink" href="#full-and-single-use-forms" title="Permalink to this headline">¶</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">acro</span></code> package accepts the <code class="docutils literal notranslate"><span class="pre">first-style</span></code> option which sets the
+form of the first and full usages of an acronym.  The valid options are:
+<code class="docutils literal notranslate"><span class="pre">long-short</span></code> (default), <code class="docutils literal notranslate"><span class="pre">short-long</span></code>, <code class="docutils literal notranslate"><span class="pre">long</span></code> , <code class="docutils literal notranslate"><span class="pre">short</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">footnote</span></code>.  For the LaTeX output, this option is passed to
+<code class="docutils literal notranslate"><span class="pre">\acsetup</span></code>.  For all other outputs, the filter respects the
+selected style except for <code class="docutils literal notranslate"><span class="pre">footnote</span></code> which is not supported.</p>
+<p>The default behavior is to typeset a single use of an acronym using the
+first usage.  However, this can be changed using the <code class="docutils literal notranslate"><span class="pre">single</span></code> option.
+Setting this to true typesets a single usage using the style passed to
+the <code class="docutils literal notranslate"><span class="pre">single-style</span></code> option which accepts the same styles as
+<code class="docutils literal notranslate"><span class="pre">first-style</span></code> but defaults to <code class="docutils literal notranslate"><span class="pre">long</span></code>.  The single option can also be
+set to an integer which sets the number of non-starred times an acronym
+must be used before it is considered a “single” use.  If the use goes
+above this value, the first typesetting reverts to the usual method.
+Setting <code class="docutils literal notranslate"><span class="pre">single=true</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">single=1</span></code>.</p>
+</div>
 </div>
 <div class="section" id="output-format-notes">
 <h3>Output Format Notes<a class="headerlink" href="#output-format-notes" title="Permalink to this headline">¶</a></h3>
@@ -228,9 +254,10 @@ under a new level 1 header with the text “Acronyms.”  The list is sorted
 <h4>LaTeX<a class="headerlink" href="#latex" title="Permalink to this headline">¶</a></h4>
 <p>The acronyms definitions in the metadata are transformed to
 <code class="docutils literal notranslate"><span class="pre">\DeclareAcronym</span></code> commands and are added to the <code class="docutils literal notranslate"><span class="pre">header-includes</span></code>
-metadata field after <code class="docutils literal notranslate"><span class="pre">\usepackage{acro}</span></code>.  These are entered as raw
-LaTeX Inlines.  The running text markup is translated to the appropriate
-<code class="docutils literal notranslate"><span class="pre">acro</span></code> macro as described in the above table.</p>
+metadata field after <code class="docutils literal notranslate"><span class="pre">\usepackage{acro}</span></code> and the <code class="docutils literal notranslate"><span class="pre">\acsetup</span></code> command.
+These are entered as raw LaTeX Inlines.  The running text markup is
+translated to the appropriate <code class="docutils literal notranslate"><span class="pre">acro</span></code> macro as described in the above
+table.</p>
 </div>
 </div>
 </div>
@@ -304,7 +331,7 @@ LaTeX Inlines.  The running text markup is translated to the appropriate
       &copy;2021, Keith F. Prussing.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.2</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pandocacro API &#8212; Pandoc Acronym Filter 0.9.5 documentation</title>
+    <title>Pandocacro API &#8212; Pandoc Acronym Filter 0.10.0 documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -46,6 +46,14 @@ overridden by the class of the span.  In LaTeX mode, the markup is
 simply translated to the <code class="docutils literal notranslate"><span class="pre">acro</span></code> macro.  If a key is not defined in the
 metadata, no transformation is done.</p>
 <dl class="py function">
+<dt id="pandocacro.finalize">
+<code class="sig-prename descclassname"><span class="pre">pandocacro.</span></code><code class="sig-name descname"><span class="pre">finalize</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">doc</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">panflute.elements.Doc</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#pandocacro.finalize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clear all temporary attributes from the elements</p>
+<p>The utilities can place attributes on the elements that are
+prepended by ‘pandocacro-‘.  Before we return the</p>
+</dd></dl>
+
+<dl class="py function">
 <dt id="pandocacro.prepare">
 <code class="sig-prename descclassname"><span class="pre">pandocacro.</span></code><code class="sig-name descname"><span class="pre">prepare</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">doc</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">panflute.elements.Doc</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#pandocacro.prepare" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prepare the document</p>
@@ -53,6 +61,65 @@ metadata, no transformation is done.</p>
 definitions of the acronyms and count the number of uses of the
 acronyms in the document.  These details are to be used by the
 writer or the main filter.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pandocacro.pandocacro">
+<span id="pandocacro-pandocacro"></span><h2>pandocacro.pandocacro<a class="headerlink" href="#module-pandocacro.pandocacro" title="Permalink to this headline">¶</a></h2>
+<p>Class definitions for the package</p>
+<dl class="py data">
+<dt id="pandocacro.pandocacro.Acronym">
+<code class="sig-prename descclassname"><span class="pre">pandocacro.pandocacro.</span></code><code class="sig-name descname"><span class="pre">Acronym</span></code><a class="headerlink" href="#pandocacro.pandocacro.Acronym" title="Permalink to this definition">¶</a></dt>
+<dd><p>A map of options passed to <code class="docutils literal notranslate"><span class="pre">\DeclareAcronym</span></code> and metadata variables.</p>
+<p>alias of Dict[str, Union[str, int, bool]]</p>
+</dd></dl>
+
+<dl class="py data">
+<dt id="pandocacro.pandocacro.Options">
+<code class="sig-prename descclassname"><span class="pre">pandocacro.pandocacro.</span></code><code class="sig-name descname"><span class="pre">Options</span></code><a class="headerlink" href="#pandocacro.pandocacro.Options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Options to pass to <code class="docutils literal notranslate"><span class="pre">\usepackage</span></code> when loading <code class="docutils literal notranslate"><span class="pre">acro</span></code>.</p>
+<p>alias of Dict[str, Union[str, int, bool]]</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="pandocacro.pandocacro.PandocAcro">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pandocacro.pandocacro.</span></code><code class="sig-name descname"><span class="pre">PandocAcro</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">acronyms</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pandocacro.pandocacro.PandocAcro" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class for managing the acronyms in a document</p>
+<p>This class stores a copy of the acronyms field from the metadata in
+a easily modifiable location.  It loads the options into a
+dictionary where the keys map to the values, and it places the
+acronyms into a dictionary that maps the keys to the formatting
+options for the acronym.  The acronyms can also be accessed using
+a mapping notation <code class="docutils literal notranslate"><span class="pre">obj['key']</span></code>.  The intended usage is to
+initialize the class from the call to the document’s
+<code class="xref py py-func docutils literal notranslate"><span class="pre">get_metadata()</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span> <span class="o">=</span> <span class="n">PandocAcro</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">get_metadata</span><span class="p">(</span><span class="s2">&quot;acronyms&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt id="pandocacro.pandocacro.PandocAcro.acronyms">
+<code class="sig-name descname"><span class="pre">acronyms</span></code><a class="headerlink" href="#pandocacro.pandocacro.PandocAcro.acronyms" title="Permalink to this definition">¶</a></dt>
+<dd><p>The mapping of the acronym keys to the formatting options for
+the acronym.  The keys can also be accessed using index
+notation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>map of strings <code class="xref py py-class docutils literal notranslate"><span class="pre">Acronyms</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="pandocacro.pandocacro.PandocAcro.options">
+<code class="sig-name descname"><span class="pre">options</span></code><a class="headerlink" href="#pandocacro.pandocacro.PandocAcro.options" title="Permalink to this definition">¶</a></dt>
+<dd><p>The mapping of the option names to the values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pandocacro.pandocacro.Options" title="pandocacro.pandocacro.Options"><code class="xref py py-class docutils literal notranslate"><span class="pre">Options</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -266,7 +333,7 @@ properly formatted version of the LaTeX acronym.</p>
 
 <dl class="py function">
 <dt id="pandocacro.translate.plain">
-<code class="sig-prename descclassname"><span class="pre">pandocacro.translate.</span></code><code class="sig-name descname"><span class="pre">plain</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#pandocacro.keys.Key" title="pandocacro.keys.Key"><span class="pre">pandocacro.keys.Key</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">acronyms</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">panflute.elements.MetaMap</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">panflute.elements.Str</span><a class="headerlink" href="#pandocacro.translate.plain" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">pandocacro.translate.</span></code><code class="sig-name descname"><span class="pre">plain</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#pandocacro.keys.Key" title="pandocacro.keys.Key"><span class="pre">pandocacro.keys.Key</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">acronyms</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#pandocacro.pandocacro.PandocAcro" title="pandocacro.pandocacro.PandocAcro"><span class="pre">pandocacro.pandocacro.PandocAcro</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">panflute.elements.Str</span><a class="headerlink" href="#pandocacro.translate.plain" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate the plain text acronym expansion from a key</p>
 <p>This method inspects the given <code class="xref py py-class docutils literal notranslate"><span class="pre">keys.Key</span></code> and deduces the
 appropriate expansion based on the details in the given
@@ -285,6 +352,9 @@ the ‘used’ field in the <code class="xref py py-class docutils literal notra
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">panflute.Str</span></code></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>NotImplementedError:</strong> – When an unknown first or single style is requested.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -465,7 +535,7 @@ appropriate list of acronyms.</p>
       &copy;2021, Keith F. Prussing.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.2</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
