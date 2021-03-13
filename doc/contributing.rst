@@ -24,6 +24,7 @@ Pull Requests
 -   Update the Changelog
 -   Provide a test demonstrating the error is fixed or the new feature
     works as expected if appropriate
+-   Pull requests should be against the ``trunk`` branch
 
 The development uses nox_ to aide with testing multiple Python versions
 and linting the code and documentation.  It uses the conda_ back end to

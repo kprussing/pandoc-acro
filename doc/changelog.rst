@@ -7,6 +7,11 @@ The format is based on `Keep a Changelog`_.
 Unreleased_
 -----------
 
+Changed
+^^^^^^^
+
+-   Moved development to ``trunk``
+
 0.10.0_ 2021-03-12
 ------------------
 
