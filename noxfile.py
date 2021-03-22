@@ -125,6 +125,9 @@ def github(session):
 def dist(session):
     """Push to PyPI"""
     session.install("build", "twine")
+    if os.path.exists("dist"):
+        shutil.rmtree("dist")
+
     session.run("python", "-m", "build")
     session.run(
         "python", "-m", "twine", "check", os.path.join("dist", "*")
