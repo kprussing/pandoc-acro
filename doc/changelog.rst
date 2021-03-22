@@ -17,6 +17,7 @@ Changed
 
 -   Moved development to ``trunk``
 -   Dropped the github session
+-   Migrated to the kpruss_ theme from alabaster
 
 0.10.0_ 2021-03-12
 ------------------
@@ -123,6 +124,7 @@ Removed
 .. _Keep a Changelog: https://keepachangelog.com/en/1.0.0/
 .. _PyPI: https://pypi.org/project/pandoc-acro/
 .. _flake8: https://flake8.pycqa.org/en/latest/
+.. _kpruss: https://pypi.org/project/kpruss/
 .. _mypy: https://mypy.readthedocs.io/en/stable/
 .. _pytest: https://docs.pytest.org/en/stable/
 .. _nox: xhttps://nox.thea.codes/en/stable/
