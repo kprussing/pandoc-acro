@@ -1,0 +1,26 @@
+/* The variable definitions for the main style.  This is mainly to
+ * isolate the templating Sphinx and Jinja need to do.  We can let the
+ * usual HTML rendering process deal with the color replacements.
+ */
+
+:root {
+    --foreground:   #333333;
+    --background:   #ffffff;
+    --headers:      #222222;
+    --quotes:       #666666;
+    --links:        #4183C4;
+    --footer:       #eeeeee;
+
+    --main-font:    "Source Sans Pro",
+                    "DejaVu Sans",
+                    "Helvetica",
+                    "Georgia",
+                    "Arial",
+                    sans-serif;
+    --code-font:    "Source Code Pro",
+                    "DejaVu Sans Mono",
+                    "Bitstream Vera Sans Mono",
+                    "Cosolas",
+                    "Menlo",
+                    monospace;
+}

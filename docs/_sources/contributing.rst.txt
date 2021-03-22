@@ -56,7 +56,7 @@ Deploying the HTML Documentation
 --------------------------------
 
 The HTML version of the documentation can be updated by running ``nox``
-with the ``github`` session.  Then add and commit the changes.  To
+with the ``docs`` session.  Then add and commit the changes.  To
 prevent pushing the stable branch without rebuilding the documentation,
 copy the script :file:`pre-push-build-sphinx.py` to
 :file:`.git/hooks/pre-push` and make it executable.

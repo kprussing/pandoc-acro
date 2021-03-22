@@ -1,7 +1,6 @@
-div.by-line {
-    text-align: right;
+div.sphinxsidebar ul {
+    margin-left: 0px;
 }
-
-span.by-line {
-    font-style: italic;
+div.sphinxsidebar ul ul {
+    margin-left: 0px;
 }

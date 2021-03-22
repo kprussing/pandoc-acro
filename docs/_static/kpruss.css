@@ -1,0 +1,341 @@
+/**************/
+/* BASE RULES */
+/**************/
+
+/*
+ * Initialize with the basic style sheets.
+ * using sane defaults.
+ */
+
+@import url("basic.css");
+@import url("variables.css");
+@import url("custom.css");
+
+/*
+ * Settings to tailor the masthead
+ */
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+.clearfix:after {
+    clear: both;
+}
+
+/*
+ * Basic styling
+ * =============
+ */
+
+html {
+    font-size: 100%;
+    font-family: var(--main-font);
+}
+body {
+    background: var(--background);
+    color: var(--foreground);
+    font-size: 1em;
+    line-height: 1.4;
+
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+/*
+ * Headers
+ */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--headers);
+    font-weight: bold;
+    line-height: 1.7;
+    margin: 1em 0 15px;
+    padding: 0;
+}
+@media screen and (max-width: 640px) {
+    h1, h2, h3, h4, h5, h6 {
+        line-height: 1.4;
+    }
+}
+h1 {
+    font-size: 1.875em;
+}
+h1 a {
+    color: inherit;
+}
+h2 {
+    font-size: 1.4em;
+}
+h3 {
+    font-size: 1.25em;
+}
+h4 {
+    font-size: 1.125em;
+    color: var(--quotes);
+}
+
+/*
+ * Main text elements
+ */
+p {
+    margin: 1em 0;
+}
+a {
+    color: var(--links);
+    /*text-decoration: none;*/
+    cursor: pointer;
+}
+a:hover, a:active {
+    color: var(--links);
+}
+img {
+    max-width: 100%;
+}
+em, i {
+    font-style: italic;
+}
+string, b{
+    font-weight: bold;
+}
+code {
+    font-family: var(--code-font);
+    font-size: 0.9em;
+}
+
+/*
+ * List customizations
+ */
+ul, ol {
+    margin: 1em 0;
+    padding-left: 1.875em;
+}
+ul {
+    list-style-type: disc;
+}
+ol {
+    list-style-type: decimal;
+}
+ol ul, ul ol, ul ul, ol ol {
+    margin: 0;
+}
+ul ul, ol ul {
+    list-style-type: circle;
+}
+
+/*
+ * Post specific settings
+ */
+div.abstract {
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+    font-size: 90%;
+}
+.by-line {
+    font-style: italic;
+    text-align: right;
+}
+.posts > .post {
+    padding-bottom: 2em;
+    border-bottom: 1px solid var(--footer);
+}
+.posts a.read-more {
+    text-transform: uppercase;
+    font-size: small;
+    font-weight: bold;
+}
+.posts > .post:last-child {
+    padding-bottom: 1em;
+    border-bottom: none;
+}
+div.post blockquote {
+    margin: 1.8em 0.8em;
+    border-left: 2px solid var(--quotes);
+    padding: 0.1em 1em;
+    color: var(--quotes);
+    font-size: 100%;
+    font-style: italic;
+}
+
+/*
+ * Structural Configurations
+ * =========================
+ */
+
+/*
+ * A container for the header and footer
+ */
+.kpruss-container {
+    margin: 0 auto;
+    max-width: 740px;
+    padding: 0 10px;
+    width: 100%;
+}
+
+/*
+ * Header configurations
+ */
+.wrapper-masthead {
+    margin-bottom: 50px;
+}
+
+.masthead {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--footer);
+}
+@media screen and (max-width: 640px) {
+    .masthead {
+        text-align: center;
+    }
+}
+
+.site-avatar {
+    margin: 0pt;
+    padding: 0pt;
+    border: 0pt;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    float: left;
+    width: 70px;
+    height: 70px;
+    margin-right: 15px;
+}
+@media screen and (max-width: 640px) {
+    .site-avatar {
+        float: none;
+        display: block;
+        margin: 0 auto;
+    }
+}
+.site-avatar img {
+    border-radius: 5px;
+}
+
+.site-info {
+    float: left;
+}
+@media screen and (max-width: 640px) {
+    .site-info {
+        float: none;
+        display: block;
+        margin: 0 auto;
+    }
+}
+
+.site-name {
+    margin: 0;
+    color: var(--headers);
+    cursor: pointer;
+    font-weight: 300;
+    font-size: 28px;
+    letter-spacing: 1px;
+}
+
+.site-description {
+    margin: -5px 0 0 0;
+    font-size: 16px;
+}
+@media screen and (max-width: 640px) {
+    .site-description {
+        margin: 3px 0;
+    }
+}
+
+nav {
+    float: right;
+    margin-top: 23px; /* @TODO: Vertically middle align */
+    font-size: 1.125em;
+}
+nav a {
+    margin-left: 1.25em;
+    color: var(--foreground);
+    text-align: right;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+@media screen and (max-width: 640px) {
+    nav {
+        float: none;
+        margin-top: 9px;
+        display: block;
+        font-size: 1em;
+    }
+    nav a {
+        margin: 0 10px;
+        color: var(--links);
+    }
+}
+
+/*
+ * Footer configurations
+ */
+.wrapper-footer {
+    margin-top: 50px;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    background-color: var(--footer);
+}
+
+footer {
+    padding: 20px 0;
+    text-align: center;
+}
+
+/*
+ * Minor Style Customizations
+ * ==========================
+ */
+::selection {
+    color: #000000;
+    background: var(--quote);
+}
+
+/*
+ * Sphinx Specific Configurations
+ * ==============================
+ *
+ * We want the sidebar on the left so we have to adjust the default
+ * settings left margin, but we might as well left align the text
+ * instead of justifying because the region is so small.
+ */
+div.sphinxsidebar {
+    margin-left: 0;
+    text-align: left;
+}
+
+/*
+ * Admonition settings
+ * -------------------
+ */
+div.admonition, div.warning {
+    border-radius: 5pt;
+    border-width: 1px;
+    border-style: solid;
+    margin: 1em 2em;
+}
+div.admonition {
+    border-color: #dddddd;
+    background-color: var(--footer);
+}
+div.warning {
+    border-color: #D52C2C;
+    background-color: #FFAAAA;
+}
+
+div.admonition p, div.warning p {
+    margin: 0;
+}
+
+div.admonition p.admonition-title,
+div.warning p.admonition-title {
+    /*color: white;*/
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+
+div.admonition ul, div.admonition ol,
+div.warning ul, div.warning ol {
+    margin: 0.1em 0.5em 0.5em 3em;
+    padding: 0;
+}
