@@ -91,10 +91,9 @@ def docs(session):
         session.install(*deps)
 
     setup_environment(session)
-    docs = pathlib.Path(session.bin).parent
-    html = docs / "html"
-    doctrees = docs / "doctrees"
-    srcdir = pathlib.Path(__file__).parent / "doc"
+    root = pathlib.Path(__file__).parent
+    srcdir = root / "doc"
+    html = root / "docs"
     static = srcdir / "_static"
     if not static.is_dir():
         static.mkdir()
@@ -102,23 +101,9 @@ def docs(session):
     session.run("sphinx-build",
                 "-b", "html",
                 "-W",  # Warnings as errors
-                "-d", str(doctrees.resolve()),
                 str(srcdir.resolve()),
                 str(html.resolve())
                 )
-
-
-@nox.session
-def github(session):
-    """Build the github documentation"""
-    docs(session)
-    #
-    # Move the docs to the proper location
-    root = pathlib.Path(__file__).parent
-    shutil.rmtree(root / "docs")
-    html = pathlib.Path(session.bin).parent / "html"
-    (html / ".buildinfo").unlink()
-    html.rename(root / "docs")
 
 
 @nox.session

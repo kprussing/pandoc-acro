@@ -16,6 +16,7 @@ Changed
 ^^^^^^^
 
 -   Moved development to ``trunk``
+-   Dropped the github session
 
 0.10.0_ 2021-03-12
 ------------------

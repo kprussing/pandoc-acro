@@ -2,5 +2,5 @@ build
 dist
 *.egg-info
 .nox
-docs/doctrees
-docs/html
+docs/.doctrees
+docs/.buildinfo

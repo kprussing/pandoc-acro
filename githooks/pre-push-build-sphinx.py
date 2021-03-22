@@ -71,7 +71,7 @@ branch = subprocess.run(["git", "symbolic-ref", "HEAD"],
 if not re.search("stable$", branch):
     subprocess.run(["git", "checkout", "stable"], check=True)
 
-build = subprocess.run(["nox", "-s", "github"], cwd=root)
+build = subprocess.run(["nox", "-s", "docs"], cwd=root)
 success = build.returncode == 0
 
 if success:
