@@ -19,6 +19,11 @@ Changed
 -   Dropped the github session
 -   Migrated to the kpruss_ theme from alabaster
 
+Fixed
+^^^^^
+
+-   Corrected the LaTeX header order to put ``short`` first
+
 0.10.0_ 2021-03-12
 ------------------
 

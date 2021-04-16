@@ -6,13 +6,13 @@ import panflute
 
 _expected = r"""\usepackage{acro}
 \DeclareAcronym{afaik}{
-long = as far as I know,
-short = AFAIK
+short = AFAIK,
+long = as far as I know
 }
 \DeclareAcronym{lol}{
+short = lol,
 long = laugh out loud,
 long-plural = es,
-short = lol,
 short-plural = es
 }"""
 

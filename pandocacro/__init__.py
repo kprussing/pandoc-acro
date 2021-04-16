@@ -47,8 +47,11 @@ def prepare(doc: panflute.Doc) -> None:
 
     for key, values in doc.acronyms.items():
         header.append(LaTeX(fr"\DeclareAcronym{{{key}}}{{"))
+        # The short key *must be first*!
+        header.append(LaTeX(f"short = {values['short']},\n"))
         header.append(LaTeX(",\n".join(f"{k} = {v}" for k, v
-                                       in values.items())))
+                                       in sorted(values.items())
+                                       if k != "short")))
         header.append(LaTeX("}"))
 
         doc.acronyms[key]["count"] = 0
