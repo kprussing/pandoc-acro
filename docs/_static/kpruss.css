@@ -303,6 +303,12 @@ div.sphinxsidebar {
     text-align: left;
 }
 
+div.shinxsidebar ul, div.shinxsidebar ol,
+div.sphinxsidebar ul ul, div.sphinxsidebar ul ol,
+div.sphinxsidebar ol ul, div.sphinxsidebar ol ol {
+    margin-left: 0;
+}
+
 /*
  * Admonition settings
  * -------------------

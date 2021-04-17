@@ -7,6 +7,9 @@ The format is based on `Keep a Changelog`_.
 Unreleased_
 -----------
 
+0.10.1_ 2021-04-17
+------------------
+
 Added
 ^^^^^
 
@@ -120,7 +123,8 @@ Removed
 
 -   Support for Python 3.5
 
-.. _Unreleased: https://github.com/kprussing/pandoc-acro/compare/v0.10.0...HEAD
+.. _Unreleased: https://github.com/kprussing/pandoc-acro/compare/v0.10.1...HEAD
+.. _0.10.1: https://github.com/kprussing/pandoc-acro/compare/v0.10.0...v0.10.1
 .. _0.10.0: https://github.com/kprussing/pandoc-acro/compare/v0.9.5...v0.10.0
 .. _0.9.5: https://github.com/kprussing/pandoc-acro/compare/v0.9.4...v0.9.5
 .. _0.9.4: https://github.com/kprussing/pandoc-acro/compare/v0.9.3...v0.9.4
