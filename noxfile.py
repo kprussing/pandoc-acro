@@ -1,4 +1,3 @@
-import configparser
 import os
 import pathlib
 import re
@@ -6,18 +5,15 @@ import shutil
 
 import keyring
 import nox
+import setuptools
 
-parser = configparser.ConfigParser(empty_lines_in_values=True)
-parser.read(
-    pathlib.Path(__file__).parent / x for x in ("pyproject.toml",
-                                                "setup.cfg")
+config = setuptools.config.read_configuration(
+    pathlib.Path(__file__).parent / "setup.cfg"
 )
 
 # Set the default sessions to run
 pythons = [v.split(":")[-1].strip()
-           for v in parser.get("metadata",
-                               "classifiers",
-                               fallback="").splitlines()
+           for v in config.get("metadata", {}).get("classifiers", [])
            if re.search(r"Python\s*::\s*\d+[.]\d+\s*$", v)]
 nox.options.sessions = [
     "flake8",
@@ -37,7 +33,7 @@ def flake8(session):
 @nox.session
 def mypy(session):
     """Run mypy"""
-    session.install("mypy")
+    session.install("mypy", *config["options"]["extras_require"]["mypy"])
     session.run("mypy", "pandocacro", "tests", "noxfile.py")
 
 
@@ -48,14 +44,6 @@ def lint(session):
     mypy(session)
 
 
-def setup_environment(session):
-    """Install the base dependencies"""
-    # Get the dependencies from the setup.cfg
-    deps = parser.get("options", "install_requires", fallback="")
-    session.install(*[d for d in deps.splitlines() if d])
-    session.install('.')
-
-
 @nox.session(python=pythons,
              venv_backend="conda")
 def test(session):
@@ -64,8 +52,12 @@ def test(session):
     Alternate flags can be passed to ``pytest`` using the positional
     arguments.
     """
-    session.install("pytest", "pyyaml")
-    setup_environment(session)
+    deps = config["options"].get("install_requires", [])
+    deps.extend(config["options"]["extras_require"].get("tests", []))
+    if deps != []:
+        session.install(*deps)
+
+    session.install(".")
     session.conda_install("pandoc>=2.11")
     if session.posargs:
         tests = session.posargs
@@ -78,19 +70,14 @@ def test(session):
 @nox.session
 def docs(session):
     """Build the documentation"""
-
-    deps = []
-    for dep in parser.get("build-system",
-                          "requires",
-                          fallback="")[1:-1].split(","):
-        match = re.match(r"(?P<quote>['\"])(.*)(?P=quote)", dep.strip())
-        if match and not re.match("(wheel|setuptools)", match.group(2)):
-            deps.append(match.group(2))
-
+    deps = config.get("options", {}).get("install_requires", [])
+    deps.extend(
+        config.get("options", {}).get("extras_require", {}).get("docs", [])
+    )
     if deps != []:
         session.install(*deps)
 
-    setup_environment(session)
+    session.install(".")
     root = pathlib.Path(__file__).parent
     srcdir = root / "doc"
     html = root / "docs"

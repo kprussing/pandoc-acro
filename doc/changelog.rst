@@ -7,6 +7,11 @@ The format is based on `Keep a Changelog`_.
 Unreleased_
 -----------
 
+Changed
+^^^^^^^
+
+-   Moved the dependency lists to the correct location
+
 0.10.1_ 2021-04-17
 ------------------
 
