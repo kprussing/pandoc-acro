@@ -42,6 +42,8 @@ Beyond the minimum, each acronym can define:
     Defaults to ‘s’.
 -   ``long-plural``: The plural ending of the long form.
     Defaults to ‘s’.
+-   ``short-plural-form``: The plural short form of the acronym; replaces the short form when used instead of appending the plural ending.
+-   ``long-plural-form``: Plural long form of the acronym; replaces the long form when used instead of appending the plural ending.
 
 An example metadata block would be:
 
