@@ -14,3 +14,6 @@
 -   [+afaik]{.caps .long .plural}
 -   [+afaik]{.caps .full}
 -   [+afaik]{.caps .full .plural}
+  - [+BR]{.full .plural}
+-   [+BR]{.short .plural}
+-   [+BR]{.long .plural}

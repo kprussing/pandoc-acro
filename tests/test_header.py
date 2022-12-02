@@ -5,6 +5,12 @@ import os
 import panflute
 
 _expected = r"""\usepackage{acro}
+\DeclareAcronym{BR}{
+short = BR,
+long = Betriebsrat,
+long-plural-form = Betriebsräte,
+short-plural-form = BRs
+}
 \DeclareAcronym{afaik}{
 short = AFAIK,
 long = as far as I know
