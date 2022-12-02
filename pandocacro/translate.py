@@ -117,9 +117,14 @@ def plain(key: keys.Key, acronyms: PandocAcro) -> panflute.Str:
     long_ = acronyms[key.value]["long"] + (
         acronyms[key.value].get("long-plural", "s") if key.plural else ""
     )
+    if key.plural and acronyms[key.value].get("long-plural-form"):
+        long_ = acronyms[key.value].get("long-plural-form")
+
     short_ = acronyms[key.value]["short"] + (
         acronyms[key.value].get("short-plural", "s") if key.plural else ""
     )
+    if key.plural and acronyms[key.value].get("short-plural-form"):
+        short_ = acronyms[key.value].get("short-plural-form")
 
     def get_style(option: str, default: str) -> Tuple[str, bool]:
         style = acronyms.options.get(option, default)
