@@ -7,6 +7,11 @@ The format is based on `Keep a Changelog`_.
 Unreleased_
 -----------
 
+Added
+^^^^^
+
+-   Support for Python 3.10
+
 Changed
 ^^^^^^^
 
