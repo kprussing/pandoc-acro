@@ -5,11 +5,10 @@ import shutil
 
 import keyring
 import nox
-import setuptools
 
-config = setuptools.config.read_configuration(
-    pathlib.Path(__file__).parent / "setup.cfg"
-)
+from setuptools.config.setupcfg import read_configuration
+
+config = read_configuration(pathlib.Path(__file__).parent / "setup.cfg")
 
 # Set the default sessions to run
 pythons = [v.split(":")[-1].strip()
