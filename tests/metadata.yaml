@@ -8,4 +8,9 @@ acronyms:
     long: laugh out loud
     short-plural: es  # Contrived for example purposes
     long-plural: es   # Contrived for example purposes
+  BR:
+    short: BR
+    long: Betriebsrat
+    short-plural-form: BRs
+    long-plural-form: Betriebsräte
 ...

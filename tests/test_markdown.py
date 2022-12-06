@@ -21,6 +21,9 @@ _expected = "\n".join("-   " + s for s in (
     "As far as I knows",
     "As far as I know (AFAIK)",
     "As far as I knows (AFAIK)",
+    "Betriebsräte (BR)",
+    "BRs",
+    "Betriebsräte",
     )
 )
 

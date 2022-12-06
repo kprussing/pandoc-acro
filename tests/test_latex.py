@@ -23,6 +23,12 @@ _macros = [f"\\item\n  \\{s}{{afaik}}" for s in (
         "Acfp",
     )
 ]
+_macros.extend([f"\\item\n  \\{s}{{BR}}" for s in (
+        "acfp",
+        "acsp",
+        "aclp",
+    )
+])
 
 _expected = "\n".join([
     r"\begin{itemize}",
