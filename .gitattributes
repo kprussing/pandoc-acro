@@ -1,11 +1,3 @@
-docs/**.html       -diff -merge
-docs/*.js          -diff -merge
-docs/objects.inv   -diff -merge
-docs/_sources/*    -diff -merge
-docs/_static/*     -diff -merge
+docs/**       -diff -merge
 
-docs/**.html       linguist-generated=true
-docs/*.js          linguist-generated=true
-docs/objects.inv   linguist-generated=true
-docs/_sources/*    linguist-generated=true
-docs/_static/*     linguist-generated=true
+docs/**       linguist-generated=true
