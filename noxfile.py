@@ -21,6 +21,7 @@ nox.options.sessions = [
     *["test-" + x for x in pythons],
     "docs"
 ]
+nox.options.reuse_existing_virtualenvs = True
 
 
 @nox.session
