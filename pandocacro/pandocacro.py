@@ -60,7 +60,8 @@ class PandocAcro:
         for acro in self.acronyms.values():
             for k in acro:
                 match = re.match(reg, k)
-                if match and match.group(1) != "plural" and not match.groups(1) in self.endings:
+                if match and match.group(1) != "plural"\
+                        and not match.groups(1) in self.endings:
                     self.endings[match.group(1)] = {'short': "", 'long': ""}
 
         self.options: Options = acronyms.get("options", {})

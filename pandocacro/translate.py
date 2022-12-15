@@ -121,6 +121,11 @@ def plain(key: keys.Key, acronyms: PandocAcro) -> panflute.Str:
     )
     if key.plural and acronyms[key.value].get("long-plural-form"):
         long_ = acronyms[key.value].get("long-plural-form")
+    if key.ending:
+        if ("long-" + key.ending + "-form") in acronyms[key.value]:
+            long_ = acronyms[key.value]["long-" + key.ending + "-form"]
+        else:
+            long_ = acronyms[key.value]["long"] + acronyms[key.value].get("long-" + key.ending, acronyms.new_default_endings().get(key.ending).get("long"))
 
     short_ = acronyms[key.value]["short"] + (
         acronyms[key.value]
@@ -129,10 +134,11 @@ def plain(key: keys.Key, acronyms: PandocAcro) -> panflute.Str:
     )
     if key.plural and acronyms[key.value].get("short-plural-form"):
         short_ = acronyms[key.value].get("short-plural-form")
-
     if key.ending:
-        short_ += acronyms.new_default_endings().get(key.ending)["short"]
-        long_ += acronyms.new_default_endings().get(key.ending)["long"]
+        if ("short-" + key.ending + "-form") in acronyms[key.value]:
+            short_ = acronyms[key.value]["short-" + key.ending + "-form"]
+        else:
+            short_ = acronyms[key.value]["short"] + acronyms[key.value].get("short-" + key.ending, acronyms.new_default_endings().get(key.ending).get("short"))
 
     def get_style(option: str, default: str) -> Tuple[str, bool]:
         style = acronyms.options.get(option, default)
