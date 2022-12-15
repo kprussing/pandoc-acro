@@ -24,15 +24,16 @@ short-plural = es
 
 _expected_with_endings = r"""\usepackage{acro}
 \acsetup{long-plural=es,short-plural=es}
+
 \DeclareAcroEnding{gs}{s}{s}
-\NewAcroCommand\acgs{\acrogs\UseAcroTemplate{first}{#1}}
-\NewAcroCommand\acgss{\acrogs\UseAcroTemplate{short}{#1}}
-\NewAcroCommand\acgsl{\acrogs\UseAcroTemplate{long}{#1}}
-\NewAcroCommand\acgsf{\acrofull\acrogs\UseAcroTemplate{first}{#1}}
-\NewAcroCommand\Acgs{\acroupper\acrogs\UseAcroTemplate{first}{#1}}
-\NewAcroCommand\Acgss{\acroupper\acrogs\UseAcroTemplate{short}{#1}}
-\NewAcroCommand\Acgsl{\acroupper\acrogs\UseAcroTemplate{long}{#1}}
-\NewAcroCommand\Acgsf{\acroupper\acrofull\acrogs\UseAcroTemplate{first}{#1}}
+\NewAcroCommand\acgs{m}{\acrogs\UseAcroTemplate{first}{#1}}
+\NewAcroCommand\acgss{m}{\acrogs\UseAcroTemplate{short}{#1}}
+\NewAcroCommand\acgsl{m}{\acrogs\UseAcroTemplate{long}{#1}}
+\NewAcroCommand\acgsf{m}{\acrofull\acrogs\UseAcroTemplate{first}{#1}}
+\NewAcroCommand\Acgs{m}{\acroupper\acrogs\UseAcroTemplate{first}{#1}}
+\NewAcroCommand\Acgss{m}{\acroupper\acrogs\UseAcroTemplate{short}{#1}}
+\NewAcroCommand\Acgsl{m}{\acroupper\acrogs\UseAcroTemplate{long}{#1}}
+\NewAcroCommand\Acgsf{m}{\acroupper\acrofull\acrogs\UseAcroTemplate{first}{#1}}
 \DeclareAcronym{afaik}{
 short = AFAIK,
 long = as far as I know,

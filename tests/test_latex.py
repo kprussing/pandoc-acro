@@ -67,6 +67,7 @@ _expected_with_endings = "\n".join([
     ]
 )
 
+
 def test_latex() -> None:
     """Check the LaTeX output"""
     dirname = os.path.dirname(os.path.abspath(__file__))
@@ -75,6 +76,7 @@ def test_latex() -> None:
     result = panflute.convert_text(text, output_format="latex",
                                    extra_args=["-F", "pandoc-acro"])
     assert _expected == result
+
 
 def test_latex_with_endings() -> None:
     """Check the LaTeX output if custom endings are used"""

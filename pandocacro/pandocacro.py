@@ -1,7 +1,6 @@
 __doc__ = """Class definitions for the package"""
 
 from typing import Dict, Union
-import re
 
 Acronym = Dict[str, Union[str, int, bool]]
 r"""A map of options passed to ``\DeclareAcronym`` and metadata variables.
@@ -10,8 +9,11 @@ r"""A map of options passed to ``\DeclareAcronym`` and metadata variables.
 Options = Dict[str, Union[str, int, bool]]
 r"""Options to pass to ``\usepackage`` when loading ``acro``."""
 
-Endings = Dict[str, Dict[Union['short', 'long'], str]]
-r""""""
+Endings = Dict[str, Dict[str, str]]
+r"""Endings entered by the user in the metadata,
+2nd level keys should be ``short`` and ``long``
+"""
+
 
 class PandocAcro:
     """A class for managing the acronyms in a document
@@ -37,13 +39,15 @@ class PandocAcro:
     options: :class:`Options`
         The mapping of the option names to the values.
     endings: map of strings :class:`Endings`
-        The mapping of the new ending names (excluding plural) to the long and short default forms.
+        The mapping of the new ending names (excluding plural) to the
+        long and short default forms.
 
     """
 
     def __init__(self, acronyms: Dict[str, Union[Acronym, Options, Endings]]):
         self.acronyms: Dict[str, Acronym] = {
-            k: v for k, v in acronyms.items() if k != "options" and k != "endings"
+            k: v for k, v in acronyms.items()
+            if k != "options" and k != "endings"
         }
 
         self.endings: Dict[str, Endings] = {
@@ -51,11 +55,13 @@ class PandocAcro:
             for k, v in acronyms.get("endings", {}).items() if k != "plural"
         }
         self.options: Options = acronyms.get("options", {})
-        if "endings" in acronyms.keys() and "plural" in acronyms.get("endings"):
-            if "long" in acronyms.get("endings").get("plural"):
-                self.options["long-plural"] = acronyms.get("endings").get("plural").get("long")
-            if "short" in acronyms.get("endings").get("plural"):
-                self.options["short-plural"] = acronyms.get("endings").get("plural").get("short")
+        if "endings" in acronyms.keys()\
+                and "plural" in acronyms.get("endings"):
+            plural = acronyms.get("endings").get("plural")
+            if "long" in plural:
+                self.options["long-plural"] = plural.get("long")
+            if "short" in plural:
+                self.options["short-plural"] = plural.get("short")
 
     def __getitem__(self, key):
         return self.acronyms[key]
@@ -86,4 +92,3 @@ class PandocAcro:
 
     def new_default_endings(self):
         return self.endings
-

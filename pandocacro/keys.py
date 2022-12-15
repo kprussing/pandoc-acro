@@ -57,7 +57,11 @@ class Key:
         ))
     """The valid class options for the type of acronym expansion"""
 
-    def __init__(self, elem: Optional[panflute.Element] = None, new_default_endings=None):
+    def __init__(
+            self,
+            elem: Optional[panflute.Element] = None,
+            new_default_endings=None
+    ):
         if new_default_endings is None:
             new_default_endings = []
         self.value: str = ""
@@ -107,7 +111,11 @@ class Key:
 
         return Key.PATTERN.match(content)
 
-    def parse(self, elem: panflute.Element, new_default_endings: list[str]) -> None:
+    def parse(
+            self,
+            elem: panflute.Element,
+            new_default_endings: list[str]
+    ) -> None:
         """Parse the key from a document element
 
         This method does the low-level details of extracting the
@@ -186,7 +194,11 @@ def count(elem: panflute.Element, doc: panflute.Doc) -> None:
         doc.acronyms[key.value]["total"] += 1 if key.count else 0
 
 
-def get(elem: panflute.Element, doc: panflute.Doc, new_default_endings=None) -> Optional[Key]:
+def get(
+        elem: panflute.Element,
+        doc: panflute.Doc,
+        new_default_endings=None
+) -> Optional[Key]:
     """Extract the key from an element
 
     Check if the given element contains a key in the metadata ``acronyms``

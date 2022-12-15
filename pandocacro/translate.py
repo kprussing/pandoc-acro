@@ -116,13 +116,16 @@ def plain(key: keys.Key, acronyms: PandocAcro) -> panflute.Str:
 
     """
     long_ = acronyms[key.value]["long"] + (
-        acronyms[key.value].get("long-plural", acronyms.default_long_plural()) if key.plural else ""
+        acronyms[key.value].get("long-plural", acronyms.default_long_plural())
+        if key.plural else ""
     )
     if key.plural and acronyms[key.value].get("long-plural-form"):
         long_ = acronyms[key.value].get("long-plural-form")
 
     short_ = acronyms[key.value]["short"] + (
-        acronyms[key.value].get("short-plural", acronyms.default_short_plural()) if key.plural else ""
+        acronyms[key.value]
+        .get("short-plural", acronyms.default_short_plural())
+        if key.plural else ""
     )
     if key.plural and acronyms[key.value].get("short-plural-form"):
         short_ = acronyms[key.value].get("short-plural-form")
