@@ -23,7 +23,7 @@ short-plural = es
 }"""
 
 _expected_with_endings = r"""\usepackage{acro}
-\acsetup{long-plural=es,short-plural=es}
+\acsetup{long-plural-ending=es,short-plural-ending=es}
 
 \DeclareAcroEnding{gs}{s}{s}
 \NewAcroCommand\acgs{m}{\acrogs\UseAcroTemplate{first}{#1}}

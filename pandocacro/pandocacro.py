@@ -69,9 +69,9 @@ class PandocAcro:
                 and "plural" in acronyms.get("endings"):
             plural = acronyms.get("endings").get("plural")
             if "long" in plural:
-                self.options["long-plural"] = plural.get("long")
+                self.options["long-plural-ending"] = plural.get("long")
             if "short" in plural:
-                self.options["short-plural"] = plural.get("short")
+                self.options["short-plural-ending"] = plural.get("short")
 
     def __getitem__(self, key):
         return self.acronyms[key]
