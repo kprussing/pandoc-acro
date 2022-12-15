@@ -1,0 +1,6 @@
+-   +afaik
+-   [+afaik]{.plural .long}
+-   [+afaik]{.plural .short}
+-   +lol
+-   [+lol]{.plural .long}
+-   [+lol]{.plural}

@@ -1,0 +1,15 @@
+---
+acronyms:
+  endings:
+    plural:
+      short: es
+      long: es
+  afaik:
+    short: AFAIK
+    long: as far as I know
+    short-plural: S
+    long-plural: s
+  lol:
+    short: lol
+    long: laugh out loud
+...

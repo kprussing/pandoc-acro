@@ -1,6 +1,7 @@
 __doc__ = """Class definitions for the package"""
 
 from typing import Dict, Union
+import re
 
 Acronym = Dict[str, Union[str, int, bool]]
 r"""A map of options passed to ``\DeclareAcronym`` and metadata variables.
@@ -9,6 +10,8 @@ r"""A map of options passed to ``\DeclareAcronym`` and metadata variables.
 Options = Dict[str, Union[str, int, bool]]
 r"""Options to pass to ``\usepackage`` when loading ``acro``."""
 
+Endings = Dict[str, Dict[str, str]]
+r""""""
 
 class PandocAcro:
     """A class for managing the acronyms in a document
@@ -36,11 +39,17 @@ class PandocAcro:
 
     """
 
-    def __init__(self, acronyms: Dict[str, Union[Acronym, Options]]):
+    def __init__(self, acronyms: Dict[str, Union[Acronym, Options, Endings]]):
         self.acronyms: Dict[str, Acronym] = {
-            k: v for k, v in acronyms.items() if k != "options"
+            k: v for k, v in acronyms.items() if k != "options" and k != "endings"
         }
         self.options: Options = acronyms.get("options", {})
+        if "endings" in acronyms.keys() and "plural" in acronyms.get("endings"):
+            if "long" in acronyms.get("endings").get("plural"):
+                self.options["long-plural"] = acronyms.get("endings").get("plural").get("long")
+            if "short" in acronyms.get("endings").get("plural"):
+                self.options["short-plural"] = acronyms.get("endings").get("plural").get("short")
+
 
     def __getitem__(self, key):
         return self.acronyms[key]
@@ -62,3 +71,9 @@ class PandocAcro:
 
     def items(self):
         return self.acronyms.items()
+
+    def default_long_plural(self):
+        return self.options.get("long-plural", "s")
+
+    def default_short_plural(self):
+        return self.options.get("short-plural", "s")
