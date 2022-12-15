@@ -1,6 +1,7 @@
 __doc__ = """Class definitions for the package"""
 
 from typing import Dict, Union
+import re
 
 Acronym = Dict[str, Union[str, int, bool]]
 r"""A map of options passed to ``\DeclareAcronym`` and metadata variables.
@@ -54,6 +55,14 @@ class PandocAcro:
             k: {'short': v.get("short", ""), 'long': v.get("long", "")}
             for k, v in acronyms.get("endings", {}).items() if k != "plural"
         }
+
+        reg = r"^(?:short|long)-([a-zA-Z]+)(?:-form)?$"
+        for acro in self.acronyms.values():
+            for k in acro:
+                match = re.match(reg, k)
+                if match and match.group(1) != "plural" and not match.groups(1) in self.endings:
+                    self.endings[match.group(1)] = {'short': "", 'long': ""}
+
         self.options: Options = acronyms.get("options", {})
         if "endings" in acronyms.keys()\
                 and "plural" in acronyms.get("endings"):

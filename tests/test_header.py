@@ -34,15 +34,49 @@ _expected_with_endings = r"""\usepackage{acro}
 \NewAcroCommand\Acgss{m}{\acroupper\acrogs\UseAcroTemplate{short}{#1}}
 \NewAcroCommand\Acgsl{m}{\acroupper\acrogs\UseAcroTemplate{long}{#1}}
 \NewAcroCommand\Acgsf{m}{\acroupper\acrofull\acrogs\UseAcroTemplate{first}{#1}}
+
+\DeclareAcroEnding{gp}{}{}
+\NewAcroCommand\acgp{m}{\acrogp\UseAcroTemplate{first}{#1}}
+\NewAcroCommand\acgps{m}{\acrogp\UseAcroTemplate{short}{#1}}
+\NewAcroCommand\acgpl{m}{\acrogp\UseAcroTemplate{long}{#1}}
+\NewAcroCommand\acgpf{m}{\acrofull\acrogp\UseAcroTemplate{first}{#1}}
+\NewAcroCommand\Acgp{m}{\acroupper\acrogp\UseAcroTemplate{first}{#1}}
+\NewAcroCommand\Acgps{m}{\acroupper\acrogp\UseAcroTemplate{short}{#1}}
+\NewAcroCommand\Acgpl{m}{\acroupper\acrogp\UseAcroTemplate{long}{#1}}
+\NewAcroCommand\Acgpf{m}{\acroupper\acrofull\acrogp\UseAcroTemplate{first}{#1}}
+
+\DeclareAcroEnding{ga}{}{}
+\NewAcroCommand\acga{m}{\acroga\UseAcroTemplate{first}{#1}}
+\NewAcroCommand\acgas{m}{\acroga\UseAcroTemplate{short}{#1}}
+\NewAcroCommand\acgal{m}{\acroga\UseAcroTemplate{long}{#1}}
+\NewAcroCommand\acgaf{m}{\acrofull\acroga\UseAcroTemplate{first}{#1}}
+\NewAcroCommand\Acga{m}{\acroupper\acroga\UseAcroTemplate{first}{#1}}
+\NewAcroCommand\Acgas{m}{\acroupper\acroga\UseAcroTemplate{short}{#1}}
+\NewAcroCommand\Acgal{m}{\acroupper\acroga\UseAcroTemplate{long}{#1}}
+\NewAcroCommand\Acgaf{m}{\acroupper\acrofull\acroga\UseAcroTemplate{first}{#1}}
+
+\DeclareAcroEnding{gb}{}{}
+\NewAcroCommand\acgb{m}{\acrogb\UseAcroTemplate{first}{#1}}
+\NewAcroCommand\acgbs{m}{\acrogb\UseAcroTemplate{short}{#1}}
+\NewAcroCommand\acgbl{m}{\acrogb\UseAcroTemplate{long}{#1}}
+\NewAcroCommand\acgbf{m}{\acrofull\acrogb\UseAcroTemplate{first}{#1}}
+\NewAcroCommand\Acgb{m}{\acroupper\acrogb\UseAcroTemplate{first}{#1}}
+\NewAcroCommand\Acgbs{m}{\acroupper\acrogb\UseAcroTemplate{short}{#1}}
+\NewAcroCommand\Acgbl{m}{\acroupper\acrogb\UseAcroTemplate{long}{#1}}
+\NewAcroCommand\Acgbf{m}{\acroupper\acrofull\acrogb\UseAcroTemplate{first}{#1}}
 \DeclareAcronym{afaik}{
 short = AFAIK,
 long = as far as I know,
+long-gp = q,
 long-plural = s,
+short-ga = A,
 short-plural = S
 }
 \DeclareAcronym{lol}{
 short = lol,
-long = laugh out loud
+long = laugh out loud,
+long-gb-form = rolling on the floor laughing,
+short-gb-form = rofl
 }"""
 
 _template = os.path.join(os.path.dirname(__file__), "test.latex")
