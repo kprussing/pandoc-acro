@@ -42,17 +42,17 @@ def translate(elem: panflute.Element,
 
         return translate(panflute.Span(elem), doc)
 
-    key = keys.get(elem, doc)
+    key = keys.get(elem, doc, doc.acronyms.new_default_endings().keys())
     if not key:
         return None
 
     if doc.format in ("latex", "beamer"):
-        return latex(key)
+        return latex(key, doc.acronyms)
     else:
         return plain(key, doc.acronyms)
 
 
-def latex(key: keys.Key) -> panflute.RawInline:
+def latex(key: keys.Key, acronyms: PandocAcro) -> panflute.RawInline:
     """Generate the LaTeX output from a key
 
     This method inspects the given :class:`keys.Key` and determine the
@@ -72,6 +72,7 @@ def latex(key: keys.Key) -> panflute.RawInline:
 
     """
     macro = "\\" + ("A" if key.capitalize else "a") + "c" \
+        + key.ending \
         + {"full": "f",
            "short": "s",
            "long": "l"
@@ -125,6 +126,10 @@ def plain(key: keys.Key, acronyms: PandocAcro) -> panflute.Str:
     )
     if key.plural and acronyms[key.value].get("short-plural-form"):
         short_ = acronyms[key.value].get("short-plural-form")
+
+    if key.ending:
+        short_ += acronyms.new_default_endings().get(key.ending)["short"]
+        long_ += acronyms.new_default_endings().get(key.ending)["long"]
 
     def get_style(option: str, default: str) -> Tuple[str, bool]:
         style = acronyms.options.get(option, default)

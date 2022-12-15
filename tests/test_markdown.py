@@ -31,9 +31,16 @@ _expected_with_endings = "\n".join("-   " + s for s in (
     "as far as I know (AFAIK)",
     "as far as I knows",
     "AFAIKS",
-    "laugh out loud (lol)",
+    "laugh out louds (lol)",
     "laugh out loudes",
     "loles",
+    "lols",
+    "laugh out louds",
+    "laugh out louds (lol)",
+    "Lols",
+    "Lols",
+    "Laugh out louds",
+    "Laugh out louds (lol)",
     )
 )
 

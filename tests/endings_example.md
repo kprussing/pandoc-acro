@@ -1,6 +1,13 @@
 -   +afaik
 -   [+afaik]{.plural .long}
 -   [+afaik]{.plural .short}
--   +lol
+-   [+lol]{.gs}
 -   [+lol]{.plural .long}
 -   [+lol]{.plural}
+-   [+lol]{.gs .short}
+-   [+lol]{.gs .long}
+-   [+lol]{.gs .full}
+-   [+lol]{.gs .caps}
+-   [+lol]{.gs .short .caps}
+-   [+lol]{.gs .long .caps}
+-   [+lol]{.gs .full .caps}

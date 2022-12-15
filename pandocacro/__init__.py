@@ -45,6 +45,18 @@ def prepare(doc: panflute.Doc) -> None:
     if doc.acronyms.options:
         header.append(LaTeX(options.acsetup(doc.acronyms.options)))
 
+    new_default_endings = doc.acronyms.new_default_endings()
+    for token in new_default_endings.keys():
+        header.append(LaTeX(fr"\DeclareAcroEnding{{{token}}}{{{new_default_endings[token]['short']}}}{{{new_default_endings[token]['long']}}}"))
+        header.append(LaTeX(fr"\NewAcroCommand\ac{token}{{\acro{token}\UseAcroTemplate{{first}}{{#1}}}}"))
+        header.append(LaTeX(fr"\NewAcroCommand\ac{token}s{{\acro{token}\UseAcroTemplate{{short}}{{#1}}}}"))
+        header.append(LaTeX(fr"\NewAcroCommand\ac{token}l{{\acro{token}\UseAcroTemplate{{long}}{{#1}}}}"))
+        header.append(LaTeX(fr"\NewAcroCommand\ac{token}f{{\acrofull\acro{token}\UseAcroTemplate{{first}}{{#1}}}}"))
+        header.append(LaTeX(fr"\NewAcroCommand\Ac{token}{{\acroupper\acro{token}\UseAcroTemplate{{first}}{{#1}}}}"))
+        header.append(LaTeX(fr"\NewAcroCommand\Ac{token}s{{\acroupper\acro{token}\UseAcroTemplate{{short}}{{#1}}}}"))
+        header.append(LaTeX(fr"\NewAcroCommand\Ac{token}l{{\acroupper\acro{token}\UseAcroTemplate{{long}}{{#1}}}}"))
+        header.append(LaTeX(fr"\NewAcroCommand\Ac{token}f{{\acroupper\acrofull\acro{token}\UseAcroTemplate{{first}}{{#1}}}}"))
+
     for key, values in doc.acronyms.items():
         header.append(LaTeX(fr"\DeclareAcronym{{{key}}}{{"))
         # The short key *must be first*!

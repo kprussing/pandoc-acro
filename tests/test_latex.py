@@ -46,9 +46,16 @@ _macros_with_endings = [f"\\item\n  \\{s}{{afaik}}" for s in (
 ]
 
 _macros_with_endings.extend([f"\\item\n  \\{s}{{lol}}" for s in (
-        "ac",
+        "acgs",
         "aclp",
         "acp",
+        "acgss",
+        "acgsl",
+        "acgsf",
+        "Acgs",
+        "Acgss",
+        "Acgsl",
+        "Acgsf",
     )
 ])
 

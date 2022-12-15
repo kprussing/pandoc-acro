@@ -10,7 +10,7 @@ r"""A map of options passed to ``\DeclareAcronym`` and metadata variables.
 Options = Dict[str, Union[str, int, bool]]
 r"""Options to pass to ``\usepackage`` when loading ``acro``."""
 
-Endings = Dict[str, Dict[str, str]]
+Endings = Dict[str, Dict[Union['short', 'long'], str]]
 r""""""
 
 class PandocAcro:
@@ -36,6 +36,8 @@ class PandocAcro:
         notation.
     options: :class:`Options`
         The mapping of the option names to the values.
+    endings: map of strings :class:`Endings`
+        The mapping of the new ending names (excluding plural) to the long and short default forms.
 
     """
 
@@ -43,13 +45,17 @@ class PandocAcro:
         self.acronyms: Dict[str, Acronym] = {
             k: v for k, v in acronyms.items() if k != "options" and k != "endings"
         }
+
+        self.endings: Dict[str, Endings] = {
+            k: {'short': v.get("short", ""), 'long': v.get("long", "")}
+            for k, v in acronyms.get("endings", {}).items() if k != "plural"
+        }
         self.options: Options = acronyms.get("options", {})
         if "endings" in acronyms.keys() and "plural" in acronyms.get("endings"):
             if "long" in acronyms.get("endings").get("plural"):
                 self.options["long-plural"] = acronyms.get("endings").get("plural").get("long")
             if "short" in acronyms.get("endings").get("plural"):
                 self.options["short-plural"] = acronyms.get("endings").get("plural").get("short")
-
 
     def __getitem__(self, key):
         return self.acronyms[key]
@@ -77,3 +83,7 @@ class PandocAcro:
 
     def default_short_plural(self):
         return self.options.get("short-plural", "s")
+
+    def new_default_endings(self):
+        return self.endings
+
