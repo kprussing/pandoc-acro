@@ -7,6 +7,8 @@ acronyms:
     gs:
       short: s
       long: s
+    gp:
+      long: s
   afaik:
     short: AFAIK
     long: as far as I know

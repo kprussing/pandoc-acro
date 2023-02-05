@@ -25,6 +25,16 @@ short-plural = es
 _expected_with_endings = r"""\usepackage{acro}
 \acsetup{long-plural-ending=es,short-plural-ending=es}
 
+\DeclareAcroEnding{gp}{}{s}
+\NewAcroCommand\acgp{m}{\acrogp\UseAcroTemplate{first}{#1}}
+\NewAcroCommand\acgps{m}{\acrogp\UseAcroTemplate{short}{#1}}
+\NewAcroCommand\acgpl{m}{\acrogp\UseAcroTemplate{long}{#1}}
+\NewAcroCommand\acgpf{m}{\acrofull\acrogp\UseAcroTemplate{first}{#1}}
+\NewAcroCommand\Acgp{m}{\acroupper\acrogp\UseAcroTemplate{first}{#1}}
+\NewAcroCommand\Acgps{m}{\acroupper\acrogp\UseAcroTemplate{short}{#1}}
+\NewAcroCommand\Acgpl{m}{\acroupper\acrogp\UseAcroTemplate{long}{#1}}
+\NewAcroCommand\Acgpf{m}{\acroupper\acrofull\acrogp\UseAcroTemplate{first}{#1}}
+
 \DeclareAcroEnding{gs}{s}{s}
 \NewAcroCommand\acgs{m}{\acrogs\UseAcroTemplate{first}{#1}}
 \NewAcroCommand\acgss{m}{\acrogs\UseAcroTemplate{short}{#1}}
@@ -34,16 +44,6 @@ _expected_with_endings = r"""\usepackage{acro}
 \NewAcroCommand\Acgss{m}{\acroupper\acrogs\UseAcroTemplate{short}{#1}}
 \NewAcroCommand\Acgsl{m}{\acroupper\acrogs\UseAcroTemplate{long}{#1}}
 \NewAcroCommand\Acgsf{m}{\acroupper\acrofull\acrogs\UseAcroTemplate{first}{#1}}
-
-\DeclareAcroEnding{gp}{}{}
-\NewAcroCommand\acgp{m}{\acrogp\UseAcroTemplate{first}{#1}}
-\NewAcroCommand\acgps{m}{\acrogp\UseAcroTemplate{short}{#1}}
-\NewAcroCommand\acgpl{m}{\acrogp\UseAcroTemplate{long}{#1}}
-\NewAcroCommand\acgpf{m}{\acrofull\acrogp\UseAcroTemplate{first}{#1}}
-\NewAcroCommand\Acgp{m}{\acroupper\acrogp\UseAcroTemplate{first}{#1}}
-\NewAcroCommand\Acgps{m}{\acroupper\acrogp\UseAcroTemplate{short}{#1}}
-\NewAcroCommand\Acgpl{m}{\acroupper\acrogp\UseAcroTemplate{long}{#1}}
-\NewAcroCommand\Acgpf{m}{\acroupper\acrofull\acrogp\UseAcroTemplate{first}{#1}}
 
 \DeclareAcroEnding{ga}{}{}
 \NewAcroCommand\acga{m}{\acroga\UseAcroTemplate{first}{#1}}
