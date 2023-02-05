@@ -34,6 +34,8 @@ class Key:
         Use the plural form of the acronym.
     post: str, optional
         The trailing punctuation.
+    ending: str, optional
+        The key of the user defined endings in yaml
 
     Arguments
     ---------
@@ -55,15 +57,22 @@ class Key:
         ))
     """The valid class options for the type of acronym expansion"""
 
-    def __init__(self, elem: Optional[panflute.Element] = None):
+    def __init__(
+            self,
+            elem: Optional[panflute.Element] = None,
+            new_default_endings=None
+    ):
+        if new_default_endings is None:
+            new_default_endings = []
         self.value: str = ""
         self.count: bool = True
         self.type: str = ""
         self.capitalize: bool = False
         self.plural: bool = False
         self.post: str = ""
+        self.ending: str = ""
         if elem is not None:
-            self.parse(elem)
+            self.parse(elem, new_default_endings)
 
     @staticmethod
     def match(elem: panflute.Element) -> Optional[Match[str]]:
@@ -102,7 +111,11 @@ class Key:
 
         return Key.PATTERN.match(content)
 
-    def parse(self, elem: panflute.Element) -> None:
+    def parse(
+            self,
+            elem: panflute.Element,
+            new_default_endings: list[str]
+    ) -> None:
         """Parse the key from a document element
 
         This method does the low-level details of extracting the
@@ -139,6 +152,11 @@ class Key:
         self.capitalize = hasattr(elem, "classes") and "caps" in elem.classes
         self.plural = hasattr(elem, "classes") and "plural" in elem.classes
         self.post = match.groupdict().get("post", "")
+        if not self.plural and hasattr(elem, "classes"):
+            for ending in new_default_endings:
+                if ending in elem.classes:
+                    self.ending = ending
+                    break
 
     def __str__(self) -> str:
         return "[+" + ("" if self.count else "*") \
@@ -176,7 +194,11 @@ def count(elem: panflute.Element, doc: panflute.Doc) -> None:
         doc.acronyms[key.value]["total"] += 1 if key.count else 0
 
 
-def get(elem: panflute.Element, doc: panflute.Doc) -> Optional[Key]:
+def get(
+        elem: panflute.Element,
+        doc: panflute.Doc,
+        new_default_endings=None
+) -> Optional[Key]:
     """Extract the key from an element
 
     Check if the given element contains a key in the metadata ``acronyms``
@@ -190,6 +212,8 @@ def get(elem: panflute.Element, doc: panflute.Doc) -> Optional[Key]:
         The element under inspection
     doc: :class:`panflte.Doc`
         The main document
+    new_default_endings: :class:`list[str]`
+        The endings added by the user in yaml
 
     Returns
     -------
@@ -199,6 +223,8 @@ def get(elem: panflute.Element, doc: panflute.Doc) -> Optional[Key]:
         metadata.  Otherwise, None.
 
     """
+    if new_default_endings is None:
+        new_default_endings = []
     # Check for the main acronym database
     if "acronyms" not in doc.metadata:
         return None
@@ -207,5 +233,5 @@ def get(elem: panflute.Element, doc: panflute.Doc) -> Optional[Key]:
     if not match:
         return None
 
-    key = Key(elem)
+    key = Key(elem, new_default_endings)
     return key if key.value in doc.acronyms else None

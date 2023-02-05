@@ -42,17 +42,17 @@ def translate(elem: panflute.Element,
 
         return translate(panflute.Span(elem), doc)
 
-    key = keys.get(elem, doc)
+    key = keys.get(elem, doc, doc.acronyms.new_default_endings().keys())
     if not key:
         return None
 
     if doc.format in ("latex", "beamer"):
-        return latex(key)
+        return latex(key, doc.acronyms)
     else:
         return plain(key, doc.acronyms)
 
 
-def latex(key: keys.Key) -> panflute.RawInline:
+def latex(key: keys.Key, acronyms: PandocAcro) -> panflute.RawInline:
     """Generate the LaTeX output from a key
 
     This method inspects the given :class:`keys.Key` and determine the
@@ -72,6 +72,7 @@ def latex(key: keys.Key) -> panflute.RawInline:
 
     """
     macro = "\\" + ("A" if key.capitalize else "a") + "c" \
+        + key.ending \
         + {"full": "f",
            "short": "s",
            "long": "l"
@@ -115,16 +116,29 @@ def plain(key: keys.Key, acronyms: PandocAcro) -> panflute.Str:
 
     """
     long_ = acronyms[key.value]["long"] + (
-        acronyms[key.value].get("long-plural", "s") if key.plural else ""
+        acronyms[key.value].get("long-plural", acronyms.default_long_plural())
+        if key.plural else ""
     )
     if key.plural and acronyms[key.value].get("long-plural-form"):
         long_ = acronyms[key.value].get("long-plural-form")
+    if key.ending:
+        if ("long-" + key.ending + "-form") in acronyms[key.value]:
+            long_ = acronyms[key.value]["long-" + key.ending + "-form"]
+        else:
+            long_ = acronyms[key.value]["long"] + acronyms[key.value].get("long-" + key.ending, acronyms.new_default_endings().get(key.ending).get("long"))
 
     short_ = acronyms[key.value]["short"] + (
-        acronyms[key.value].get("short-plural", "s") if key.plural else ""
+        acronyms[key.value]
+        .get("short-plural", acronyms.default_short_plural())
+        if key.plural else ""
     )
     if key.plural and acronyms[key.value].get("short-plural-form"):
         short_ = acronyms[key.value].get("short-plural-form")
+    if key.ending:
+        if ("short-" + key.ending + "-form") in acronyms[key.value]:
+            short_ = acronyms[key.value]["short-" + key.ending + "-form"]
+        else:
+            short_ = acronyms[key.value]["short"] + acronyms[key.value].get("short-" + key.ending, acronyms.new_default_endings().get(key.ending).get("short"))
 
     def get_style(option: str, default: str) -> Tuple[str, bool]:
         style = acronyms.options.get(option, default)

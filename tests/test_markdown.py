@@ -23,7 +23,31 @@ _expected = "\n".join("-   " + s for s in (
     "As far as I knows (AFAIK)",
     "Betriebsräte (BR)",
     "BRs",
-    "Betriebsräte",
+    "Betriebsräte"
+    )
+)
+
+_expected_with_endings = "\n".join("-   " + s for s in (
+    "as far as I know (AFAIK)",
+    "as far as I knows",
+    "AFAIKS",
+    "as far as I knowq",
+    "AFAIK",
+    "as far as I know",
+    "AFAIKA",
+    "laugh out louds (lol)",
+    "laugh out loudes",
+    "loles",
+    "lols",
+    "laugh out louds",
+    "laugh out louds (lol)",
+    "Lols",
+    "Lols",
+    "Laugh out louds",
+    "Laugh out louds (lol)",
+    "rolling on the floor laughing (lol)",
+    "rolling on the floor laughing",
+    "rofl",
     )
 )
 
@@ -36,3 +60,13 @@ def test_markdown() -> None:
     result = panflute.convert_text(text, output_format="markdown",
                                    extra_args=["-F", "pandoc-acro"])
     assert _expected == result
+
+
+def test_markdown_with_endings() -> None:
+    """Check the Markdown output with custom endings"""
+    dirname = os.path.dirname(os.path.abspath(__file__))
+    text = "\n".join(open(os.path.join(dirname, p), "r").read()
+                     for p in ("endings_metadata.yaml", "endings_example.md"))
+    result = panflute.convert_text(text, output_format="markdown",
+                                   extra_args=["-F", "pandoc-acro"])
+    assert _expected_with_endings == result

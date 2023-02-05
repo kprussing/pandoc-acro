@@ -1,0 +1,20 @@
+-   +afaik
+-   [+afaik]{.plural .long}
+-   [+afaik]{.plural .short}
+-   [+afaik]{.gp .long}
+-   [+afaik]{.gp .short}
+-   [+afaik]{.ga .long}
+-   [+afaik]{.ga .short}
+-   [+lol]{.gs}
+-   [+lol]{.plural .long}
+-   [+lol]{.plural}
+-   [+lol]{.gs .short}
+-   [+lol]{.gs .long}
+-   [+lol]{.gs .full}
+-   [+lol]{.gs .caps}
+-   [+lol]{.gs .short .caps}
+-   [+lol]{.gs .long .caps}
+-   [+lol]{.gs .full .caps}
+-   [+lol]{.gb .full}
+-   [+lol]{.gb .long}
+-   [+lol]{.gb .short}

@@ -1,0 +1,24 @@
+---
+acronyms:
+  endings:
+    plural:
+      short: es
+      long: es
+    gs:
+      short: s
+      long: s
+    gp:
+      long: s
+  afaik:
+    short: AFAIK
+    long: as far as I know
+    short-plural: S
+    long-plural: s
+    long-gp: q
+    short-ga: A
+  lol:
+    short: lol
+    long: laugh out loud
+    short-gb-form: rofl
+    long-gb-form: rolling on the floor laughing
+...
